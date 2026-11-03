@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>جامعة حلوان الدولية التكنولوجية - المنصة الرسمية للجداول</title>
+  
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 font-sans transition-colors duration-300">
+<body class="bg-slate-950 font-sans transition-colors duration-300 text-slate-100">
   <div id="root"></div>
 
   <script type="text/babel">
@@ -17,152 +18,145 @@
 
     const departmentsData = {
       'تحكم صناعي': {
-        nameAr: 'تحكم صناعي',
         nameEn: 'Industrial Control Technology',
         nameIt: 'Tecnologia di Controllo Industriale',
-        theme: 'from-slate-900 via-emerald-950 to-slate-900 border-emerald-500/30 text-emerald-100',
-        cardBg: 'bg-slate-900/80 border-emerald-500/20',
         badge: 'bg-emerald-600 text-white',
+        themeBg: 'bg-emerald-950/20 border-emerald-500/40',
+        cardTheme: 'bg-emerald-950/30 border-emerald-500/30',
         schedule: {
           'السبت': [
-            { time: '09:00 - 11:00', subject: 'دوائر كهربائية متقدمة (3Phase & Solid & Electronics)', place: 'مدرج C104 / D103' },
-            { time: '11:00 - 01:00', subject: 'اللغة الإيطالية (د. وفاء عبد التواب)', place: 'مدرج A303' }
+            { time: '09:00 - 11:00', type: 'Dr/Eng', subject: 'دوائر كهربائية متقدمة (3Phase & Solid & Electronics)', place: 'مدرج C104 / D103', doc: 'د. جولينا سمير' },
+            { time: '11:00 - 01:00', type: 'Dr', subject: 'اللغة الإيطالية 1', place: 'مدرج A303', doc: 'أ.د. وفاء عبد التواب' }
           ],
           'الأحد': [
-            { time: '09:00 - 12:00', subject: 'هندسة التحكم والتشغيل الآلي والرسم الهندسي', place: 'مدرج G202 / G203' }
+            { time: '09:00 - 12:00', type: 'Dr/Eng', subject: 'هندسة التحكم والتشغيل الآلي والرسم الهندسي', place: 'مدرج G202 / G203', doc: 'د. حسام حجازي' }
           ],
           'الإثنين': '🌴 ارتاح يابطل',
           'الثلاثاء': [
-            { time: '09:00 - 11:00', subject: 'رياضيات هندسية متقدمة (د. إبراهيم عيد)', place: 'مدرج A303' }
+            { time: '09:00 - 11:00', type: 'Dr', subject: 'رياضيات هندسية متقدمة', place: 'مدرج A303', doc: 'د. إبراهيم عيد' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 02:00', subject: 'تطبيقات إلكترونية وورش عمل وتغذية', place: 'معمل F108 / الورش' }
+            { time: '09:00 - 02:00', type: 'Dr/Eng', subject: 'تطبيقات إلكترونية وورش عمل وتغذية', place: 'معمل F108 / الورش', doc: 'م. شهد حنتيرة' }
           ],
           'الخميس': '🌴 ارتاح يابطل'
         }
       },
       'تكنولوجيا الملابس الجاهزة': {
-        nameAr: 'تكنولوجيا الملابس الجاهزة',
         nameEn: 'Ready-Made Garments Technology',
         nameIt: 'Ready-Made Garments Technology',
-        theme: 'from-slate-900 via-pink-950 to-slate-900 border-pink-500/30 text-pink-100',
-        cardBg: 'bg-slate-900/80 border-pink-500/20',
         badge: 'bg-pink-600 text-white',
+        themeBg: 'bg-pink-950/20 border-pink-500/40',
+        cardTheme: 'bg-pink-950/30 border-pink-500/30',
         schedule: {
           'الأحد': [
-            { time: '09:00 - 01:00', subject: 'تشكيل على المانيكان وتكنولوجيا صناعة الملابس', place: 'مدرج C108 / G107' }
+            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'تشكيل على المانيكان وتكنولوجيا صناعة الملابس', place: 'مدرج C108 / G107', doc: 'م.د. إيمان عبد المعطي' }
           ],
           'الإثنين': '🌴 ارتاح يابطل',
           'الثلاثاء': [
-            { time: '09:00 - 02:00', subject: 'الموضة والازياء والثقافة والمجتمع (د. إيمان عبد المعطي)', place: 'مدرج C107 / C108' }
+            { time: '09:00 - 02:00', type: 'Dr', subject: 'الموضة والازياء والثقافة والمجتمع', place: 'مدرج C107 / C108', doc: 'م.د. إيمان عبد المعطي' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 03:00', subject: 'تكنولوجيا المعلومات وأسس بناء الجسم', place: 'مدرج G203 / C104' }
+            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'تكنولوجيا المعلومات وأسس بناء الجسم', place: 'مدرج G203 / C104', doc: 'م.د. مها توفيق' }
           ],
           'الخميس': [
-            { time: '09:00 - 02:00', subject: 'لغة إيطالية 1 وتطبيقات الملابس', place: 'مدرج G203' }
+            { time: '09:00 - 02:00', type: 'Dr', subject: 'لغة إيطالية 1 وتطبيقات الملابس', place: 'مدرج G203', doc: 'أ.د. وفاء عبد التواب' }
           ]
         }
       },
       'تكنولوجيا الأمن السيبراني': {
-        nameAr: 'تكنولوجيا الأمن السيبراني',
         nameEn: 'Cyber-Security Technology',
         nameIt: 'Cyber-Security Technology',
-        theme: 'from-slate-900 via-purple-950 to-slate-900 border-purple-500/30 text-purple-100',
-        cardBg: 'bg-slate-900/80 border-purple-500/20',
         badge: 'bg-purple-600 text-white',
+        themeBg: 'bg-purple-950/20 border-purple-500/40',
+        cardTheme: 'bg-purple-950/30 border-purple-500/30',
         schedule: {
           'الجمعة': [
-            { time: '09:00 - 02:00', subject: 'أنظمة قواعد البيانات وأمن المعلومات (د. عبير حسن)', place: 'مدرج G202 / F-Seminar' }
+            { time: '09:00 - 02:00', type: 'Dr', subject: 'أنظمة قواعد البيانات وأمن المعلومات', place: 'مدرج G202 / F-Seminar', doc: 'د. عبير حسن' }
           ],
           'السبت': [
-            { time: '09:00 - 02:00', subject: 'الرياضيات وتكنولوجيا المعلومات (د. شيماء مهران)', place: 'مدرج A-NEW / D104' }
+            { time: '09:00 - 02:00', type: 'Dr/Eng', subject: 'الرياضيات وتكنولوجيا المعلومات', place: 'مدرج A-NEW / D104', doc: 'د. شيماء مهران' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 02:00', subject: 'الرياضيات والفيزياء التطبيقية', place: 'مدرج G204 / A202' }
+            { time: '09:00 - 02:00', type: 'Dr', subject: 'الرياضيات والفيزياء التطبيقية', place: 'مدرج G204 / A202', doc: 'د. أحمد إبراهيم' }
           ],
           'الخميس': [
-            { time: '09:00 - 03:00', subject: 'اللغة الإنجليزية وتأمين الأنظمة', place: 'مدرج A202 / F-Seminar' }
+            { time: '09:00 - 03:00', type: 'Dr', subject: 'اللغة الإنجليزية وتأمين الأنظمة', place: 'مدرج A202 / F-Seminar', doc: 'د. أحمد حسن' }
           ]
         }
       },
       'تكنولوجيا الميكاترونكس': {
-        nameAr: 'تكنولوجيا الميكاترونكس',
         nameEn: 'Mechatronics Technology',
         nameIt: 'Mechatronics Technology',
-        theme: 'from-slate-900 via-blue-950 to-slate-900 border-blue-500/30 text-blue-100',
-        cardBg: 'bg-slate-900/80 border-blue-500/20',
         badge: 'bg-blue-600 text-white',
+        themeBg: 'bg-blue-950/20 border-blue-500/40',
+        cardTheme: 'bg-blue-950/30 border-blue-500/30',
         schedule: {
           'الأحد': [
-            { time: '09:00 - 03:00', subject: 'الفيزياء التطبيقية ومهارات الاتصال', place: 'مدرج G201 / A307' }
+            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'الفيزياء التطبيقية ومهارات الاتصال', place: 'مدرج G201 / A307', doc: 'د. أحمد باكر' }
           ],
           'الإثنين': '🌴 ارتاح يابطل',
           'الثلاثاء': [
-            { time: '09:00 - 03:00', subject: 'السلامة والصحة المهنية والرياضيات', place: 'مدرج G205 / G287' }
+            { time: '09:00 - 03:00', type: 'Dr', subject: 'السلامة والصحة المهنية والرياضيات', place: 'مدرج G205 / G287', doc: 'د. أحمد سويدان' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 03:00', subject: 'الرياضيات المتقدمة وتطبيقات الفيزياء', place: 'مدرج G201 / A307' }
+            { time: '09:00 - 03:00', type: 'Dr', subject: 'الرياضيات المتقدمة وتطبيقات الفيزياء', place: 'مدرج G201 / A307', doc: 'د. دعاء رشدي' }
           ],
           'الخميس': [
-            { time: '09:00 - 04:00', subject: 'رياضيات الفنيين ومهارات الاتصال', place: 'مدرج G282 / G205' }
+            { time: '09:00 - 04:00', type: 'Dr', subject: 'رياضيات الفنيين ومهارات الاتصال', place: 'مدرج G282 / G205', doc: 'د. محمد فوزي' }
           ]
         }
       },
       'تكنولوجيا الذكاء الاصطناعي': {
-        nameAr: 'تكنولوجيا الذكاء الاصطناعي',
         nameEn: 'Artificial Intelligence Technology',
         nameIt: 'Artificial Intelligence Technology',
-        theme: 'from-slate-900 via-indigo-950 to-slate-900 border-indigo-500/30 text-indigo-100',
-        cardBg: 'bg-slate-900/80 border-indigo-500/20',
         badge: 'bg-indigo-600 text-white',
+        themeBg: 'bg-indigo-950/20 border-indigo-500/40',
+        cardTheme: 'bg-indigo-950/30 border-indigo-500/30',
         schedule: {
           'الجمعة': [
-            { time: '09:00 - 03:00', subject: 'بايثون والإحصاء التطبيقي (د. سيمون عزت)', place: 'مدرج A305 / G203' }
+            { time: '09:00 - 03:00', type: 'Dr', subject: 'بايثون والإحصاء التطبيقي', place: 'مدرج A305 / G203', doc: 'د. سيمون عزت' }
           ],
           'السبت': [
-            { time: '09:00 - 03:00', subject: 'أنظمة الذكاء الاصطناعي والمعامل', place: 'مدرج A304 / D102' }
+            { time: '09:00 - 03:00', type: 'Dr', subject: 'أنظمة الذكاء الاصطناعي ومعامل البيانات', place: 'مدرج A304 / D102', doc: 'د. سامح مصطفى' }
           ],
           'الأحد': [
-            { time: '09:00 - 03:00', subject: 'الفيزياء والرياضيات المتقدمة', place: 'مدرج G107 / A303' }
+            { time: '09:00 - 03:00', type: 'Dr', subject: 'الفيزياء والرياضيات المتقدمة', place: 'مدرج G107 / A303', doc: 'د. إبراهيم عيد' }
           ]
         }
       },
       'تكنولوجيا الأوتوترونكس': {
-        nameAr: 'تكنولوجيا الأوتوترونكس',
         nameEn: 'Autotronics Technology',
         nameIt: 'Autotronics Technology',
-        theme: 'from-slate-900 via-amber-950 to-slate-900 border-amber-500/30 text-amber-100',
-        cardBg: 'bg-slate-900/80 border-amber-500/20',
         badge: 'bg-amber-600 text-white',
+        themeBg: 'bg-amber-950/20 border-amber-500/40',
+        cardTheme: 'bg-amber-950/30 border-amber-500/30',
         schedule: {
           'الأحد': [
-            { time: '09:00 - 04:00', subject: 'أساسيات الورش والفيزياء والجرافيك للسيارات', place: 'مدرج AUTO-1A / D104' }
+            { time: '09:00 - 04:00', type: 'Dr/Eng', subject: 'أساسيات الورش والفيزياء والجرافيك للسيارات', place: 'مدرج AUTO-1A / D104', doc: 'د. خالد مصطفى' }
           ],
           'الإثنين': [
-            { time: '09:00 - 04:00', subject: 'تكنولوجيا المعلومات والرسم الهندسي', place: 'مدرج A304 / G204' }
+            { time: '09:00 - 04:00', type: 'Dr', subject: 'تكنولوجيا المعلومات والرسم الهندسي', place: 'مدرج A304 / G204', doc: 'د. روضة حمزة' }
           ],
           'الثلاثاء': [
-            { time: '09:00 - 04:00', subject: 'الرياضيات المتقدمة وتكنولوجيا المعلومات', place: 'مدرج AUTO-2A / D104' }
+            { time: '09:00 - 04:00', type: 'Dr', subject: 'الرياضيات المتقدمة وتكنولوجيا المعلومات', place: 'مدرج AUTO-2A / D104', doc: 'د. طه فرغلي' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 02:00', subject: 'اللغة الإنجليزية والرياضيات', place: 'مدرج A305 / AUTO-2A' }
+            { time: '09:00 - 02:00', type: 'Dr', subject: 'اللغة الإنجليزية والرياضيات', place: 'مدرج A305 / AUTO-2A', doc: 'د. آمال طايح' }
           ]
         }
       },
       'تكنولوجيا علوم البيانات': {
-        nameAr: 'تكنولوجيا علوم البيانات',
         nameEn: 'Data Science Technology',
         nameIt: 'Data Science Technology',
-        theme: 'from-slate-900 via-teal-950 to-slate-900 border-teal-500/30 text-teal-100',
-        cardBg: 'bg-slate-900/80 border-teal-500/20',
         badge: 'bg-teal-600 text-white',
+        themeBg: 'bg-teal-950/20 border-teal-500/40',
+        cardTheme: 'bg-teal-950/30 border-teal-500/30',
         schedule: {
           'السبت': [
-            { time: '09:00 - 03:00', subject: 'التحول الرقمي ونظم المعلومات والإحصاء', place: 'مدرج G204 / A305' }
+            { time: '09:00 - 03:00', type: 'Dr', subject: 'التحول الرقمي ونظم المعلومات والإحصاء', place: 'مدرج G204 / A305', doc: 'د. شريف الشوربجي' }
           ],
           'الأحد': [
-            { time: '09:00 - 02:00', subject: 'التحول الرقمي والفيزياء التطبيقية', place: 'مدرج G205' }
+            { time: '09:00 - 02:00', type: 'Dr', subject: 'التحول الرقمي والفيزياء التطبيقية', place: 'مدرج G205', doc: 'د. بهاء صلاح' }
           ],
           'الإثنين': '🌴 ارتاح يابطل',
           'الثلاثاء': '🌴 ارتاح يابطل',
@@ -174,87 +168,153 @@
 
     function App() {
       const [user, setUser] = useState(null);
-      const [nameInput, setNameInput] = useState('');
-      const [idInput, setIdInput] = useState('');
-      const [groupNum, setGroupNum] = useState('5');
-      const [deptInput, setDeptInput] = useState('تحكم صناعي');
-      
+      const [blockedUsers, setBlockedUsers] = useState({});
       const [theme, setTheme] = useState('dark');
       const [language, setLanguage] = useState('ar');
       const [activeTab, setActiveTab] = useState('schedule');
-      const [searchQuery, setSearchQuery] = useState('');
+      
+      const [inputName, setInputName] = useState('');
+      const [inputDept, setInputDept] = useState('تحكم صناعي');
+      const [inputGroup, setInputGroup] = useState('5');
 
-      const [chatMessages, setChatMessages] = useState([
-        { id: 1, dept: 'تحكم صناعي', user: 'شروق سمير (٢٥٢ - أدمن)', text: 'أهلاً بجميع طلاب قسم تحكم صناعي، تم تحديث الجدول الرسمي بدقة.', time: '10:00 AM' }
+      const [messages, setMessages] = useState([
+        { id: 1, dept: 'تحكم صناعي', user: 'شروق سمير السيد حميدو ٢٥٢ (الأدمن)', text: 'مرحباً بجميع طلاب قسم تحكم صناعي، تم رفع الجداول الرسمية المعتمدة.', replyToAdmin: false, time: '10:00 AM' }
       ]);
-      const [newMsg, setNewMsg] = useState('');
+      const [newMessage, setNewMessage] = useState('');
+      const [isReplyToAdmin, setIsReplyToAdmin] = useState(false);
+      const [adminNotice, setAdminNotice] = useState('منصة جامعة حلوان الدولية التكنولوجية - إشراف وإدارة: شروق سمير السيد حميدو ٢٥٢');
+      const [newNoticeInput, setNewNoticeInput] = useState('');
+      const [searchQuery, setSearchQuery] = useState('');
 
       const handleLogin = (e) => {
         e.preventDefault();
-        if(!nameInput.trim() || !idInput.trim()) {
-          alert('يرجى إدخال الاسم الثلاثي والرقم القومي!');
+        if (!inputName.trim()) return;
+
+        const isAdmin = inputName.includes('شروق سمير') || inputName.includes('٢٥٢');
+
+        if (isAdmin) {
+          setUser({ 
+            name: 'شروق سمير السيد حميدو ٢٥٢', 
+            department: 'تحكم صناعي', 
+            group: inputGroup,
+            isAdmin: true 
+          });
           return;
         }
-        setUser({
-          name: nameInput,
-          nationalId: idInput,
-          group: groupNum,
-          department: deptInput,
-          isAdmin: nameInput.includes('شروق') || idInput === '252'
+
+        if (blockedUsers[inputName]) {
+          alert('تم حظر هذا الحساب لتجاوز محاولات الدخول. برجاء مراجعة الأدمن (شروق سمير).');
+          return;
+        }
+
+        const storedAttempts = JSON.parse(localStorage.getItem('loginAttempts') || '{}');
+        let currentAttempts = storedAttempts[inputName] || 0;
+
+        if (currentAttempts >= 2) {
+          setBlockedUsers({ ...blockedUsers, [inputName]: true });
+          alert('لقد تجاوزت الحد المسموح للمحاولات. تم حظر حسابك مؤقتاً.');
+          return;
+        }
+
+        storedAttempts[inputName] = currentAttempts + 1;
+        localStorage.setItem('loginAttempts', JSON.stringify(storedAttempts));
+
+        setUser({ 
+          name: inputName, 
+          department: inputDept, 
+          group: inputGroup,
+          isAdmin: false 
         });
       };
 
-      const sendMessage = (e) => {
+      const unblockUser = (userName) => {
+        const updated = { ...blockedUsers };
+        delete updated[userName];
+        setBlockedUsers(updated);
+        const storedAttempts = JSON.parse(localStorage.getItem('loginAttempts') || '{}');
+        delete storedAttempts[userName];
+        localStorage.setItem('loginAttempts', JSON.stringify(storedAttempts));
+        alert(`تم فك الحظر عن الطالب: ${userName}`);
+      };
+
+      const handleSendMessage = (e) => {
         e.preventDefault();
-        if(!newMsg.trim()) return;
-        setChatMessages([...chatMessages, {
+        if (!newMessage.trim()) return;
+
+        const msg = {
           id: Date.now(),
           dept: user.department,
           user: user.name + ` (مجموعة ${user.group})`,
-          text: newMsg,
-          time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-        }]);
-        setNewMsg('');
+          text: newMessage,
+          replyToAdmin: isReplyToAdmin,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+
+        setMessages([...messages, msg]);
+        setNewMessage('');
+        setIsReplyToAdmin(false);
       };
 
       const t = (ar, en, it) => {
-        if(language === 'en') return en;
-        if(language === 'it' && user?.department === 'تحكم صناعي') return it;
+        if (language === 'en') return en || ar;
+        if (language === 'it' && user?.department === 'تحكم صناعي') return it || ar;
         return ar;
       };
 
-      if(!user) {
+      if (!user) {
         return (
-          <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4" dir="rtl">
+          <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 font-sans text-right" dir="rtl">
             <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl max-w-md w-full p-8 text-slate-100">
               <div className="text-center mb-6">
                 <div className="bg-emerald-600 text-white p-3 rounded-full inline-flex mb-2 shadow-lg font-bold text-xl">HTU</div>
                 <h1 className="text-xl font-bold">جامعة حلوان الدولية التكنولوجية</h1>
                 <p className="text-xs text-slate-400 mt-1">منصة الجداول الرسمية - إشراف: شروق سمير (٢٥٢)</p>
               </div>
+
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-300 mb-1">الاسم الثلاثي:</label>
-                  <input type="text" required placeholder="اكتب اسمك الثلاثي..." value={nameInput} onChange={e => setNameInput(e.target.value)} className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 text-white"/>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="اكتب اسمك الثلاثي..."
+                    value={inputName}
+                    onChange={(e) => setInputName(e.target.value)}
+                    className="w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-xl focus:ring-2 focus:ring-emerald-500 text-sm text-white"
+                  />
                 </div>
+
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">الرقم القومي:</label>
-                  <input type="text" required placeholder="أدخل الرقم القومي..." value={idInput} onChange={e => setIdInput(e.target.value)} className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 text-white"/>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">رقم المجموعة (1 إلى 12):</label>
-                  <select value={groupNum} onChange={e => setGroupNum(e.target.value)} className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
-                    {[...Array(12)].map((_, i) => <option key={i+1} value={i+1}>مجموعة {i+1}</option>)}
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">القسم الدراسي:</label>
+                  <select 
+                    value={inputDept}
+                    onChange={(e) => setInputDept(e.target.value)}
+                    className="w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white"
+                  >
+                    {Object.keys(departmentsData).map((dept) => (
+                      <option key={dept} value={dept}>{dept}</option>
+                    ))}
                   </select>
                 </div>
+
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">اختر القسم الدراسي:</label>
-                  <select value={deptInput} onChange={e => setDeptInput(e.target.value)} className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
-                    {Object.keys(departmentsData).map(dept => <option key={dept} value={dept}>{dept}</option>)}
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">رقم المجموعة (من 1 إلى 12):</label>
+                  <select 
+                    value={inputGroup}
+                    onChange={(e) => setInputGroup(e.target.value)}
+                    className="w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white"
+                  >
+                    {[...Array(12)].map((_, i) => (
+                      <option key={i+1} value={i+1}>مجموعة {i+1}</option>
+                    ))}
                   </select>
                 </div>
-                <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow text-sm">
-                  {language === 'ar' ? 'دخول المنصة وعرض الجدول 🚀' : 'Enter Platform 🚀'}
+
+                <button 
+                  type="submit"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow text-sm"
+                >
+                  دخول المنصة وعرض الجدول 🚀
                 </button>
               </form>
             </div>
@@ -262,70 +322,123 @@
         );
       }
 
-      const deptInfo = departmentsData[user.department];
+      const isDarkMode = theme === 'dark';
+      const currentDeptData = departmentsData[user.department];
 
       return (
-        <div className={`min-h-screen bg-gradient-to-br ${deptInfo.theme}`} dir="rtl">
-          <header className="border-b border-white/10 sticky top-0 z-50 backdrop-blur-md bg-slate-950/80">
-            <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4 text-white">
+        <div className={`min-h-screen font-sans transition-colors duration-300 ${isDarkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`} dir="rtl">
+          
+          {adminNotice && (
+            <div className="bg-emerald-600 text-white text-xs md:text-sm py-2 px-4 text-center font-medium flex items-center justify-center gap-2 shadow">
+              <span>🛡️ {adminNotice}</span>
+            </div>
+          )}
+
+          <header className={`border-b sticky top-0 z-50 backdrop-blur-md ${isDarkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white/90 border-slate-200'}`}>
+            <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h1 className="font-bold text-sm md:text-base">{user.name}</h1>
-                <p className="text-xs text-emerald-400 font-semibold">{t(user.department, deptInfo.nameEn, deptInfo.nameIt)} — ({t('مجموعة', 'Group', 'Gruppo')} {user.group}) {user.isAdmin && '✨ (أدمن)'}</p>
+                <p className="text-xs text-emerald-500 font-semibold">{t(user.department, currentDeptData.nameEn, currentDeptData.nameIt)} — ({t('مجموعة', 'Group', 'Gruppo')} {user.group}) {user.isAdmin && '✨ (الأدمن)'}</p>
               </div>
+
               <div className="flex items-center gap-2 flex-wrap">
-                <div className="flex items-center gap-1 bg-slate-900/80 p-1 rounded-lg border border-white/10">
-                  <button onClick={() => setLanguage('ar')} className={`px-2 py-1 text-xs rounded font-bold ${language === 'ar' ? 'bg-emerald-600 text-white' : 'text-slate-300'}`}>عربي</button>
-                  <button onClick={() => setLanguage('en')} className={`px-2 py-1 text-xs rounded font-bold ${language === 'en' ? 'bg-emerald-600 text-white' : 'text-slate-300'}`}>EN</button>
+                <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg border border-slate-200 dark:border-slate-700">
+                  <button onClick={() => setLanguage('ar')} className={`px-2.5 py-1 text-xs rounded font-bold ${language === 'ar' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`}>عربي</button>
+                  <button onClick={() => setLanguage('en')} className={`px-2.5 py-1 text-xs rounded font-bold ${language === 'en' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`}>EN</button>
                   {user.department === 'تحكم صناعي' && (
-                    <button onClick={() => setLanguage('it')} className={`px-2 py-1 text-xs rounded font-bold ${language === 'it' ? 'bg-emerald-600 text-white' : 'text-slate-300'}`}>IT</button>
+                    <button onClick={() => setLanguage('it')} className={`px-2.5 py-1 text-xs rounded font-bold ${language === 'it' ? 'bg-emerald-600 text-white' : 'text-slate-400'}`}>IT</button>
                   )}
                 </div>
-                <button onClick={() => setActiveTab('schedule')} className={`px-3 py-1.5 rounded-lg text-sm font-medium ${activeTab === 'schedule' ? 'bg-emerald-600 text-white' : 'bg-slate-900/80 text-slate-300'}`}>
+
+                <button onClick={() => setTheme(isDarkMode ? 'light' : 'dark')} className="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-xs font-bold">
+                  {isDarkMode ? '☀️ فاتح' : '🌙 مظلم'}
+                </button>
+
+                <button onClick={() => setActiveTab('schedule')} className={`px-3 py-1.5 rounded-lg text-sm font-medium ${activeTab === 'schedule' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-200 dark:bg-slate-800'}`}>
                   {t('📅 الجدول الدراسي', '📅 Schedule', '📅 Orario')}
                 </button>
-                <button onClick={() => setActiveTab('chat')} className={`px-3 py-1.5 rounded-lg text-sm font-medium ${activeTab === 'chat' ? 'bg-emerald-600 text-white' : 'bg-slate-900/80 text-slate-300'}`}>
-                  {t('💬 شات القسم', '💬 Dept Chat', '💬 Chat')}
+
+                <button onClick={() => setActiveTab('chat')} className={`px-3 py-1.5 rounded-lg text-sm font-medium ${activeTab === 'chat' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-200 dark:bg-slate-800'}`}>
+                  {t('💬 شات القسم', '💬 Chat', '💬 Chat')}
                 </button>
-                <button onClick={() => setUser(null)} className="text-xs px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 font-semibold border border-rose-500/30">خروج</button>
+
+                {user.isAdmin && (
+                  <button onClick={() => setActiveTab('admin')} className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1 ${activeTab === 'admin' ? 'bg-amber-600 text-white shadow' : 'bg-amber-100 text-amber-800'}`}>
+                    ⚙️ لوحة الأدمن
+                  </button>
+                )}
+
+                <button onClick={() => setUser(null)} className="text-xs px-3 py-1.5 rounded-lg bg-rose-100 text-rose-700 font-semibold">خروج</button>
               </div>
             </div>
           </header>
 
           <main className="max-w-7xl mx-auto px-4 py-6">
+
             {activeTab === 'schedule' && (
               <div className="space-y-6">
-                <div className="p-4 rounded-2xl shadow-lg border border-white/10 bg-slate-900/70 backdrop-blur-md flex items-center gap-3">
-                  <input type="text" placeholder={t('ابحث عن محاضرة، دكتور، مبنى، أو يوم...', 'Search lectures, doctor, building...', 'Cerca...')} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="w-full bg-transparent focus:outline-none text-sm text-white placeholder-slate-400"/>
+                <div className={`p-4 rounded-2xl shadow-md border flex items-center gap-3 ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  <input 
+                    type="text"
+                    placeholder={t('ابحث عن (محاضرة، دكتور، مبنى، يوم)...', 'Search lectures, doctor, place...', 'Cerca...')}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-transparent focus:outline-none text-sm"
+                  />
                 </div>
 
-                <div className={`p-5 rounded-2xl border ${deptInfo.cardBg} flex justify-between items-center backdrop-blur-md`}>
+                <div className={`p-5 rounded-2xl border-2 ${currentDeptData.themeBg} flex justify-between items-center backdrop-blur-md`}>
                   <div>
-                    <h2 className="font-bold text-lg text-white">{t('جدول محاضرات:', 'Schedule for:', 'Orario per:')} {t(user.department, deptInfo.nameEn, deptInfo.nameIt)}</h2>
-                    <p className="text-xs text-slate-300 mt-1">{t('مخصص لطلاب المجموعة رقم', 'Dedicated for Group', 'Dedicato al Gruppo')} ({user.group}) {t('من أصل 12 مجموعة', 'of 12 groups', 'di 12 gruppi')}</p>
+                    <h2 className="font-bold text-lg">{t('جدول محاضرات:', 'Schedule for:', 'Orario:')} {t(user.department, currentDeptData.nameEn, currentDeptData.nameIt)}</h2>
+                    <p className="text-xs text-slate-400 mt-1">{t('مخصص لطلاب المجموعة', 'Dedicated for Group', 'Gruppo')} ({user.group}) {t('من أصل 12 مجموعة', 'of 12 groups', 'di 12')}</p>
                   </div>
-                  <span className={`text-xs px-3 py-1.5 rounded-full font-bold shadow ${deptInfo.badge}`}>{t('معتمد رسمياً', 'Officially Approved', 'Approvato')}</span>
+                  <span className={`text-xs px-3 py-1.5 rounded-full font-bold shadow ${currentDeptData.badge}`}>
+                    {t('معتمد رسمياً', 'Officially Approved', 'Approvato')}
+                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {Object.entries(deptInfo.schedule).map(([day, content]) => {
-                    const isOff = content === '🌴 ارتاح يابطل';
+                  {Object.entries(currentDeptData.schedule).map(([day, dayContent]) => {
+                    const isDayMatch = day.toLowerCase().includes(searchQuery.toLowerCase());
+                    const filteredLectures = Array.isArray(dayContent) ? dayContent.filter(item => {
+                      if (!searchQuery) return true;
+                      const q = searchQuery.toLowerCase();
+                      return item.subject.toLowerCase().includes(q) ||
+                             item.doc.toLowerCase().includes(q) ||
+                             item.place.toLowerCase().includes(q) ||
+                             item.type.toLowerCase().includes(q) ||
+                             day.toLowerCase().includes(q);
+                    }) : [];
+
+                    if (searchQuery && !isDayMatch && filteredLectures.length === 0) return null;
+                    const isOffDay = dayContent === '🌴 ارتاح يابطل';
+
                     return (
-                      <div key={day} className={`rounded-2xl border p-5 shadow-xl backdrop-blur-md ${deptInfo.cardBg}`}>
-                        <div className="flex justify-between items-center mb-4 pb-3 border-b border-white/10">
+                      <div key={day} className={`rounded-2xl border p-5 shadow-sm ${currentDeptData.cardTheme} backdrop-blur-md`}>
+                        <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-700/50">
                           <h3 className="font-bold text-lg text-emerald-400">{day}</h3>
-                          <span className="text-xs bg-white/10 text-white px-2.5 py-1 rounded-lg font-bold">{t('مجموعة', 'Group', 'Gruppo')} {user.group}</span>
+                          <span className="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg font-bold">{t('مجموعة', 'Group', 'Gruppo')} {user.group}</span>
                         </div>
-                        {isOff ? (
-                          <div className="py-10 text-center bg-white/5 rounded-xl border border-dashed border-white/10">
+
+                        {isOffDay ? (
+                          <div className="py-10 text-center bg-slate-900/40 rounded-xl border border-dashed border-slate-700">
                             <span className="font-bold text-emerald-400">{t('🌴 ارتاح يابطل', '🌴 Day Off', '🌴 Riposo')}</span>
                           </div>
                         ) : (
                           <div className="space-y-3">
-                            {content.map((item, idx) => (
-                              <div key={idx} className="p-3.5 rounded-xl border border-white/10 bg-slate-950/50 hover:bg-slate-950/80 transition">
-                                <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-md font-bold">{item.time}</span>
-                                <h4 className="font-bold text-sm mt-2 text-white">{item.subject}</h4>
-                                <p className="text-xs text-slate-400 mt-1.5">📍 {t('المكان:', 'Place:', 'Luogo:')} {item.place}</p>
+                            {filteredLectures.map((item, idx) => (
+                              <div key={idx} className="p-3.5 rounded-xl border border-slate-700/60 bg-slate-900/60 shadow-sm">
+                                <div className="flex justify-between items-start mb-1.5">
+                                  <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded font-bold">
+                                    {item.type}
+                                  </span>
+                                  <span className="text-xs text-slate-400 font-medium">⏰ {item.time}</span>
+                                </div>
+                                <h4 className="font-bold text-sm mt-1 text-slate-100">{item.subject}</h4>
+                                <div className="flex justify-between text-xs text-slate-400 mt-2.5 pt-2 border-t border-slate-800">
+                                  <span>👨‍🏫 {item.doc}</span>
+                                  <span>📍 {item.place}</span>
+                                </div>
                               </div>
                             ))}
                           </div>
@@ -338,29 +451,108 @@
             )}
 
             {activeTab === 'chat' && (
-              <div className="max-w-3xl mx-auto bg-slate-900/90 border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[75vh] backdrop-blur-md">
+              <div className="max-w-3xl mx-auto bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden flex flex-col h-[75vh]">
                 <div className="p-4 bg-emerald-600 text-white flex justify-between items-center shadow">
                   <div>
-                    <h3 className="font-bold">{t('شات قسم:', 'Department Chat:', 'Chat del Dipartimento:')} {t(user.department, deptInfo.nameEn, deptInfo.nameIt)}</h3>
-                    <p className="text-xs text-emerald-200">{t('محادثة مغلقة ومخصصة لطلاب قسمك فقط', 'Private chat for your department students only', 'Chat privata')}</p>
+                    <h3 className="font-bold">{t('شات قسم:', 'Department Chat:', 'Chat:')} {t(user.department, currentDeptData.nameEn, currentDeptData.nameIt)}</h3>
+                    <p className="text-xs text-emerald-200">{t('محادثة مغلقة ومخصصة لطلاب قسمك فقط', 'Private chat for department students only', 'Chat privata')}</p>
                   </div>
                 </div>
+
                 <div className="flex-1 p-4 overflow-y-auto space-y-3">
-                  {chatMessages.filter(m => m.dept === user.department).map(m => (
-                    <div key={m.id} className={`flex flex-col ${m.user.includes(user.name) ? 'items-end' : 'items-start'}`}>
-                      <span className="text-[10px] text-slate-400 mb-1">{m.user} ({m.time})</span>
-                      <div className={`p-3 rounded-2xl max-w-md text-sm ${m.user.includes(user.name) ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-100 border border-slate-700'}`}>
-                        {m.text}
+                  {messages.filter(m => m.dept === user.department).map((msg) => (
+                    <div key={msg.id} className={`flex flex-col ${msg.user.includes(user.name) ? 'items-end' : 'items-start'}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-bold text-slate-400">{msg.user}</span>
+                        <span className="text-[10px] text-slate-500">{msg.time}</span>
+                        {msg.replyToAdmin && (
+                          <span className="bg-amber-500/20 text-amber-300 text-[10px] px-2 py-0.5 rounded font-bold border border-amber-500/30">
+                            ⭐ موجه للأدمن (شروق)
+                          </span>
+                        )}
+                      </div>
+                      <div className={`p-3 rounded-2xl max-w-md text-sm ${msg.user.includes(user.name) ? 'bg-emerald-600 text-white rounded-tl-none' : 'bg-slate-800 text-slate-100 rounded-tr-none border border-slate-700'}`}>
+                        {msg.text}
                       </div>
                     </div>
                   ))}
                 </div>
-                <form onSubmit={sendMessage} className="p-3 border-t border-white/10 bg-slate-950 flex gap-2">
-                  <input type="text" placeholder={t('اكتب رسالتك لزملاء القسم...', 'Type your message to department peers...', 'Scrivi un messaggio...')} value={newMsg} onChange={e => setNewMsg(e.target.value)} className="flex-1 px-4 py-2 border border-slate-700 rounded-xl bg-slate-900 text-sm focus:outline-none text-white"/>
-                  <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl shadow font-bold text-sm">{t('إرسال', 'Send', 'Invia')}</button>
+
+                <form onSubmit={handleSendMessage} className="p-3 border-t border-slate-800 bg-slate-950 flex flex-col gap-2">
+                  <div className="flex items-center gap-2">
+                    <input type="checkbox" id="replyAdmin" checked={isReplyToAdmin} onChange={(e) => setIsReplyToAdmin(e.target.checked)} className="rounded text-emerald-600" />
+                    <label htmlFor="replyAdmin" className="text-xs text-slate-400 cursor-pointer font-medium">
+                      تعليم كرسالة هامة / موجهة للأدمن (شروق سمير)
+                    </label>
+                  </div>
+                  <div className="flex gap-2">
+                    <input type="text" placeholder={t('اكتب رسالتك لزملاء القسم...', 'Type your message...', 'Scrivi...')} value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className="flex-1 px-4 py-2 border border-slate-700 rounded-xl bg-slate-900 text-sm focus:outline-none text-white" />
+                    <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl shadow font-bold text-sm">إرسال</button>
+                  </div>
                 </form>
               </div>
             )}
+
+            {activeTab === 'admin' && user.isAdmin && (
+              <div className="space-y-6">
+                <div className="bg-amber-950/30 border border-amber-500/40 p-5 rounded-2xl backdrop-blur-md">
+                  <h2 className="text-lg font-bold text-amber-200">
+                    ⚙️ لوحة تحكم الأدمن - شروق سمير السيد حميدو (٢٥٢)
+                  </h2>
+                  <p className="text-xs text-amber-400 mt-1">إدارة الحسابات، فك الحظر، ومتابعة رسائل الطلاب والإعلانات العامة.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm">
+                    <h3 className="font-bold text-base mb-4 text-rose-400">🔒 الطلاب المحظورين (تجاوز المحاولات)</h3>
+                    {Object.keys(blockedUsers).length === 0 ? (
+                      <p className="text-sm text-slate-400">لا يوجد طلاب محظورين حالياً.</p>
+                    ) : (
+                      <div className="space-y-3">
+                        {Object.keys(blockedUsers).map((studentName) => (
+                          <div key={studentName} className="flex justify-between items-center p-3 bg-slate-800 rounded-xl border border-slate-700">
+                            <span className="font-medium text-sm">{studentName}</span>
+                            <button onClick={() => unblockUser(studentName)} className="bg-emerald-600 text-white text-xs px-3 py-1.5 rounded-lg font-bold">
+                              فك الحلوك
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm">
+                    <h3 className="font-bold text-base mb-4 text-emerald-400">📢 الإعلان العام للكلية</h3>
+                    <div className="space-y-3">
+                      <textarea rows="3" value={newNoticeInput} onChange={(e) => setNewNoticeInput(e.target.value)} placeholder="اكتب الإعلان العام..." className="w-full p-3 border border-slate-700 rounded-xl bg-slate-800 text-sm focus:outline-none text-white"></textarea>
+                      <button onClick={() => { setAdminNotice(newNoticeInput); alert('تم تحديث الإعلان بنجاح!'); }} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm shadow">
+                        تحديث الإعلان العام
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm">
+                  <h3 className="font-bold text-base mb-4 text-amber-400">📥 الرسائل الهامة الموجهة للأدمن (شروق)</h3>
+                  <div className="space-y-3">
+                    {messages.filter(m => m.replyToAdmin).length === 0 ? (
+                      <p className="text-sm text-slate-400">لا توجد رسائل موجهة للأدمن حالياً.</p>
+                    ) : (
+                      messages.filter(m => m.replyToAdmin).map(m => (
+                        <div key={m.id} className="p-3 bg-amber-950/20 border border-amber-500/30 rounded-xl">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-xs font-bold text-amber-300">{m.user} ({m.dept})</span>
+                            <span className="text-[10px] text-slate-400">{m.time}</span>
+                          </div>
+                          <p className="text-sm text-slate-200">{m.text}</p>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
           </main>
         </div>
       );

@@ -8,34 +8,37 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 font-sans transition-colors duration-300 text-slate-900 dark:text-slate-100">
+<body class="bg-slate-100 dark:bg-slate-950 font-sans transition-colors duration-300 text-slate-800 dark:text-slate-100">
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState } = React;
+    const { useState, useEffect, useRef } = React;
 
     const departmentsData = {
       'تحكم صناعي': {
         nameEn: 'Industrial Control Technology',
         nameIt: 'Tecnologia di Controllo Industriale',
         sectionsCount: 12,
-        badge: 'bg-emerald-600 text-white',
-        themeBg: 'bg-emerald-950/20 border-emerald-500/30',
         schedule: {
           'السبت': [
-            { time: '09:00 - 11:00', type: 'Dr/Eng', subject: 'دوائر كهربائية 3Phase & Solid & Electronics', place: 'مدرج C104 / D103', doc: 'د. جولينا سمير / م. باسمة' },
+            { time: '09:00 - 11:00', type: 'Dr/Eng', subject: 'دوائر كهربائية 3Phase & Solid & Electronics', place: 'مدرج C104 / D103', doc: 'د. جولينا سمير / م. باسمة / م. محمد' },
             { time: '11:00 - 01:00', type: 'Dr', subject: 'اللغة الإيطالية 1', place: 'مدرج A303', doc: 'أ.د. وفاء عبد التواب' }
           ],
           'الأحد': [
-            { time: '09:00 - 12:00', type: 'Dr', subject: 'هندسة التحكم والتشغيل الآلي والرسم الهندسي', place: 'مدرج G202 / G203', doc: 'د. حسام حجازي / د. محمد عثمان' }
+            { time: '09:00 - 12:00', type: 'Dr/Eng', subject: 'هندسة التحكم والتشغيل الآلي والرسم الهندسي', place: 'مدرج G202 / G203', doc: 'د. حسام حجازي / د. محمد عثمان' }
           ],
           'الإثنين': '🌴 ارتاح يابطل',
           'الثلاثاء': [
             { time: '09:00 - 11:00', type: 'Dr', subject: 'رياضيات هندسية متقدمة', place: 'مدرج A303', doc: 'د. إبراهيم عيد' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 02:00', type: 'Dr/Eng', subject: 'تطبيقات إلكترونية وورش عمل وتغذية', place: 'معمل F108 / الورش', doc: 'م. شهد حنتيرة' }
+            { time: '09:00 - 02:00', type: 'Dr/Eng', subject: 'تطبيقات إلكترونية وورش عمل وتغذية', place: 'معمل F108 / الورش', doc: 'م. شهد حنتيرة / م. سلمى' }
           ],
           'الخميس': '🌴 ارتاح يابطل'
         }
@@ -43,65 +46,60 @@
       'تكنولوجيا الملابس الجاهزة': {
         nameEn: 'Ready-Made Garments Technology',
         nameIt: 'Ready-Made Garments Technology',
-        sectionsCount: 8,
-        badge: 'bg-pink-600 text-white',
-        themeBg: 'bg-pink-950/20 border-pink-500/30',
+        sectionsCount: 3,
         schedule: {
           'الأحد': [
-            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'تشكيل على المانيكان وتكنولوجيا صناعة الملابس', place: 'مدرج C108 / G107', doc: 'م.د. إيمان عبد المعطي' }
+            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'تشكيل على المانيكان 1 وتكنولوجيا الملابس', place: 'مدرج C108 / G107 / C103', doc: 'م. مصطفى / م. يارا / م. بهنسي / م.د إيمان عبد المعطي' }
           ],
           'الإثنين': '🌴 ارتاح يابطل',
           'الثلاثاء': [
-            { time: '09:00 - 02:00', type: 'Dr', subject: 'الموضة والازياء والثقافة والمجتمع', place: 'مدرج C107 / C108', doc: 'م.د. إيمان عبد المعطي' }
+            { time: '09:00 - 02:00', type: 'Dr', subject: 'الموضة والأزياء والثقافة والمجتمع', place: 'مدرج C108 / G106 / C107', doc: 'م.د إيمان عبد المعطي / م. دينا' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'تكنولوجيا المعلومات وأسس بناء الجسم', place: 'مدرج G203 / C104', doc: 'م.د. مها توفيق' }
+            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'تكنولوجيا المعلومات وأسس بناء الجسم', place: 'مدرج G203 / C104 / G107', doc: 'م.د مها توفيق / أ.د وفاء عبد التواب' }
           ],
           'الخميس': [
-            { time: '09:00 - 02:00', type: 'Dr', subject: 'لغة إيطالية 1 وتطبيقات الملابس', place: 'مدرج G203', doc: 'أ.د. وفاء عبد التواب' }
+            { time: '09:00 - 02:00', type: 'Dr', subject: 'لغة إيطالية 1 وتطبيقات الملابس', place: 'مدرج G203 / G107', doc: 'أ.د وفاء عبد التواب / م. إسراء' }
           ]
         }
       },
       'تكنولوجيا الأمن السيبراني': {
         nameEn: 'Cyber-Security Technology',
         nameIt: 'Cyber-Security Technology',
-        sectionsCount: 10,
-        badge: 'bg-purple-600 text-white',
-        themeBg: 'bg-purple-950/20 border-purple-500/30',
+        sectionsCount: 15,
         schedule: {
           'الجمعة': [
-            { time: '09:00 - 02:00', type: 'Dr', subject: 'أنظمة قواعد البيانات وأمن المعلومات', place: 'مدرج G202 / F-Seminar', doc: 'د. عبير حسن' }
+            { time: '09:00 - 11:00', type: 'Eng', subject: 'Applied Physics', place: 'مدرج G202 / G201', doc: 'Eng. Fares' },
+            { time: '11:00 - 01:00', type: 'Dr', subject: 'Information Technology / Database Systems', place: 'مدرج G202 / A-New / F-Seminar', doc: 'Dr. Nelly Saeed / Dr. Abeer Hassan' }
           ],
           'السبت': [
-            { time: '09:00 - 02:00', type: 'Dr/Eng', subject: 'الرياضيات وتكنولوجيا المعلومات', place: 'مدرج A-NEW / D104', doc: 'د. شيماء مهران' }
+            { time: '09:00 - 12:00', type: 'Dr/Eng', subject: 'Mathematics / Information Technology', place: 'مدرج A-NEW / D104 / D105', doc: 'Dr. Shaimaa Muhran / Eng. Maria' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 02:00', type: 'Dr', subject: 'الرياضيات والفيزياء التطبيقية', place: 'مدرج G204 / A202', doc: 'د. أحمد إبراهيم' }
+            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'Applied Physics / Mathematics', place: 'مدرج G204 / G202 / A202', doc: 'Eng. Abdulaziz / Eng. Omnia' }
           ],
           'الخميس': [
-            { time: '09:00 - 03:00', type: 'Dr', subject: 'اللغة الإنجليزية وتأمين الأنظمة', place: 'مدرج A202 / F-Seminar', doc: 'د. أحمد حسن' }
+            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'Applied Physics / English 1 / Database', place: 'مدرج G204 / A202 / A303', doc: 'Dr. Ahmed Ibrahem / Dr. Ahmed Hassan' }
           ]
         }
       },
       'تكنولوجيا الميكاترونكس': {
         nameEn: 'Mechatronics Technology',
         nameIt: 'Mechatronics Technology',
-        sectionsCount: 12,
-        badge: 'bg-blue-600 text-white',
-        themeBg: 'bg-blue-950/20 border-blue-500/30',
+        sectionsCount: 10,
         schedule: {
           'الأحد': [
-            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'الفيزياء التطبيقية ومهارات الاتصال', place: 'مدرج G201 / A307', doc: 'د. أحمد سويدان' }
+            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'Physics / Technical English / Application of Math', place: 'مدرج G104 / G207 / A307', doc: 'Eng. Adham / Eng. Nehal / Eng. Riham' }
           ],
           'الإثنين': '🌴 ارتاح يابطل',
           'الثلاثاء': [
-            { time: '09:00 - 03:00', type: 'Dr', subject: 'السلامة والصحة المهنية والرياضيات', place: 'مدرج G205 / G287', doc: 'د. أحمد سويدان' }
+            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'Physics / Mathematics / Communication Skills', place: 'مدرج G201 / G104 / A307', doc: 'Dr. Ahmed Bakr / Eng. Ibrahem Hamdy' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 03:00', type: 'Dr', subject: 'الرياضيات المتقدمة وتطبيقات الفيزياء', place: 'مدرج G201 / A307', doc: 'د. دعاء رشدي' }
+            { time: '09:00 - 03:00', type: 'Dr/Eng', subject: 'Health & Safety / Application of Math', place: 'مدرج G205 / G201 / A307', doc: 'Dr. Ahmed Swidan / Dr. Duaa Roshdy' }
           ],
           'الخميس': [
-            { time: '09:00 - 04:00', type: 'Dr', subject: 'رياضيات الفنيين ومهارات الاتصال', place: 'مدرج G282 / G205', doc: 'د. محمد فوزي' }
+            { time: '09:00 - 04:00', type: 'Dr/Eng', subject: 'Mathematics for Technicians / Communication Skills', place: 'مدرج G282 / G205 / G104', doc: 'Dr. Muhammed Fawzy / Dr. Mahmoud Samy' }
           ]
         }
       },
@@ -109,53 +107,55 @@
         nameEn: 'Artificial Intelligence Technology',
         nameIt: 'Artificial Intelligence Technology',
         sectionsCount: 8,
-        badge: 'bg-indigo-600 text-white',
-        themeBg: 'bg-indigo-950/20 border-indigo-500/30',
         schedule: {
           'الجمعة': [
-            { time: '09:00 - 03:00', type: 'Dr', subject: 'بايثون والإحصاء التطبيقي', place: 'مدرج A305 / G203', doc: 'د. سيمون عزت' }
+            { time: '09:00 - 12:00', type: 'Dr/Eng', subject: 'Applied Physics / Math / Python', place: 'مدرج A305 / G203 / F-Seminar', doc: 'Dr. Simon Ezzat / Eng. Shahd Bakry' },
+            { time: '12:00 - 03:00', type: 'Dr', subject: 'Introduction to Information Systems', place: 'مدرج A-New / G205 / A202', doc: 'Dr. Muhammed Salah' }
           ],
           'السبت': [
-            { time: '09:00 - 03:00', type: 'Dr', subject: 'أنظمة الذكاء الاصطناعي والمعامل', place: 'مدرج A304 / D102', doc: 'د. سامح مصطفى' }
+            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'Information Technology / Python / Math', place: 'مدرج A304 / D102 / D101', doc: 'Dr. Sameh Mustafa / Eng. Marwa' },
+            { time: '01:00 - 04:00', type: 'Dr', subject: 'Mathematics / Applied Statistics / English', place: 'مدرج A305 / F-Seminar / A304', doc: 'Dr. Ahmed Bakr / Dr. Muhammed Abdulhakem / Dr. Sabreen' }
           ],
           'الأحد': [
-            { time: '09:00 - 03:00', type: 'Dr', subject: 'الفيزياء والرياضيات المتقدمة', place: 'مدرج G107 / A303', doc: 'د. إبراهيم عيد' }
+            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'Statistics / Applied Physics / Python', place: 'مدرج G107 / D102 / F-Seminar', doc: 'Dr. Ibrahem Eid / Eng. Hana Hany' }
           ]
         }
       },
       'تكنولوجيا الأوتوترونكس': {
         nameEn: 'Autotronics Technology',
         nameIt: 'Autotronics Technology',
-        sectionsCount: 10,
-        badge: 'bg-amber-600 text-white',
-        themeBg: 'bg-amber-950/20 border-amber-500/30',
+        sectionsCount: 8,
         schedule: {
           'الأحد': [
-            { time: '09:00 - 04:00', type: 'Dr/Eng', subject: 'أساسيات الورش والفيزياء والجرافيك للسيارات', place: 'مدرج AUTO-1A / D104', doc: 'د. خالد مصطفى' }
+            { time: '09:00 - 12:00', type: 'Dr/Eng', subject: 'Mathematics (1) / Physics / Graphics', place: 'مدرج F-Seminar / AUT1A / AUTO 4B', doc: 'Dr. Doaa Roshdy / Eng. Amany / Eng. Christena' },
+            { time: '12:00 - 03:00', type: 'Eng', subject: 'Basics of Workshops / IT', place: 'مدرج AUTO 1A / D104', doc: 'Eng. Ahmed Ashraf / Eng. Amany' }
           ],
           'الإثنين': [
-            { time: '09:00 - 04:00', type: 'Dr', subject: 'تكنولوجيا المعلومات والرسم الهندسي', place: 'مدرج A304 / G204', doc: 'د. روضة حمزة' }
+            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'Drawing / Basics of Workshops / IT', place: 'مدرج A-NEW / A304 / G204', doc: 'Dr. Khaled / Dr. Ayman / Dr. Hussein El-Sayed' },
+            { time: '01:00 - 04:00', type: 'Dr/Eng', subject: 'Physics / Mathematics (1)', place: 'مدرج F-Seminar / AUTO 2A', doc: 'Dr. Taha Farghaly / Eng. Sayed Lamiey' }
           ],
           'الثلاثاء': [
-            { time: '09:00 - 04:00', type: 'Dr', subject: 'الرياضيات المتقدمة وتكنولوجيا المعلومات', place: 'مدرج AUTO-2A / D104', doc: 'د. طه فرغلي' }
+            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'Mathematics (1) / Physics / Workshops', place: 'مدرج AUTO 2A / F-Seminar', doc: 'Eng. Sayed Lamiey / Dr. Taha Farghaly' },
+            { time: '01:00 - 04:00', type: 'Dr/Eng', subject: 'English (1) / Drawing', place: 'مدرج A305 / AUTO 4B', doc: 'Dr. Amal Tayeh / Eng. Amany' }
           ],
           'الأربعاء': [
-            { time: '09:00 - 02:00', type: 'Dr', subject: 'اللغة الإنجليزية والرياضيات', place: 'مدرج A305 / AUTO-2A', doc: 'د. آمال طايح' }
+            { time: '09:00 - 01:00', type: 'Dr/Eng', subject: 'Math (1) / English (1) / Graphics', place: 'مدرج AUTO 2A / A305 / AUTO 4B', doc: 'Eng. Sayed Lamiey / Dr. Amal Tayeh' }
           ]
         }
       },
       'تكنولوجيا علوم البيانات': {
         nameEn: 'Data Science Technology',
         nameIt: 'Data Science Technology',
-        sectionsCount: 8,
-        badge: 'bg-teal-600 text-white',
-        themeBg: 'bg-teal-950/20 border-teal-500/30',
+        sectionsCount: 12,
         schedule: {
           'السبت': [
-            { time: '09:00 - 03:00', type: 'Dr', subject: 'التحول الرقمي ونظم المعلومات والإحصاء', place: 'مدرج G204 / A305', doc: 'د. شريف الشوربجي' }
+            { time: '09:00 - 11:00', type: 'Dr', subject: 'Introduction to Information System', place: 'مدرج G204', doc: 'Dr. Hend' },
+            { time: '11:00 - 01:00', type: 'Dr', subject: 'Digital Transformation Culture / Statistics', place: 'مدرج G205 / A305', doc: 'Dr. Sharief Al-Shorbagy / Dr. Muhammed Abdulhakem' },
+            { time: '01:00 - 03:00', type: 'Dr', subject: 'English Language', place: 'مدرج G204', doc: 'Dr. Ahmed Hassan' }
           ],
           'الأحد': [
-            { time: '09:00 - 02:00', type: 'Dr', subject: 'التحول الرقمي والفيزياء التطبيقية', place: 'مدرج G205', doc: 'د. بهاء صلاح' }
+            { time: '01:00 - 03:00', type: 'Dr', subject: 'Digital Transformation Culture', place: 'مدرج G205', doc: 'Dr. Sherief Al-Shorbagy' },
+            { time: '05:00 - 06:00', type: 'Dr', subject: 'Applied Physics', place: 'مدرج G205', doc: 'Dr. Bahaa Salah' }
           ],
           'الإثنين': '🌴 ارتاح يابطل',
           'الثلاثاء': '🌴 ارتاح يابطل',
@@ -165,9 +165,86 @@
       }
     };
 
+    const dictionary = {
+      ar: {
+        title: 'جامعة حلوان الدولية التكنولوجية',
+        subTitle: 'منصة جداول الكلية الرسمية',
+        fullName: 'الاسم الثلاثي:',
+        nid: 'الرقم القومي (14 رقماً):',
+        dept: 'القسم الدراسي:',
+        sec: 'رقم السكشن / المجموعة:',
+        enterBtn: 'دخول المنصة وعرض الجدول 🚀',
+        scheduleTab: '📅 الجدول الدراسي',
+        chatTab: '💬 شات القسم',
+        adminTab: '⚙️ لوحة الأدمن',
+        logout: 'خروج',
+        searchPlaceholder: 'ابحث عن مادة، دكتور، مدرج، أو يوم...',
+        officiallyApproved: 'معتمد رسمياً',
+        scheduleFor: 'جدول محاضرات:',
+        section: 'سكشن',
+        dayOff: '🌴 ارتاح يابطل',
+        place: 'المكان:',
+        doc: 'المحاضر:',
+        send: 'إرسال',
+        recVoice: '🎤 تسجيل صوتي',
+        recStop: '⏹️ إيقاف وإرسال',
+        pinMessage: 'تثبيت كرسالة هامة',
+        pinnedBadge: '📌 رسالة مثبتة'
+      },
+      en: {
+        title: 'Helwan International Technological University',
+        subTitle: 'Official College Schedule Platform',
+        fullName: 'Full Name:',
+        nid: 'National ID (14 digits):',
+        dept: 'Department:',
+        sec: 'Section / Group:',
+        enterBtn: 'Enter Platform & View Schedule 🚀',
+        scheduleTab: '📅 Schedule',
+        chatTab: '💬 Department Chat',
+        adminTab: '⚙️ Admin Dashboard',
+        logout: 'Logout',
+        searchPlaceholder: 'Search course, doctor, hall, or day...',
+        officiallyApproved: 'Officially Approved',
+        scheduleFor: 'Schedule for:',
+        section: 'Section',
+        dayOff: '🌴 Day Off',
+        place: 'Location:',
+        doc: 'Doctor/Eng:',
+        send: 'Send',
+        recVoice: '🎤 Voice Note',
+        recStop: '⏹️ Stop & Send',
+        pinMessage: 'Pin as Important',
+        pinnedBadge: '📌 Pinned Message'
+      },
+      it: {
+        title: 'Università Tecnologica Internazionale di Helwan',
+        subTitle: 'Piattaforma Ufficiale degli Orari',
+        fullName: 'Nome Completo:',
+        nid: 'Carta d\'Identità (14 cifre):',
+        dept: 'Dipartimento:',
+        sec: 'Sezione / Gruppo:',
+        enterBtn: 'Entra e Visualizza Orario 🚀',
+        scheduleTab: '📅 Orario',
+        chatTab: '💬 Chat di Reparto',
+        adminTab: '⚙️ Admin',
+        logout: 'Esci',
+        searchPlaceholder: 'Cerca corso, professore, aula...',
+        officiallyApproved: 'Approvato Ufficialmente',
+        scheduleFor: 'Orario per:',
+        section: 'Sezione',
+        dayOff: '🌴 Giorno di Riposo',
+        place: 'Luogo:',
+        doc: 'Docente:',
+        send: 'Invia',
+        recVoice: '🎤 Nota Vocale',
+        recStop: '⏹️ Ferma e Invia',
+        pinMessage: 'Fissa come Importante',
+        pinnedBadge: '📌 Messaggio Fissato'
+      }
+    };
+
     function App() {
       const [user, setUser] = useState(null);
-      const [blockedUsers, setBlockedUsers] = useState({});
       const [theme, setTheme] = useState('light');
       const [language, setLanguage] = useState('ar');
       const [activeTab, setActiveTab] = useState('schedule');
@@ -181,158 +258,175 @@
         { id: 1, dept: 'تحكم صناعي', user: 'شروق سمير (الأدمن)', text: 'أهلاً بكم في المنصة الرسمية لجدول الكلية.', isPinned: true, type: 'text', time: '10:00 AM' }
       ]);
       const [newMessage, setNewMessage] = useState('');
-      const [isReplyToAdmin, setIsReplyToAdmin] = useState(false);
-      const [adminNotice, setAdminNotice] = useState('مرحباً بجميع الطلاب في منصة جامعة حلوان الدولية التكنولوجية');
-      const [newNoticeInput, setNewNoticeInput] = useState('');
+      const [isPinnedMsg, setIsPinnedMsg] = useState(false);
       const [searchQuery, setSearchQuery] = useState('');
+      
+      // تسجيل الصوت الحقيقي
       const [isRecording, setIsRecording] = useState(false);
+      const mediaRecorderRef = useRef(null);
+      const audioChunksRef = useRef([]);
+
+      useEffect(() => {
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }, [theme]);
+
+      const dict = dictionary[language] || dictionary.ar;
+      const currentDeptData = departmentsData[user ? user.department : inputDept];
 
       const handleLogin = (e) => {
         e.preventDefault();
         if (!inputName.trim() || inputNid.length !== 14) {
-          alert(language === 'en' ? 'Please enter valid name and 14-digit NID' : 'برجاء إدخال اسم صحيح والرقم القومي 14 رقماً!');
+          alert(language === 'en' ? 'Please enter a valid name and a 14-digit National ID.' : 'برجاء إدخال اسم صحيح والرقم القومي المكون من 14 رقماً!');
           return;
         }
 
-        const isAdmin = inputName.includes('شروق') || inputNid === '252' || inputNid.startsWith('252');
+        const isAdmin = inputName.includes('شروق') || inputNid === '252';
 
-        if (isAdmin) {
-          setUser({ name: 'شروق سمير السيد حميدو ٢٥٢', department: 'تحكم صناعي', section: inputSection, isAdmin: true });
-          return;
-        }
-
-        if (blockedUsers[inputName]) {
-          alert('تم حظر هذا الحساب لتجاوز المحاولات.');
-          return;
-        }
-
-        setUser({ name: inputName, department: inputDept, section: inputSection, isAdmin: false });
+        setUser({
+          name: isAdmin ? 'شروق سمير السيد حميدو ٢٥٢' : inputName,
+          department: inputDept,
+          section: inputSection,
+          isAdmin
+        });
       };
 
-      const startAudioRecording = () => {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          alert('متصفحك لا يدعم التسجيل الصوتي.');
-          return;
-        }
-        navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-          const mediaRecorder = new MediaRecorder(stream);
-          let audioChunks = [];
-          setIsRecording(true);
-          mediaRecorder.start();
+      const startRecording = async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorderRef.current = new MediaRecorder(stream);
+          audioChunksRef.current = [];
 
-          mediaRecorder.ondataavailable = event => {
-            audioChunks.push(event.data);
+          mediaRecorderRef.current.ondataavailable = (e) => {
+            if (e.data.size > 0) audioChunksRef.current.push(e.data);
           };
 
-          mediaRecorder.onstop = () => {
-            const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+          mediaRecorderRef.current.onstop = () => {
+            const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
             const audioUrl = URL.createObjectURL(audioBlob);
             setMessages(prev => [...prev, {
               id: Date.now(),
               dept: user.department,
-              user: user.name + ` (سكشن ${user.section})`,
+              user: user.name + ` (${dict.section} ${user.section})`,
               text: audioUrl,
               isPinned: false,
               type: 'audio',
               time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             }]);
-            setIsRecording(false);
+            stream.getTracks().forEach(track => track.stop());
           };
 
-          setTimeout(() => {
-            mediaRecorder.stop();
-            stream.getTracks().forEach(track => track.stop());
-          }, 4000); // تسجيل لمدة 4 ثوانٍ تلقائياً عند الضغط
-        }).catch(err => {
-          alert('تعذر الوصول إلى الميكروفون.');
+          mediaRecorderRef.current.start();
+          setIsRecording(true);
+        } catch (err) {
+          alert('تعذر الوصول إلى الميكروفون / Microphone access error');
+        }
+      };
+
+      const stopRecording = () => {
+        if (mediaRecorderRef.current && isRecording) {
+          mediaRecorderRef.current.stop();
           setIsRecording(false);
-        });
+        }
       };
 
-      const t = (ar, en, it) => {
-        if (language === 'en') return en || ar;
-        if (language === 'it' && user?.department === 'تحكم صناعي') return it || ar;
-        return ar;
-      };
+      const handleSendText = (e) => {
+        e.preventDefault();
+        if (!newMessage.trim()) return;
 
-      const currentDeptData = departmentsData[user ? user.department : inputDept];
-      const isDarkMode = theme === 'dark';
+        setMessages(prev => [...prev, {
+          id: Date.now(),
+          dept: user.department,
+          user: user.name + ` (${dict.section} ${user.section})`,
+          text: newMessage,
+          isPinned: isPinnedMsg,
+          type: 'text',
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }]);
+
+        setNewMessage('');
+        setIsPinnedMsg(false);
+      };
 
       if (!user) {
         return (
-          <div className={`min-h-screen flex items-center justify-center p-4 font-sans text-right ${isDarkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-100 text-slate-800'}`} dir="rtl">
-            <div className={`border rounded-2xl shadow-xl max-w-md w-full p-8 ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+          <div className="min-h-screen flex items-center justify-center p-4 font-sans text-right transition-colors bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100" dir={language === 'en' ? 'ltr' : 'rtl'}>
+            <div className="w-full max-w-md p-8 border rounded-3xl shadow-2xl bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
               
-              {/* أدوات التحكم الخارجية للغة والسمة */}
-              <div className="flex justify-between items-center mb-6 pb-4 border-b dark:border-slate-800">
-                <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg border dark:border-slate-700">
-                  <button onClick={() => setLanguage('ar')} className={`px-2 py-1 text-xs rounded font-bold ${language === 'ar' ? 'bg-emerald-600 text-white' : 'text-slate-500'}`}>عربي</button>
-                  <button onClick={() => setLanguage('en')} className={`px-2 py-1 text-xs rounded font-bold ${language === 'en' ? 'bg-emerald-600 text-white' : 'text-slate-500'}`}>EN</button>
-                  <button onClick={() => setLanguage('it')} className={`px-2 py-1 text-xs rounded font-bold ${language === 'it' ? 'bg-emerald-600 text-white' : 'text-slate-500'}`}>IT</button>
+              {/* أدوات التحكم باللغة والسمة على الشاشة الافتتاحية */}
+              <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
+                  <button onClick={() => setLanguage('ar')} className={`px-2.5 py-1 text-xs rounded-lg font-bold transition ${language === 'ar' ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400'}`}>عربي</button>
+                  <button onClick={() => setLanguage('en')} className={`px-2.5 py-1 text-xs rounded-lg font-bold transition ${language === 'en' ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400'}`}>EN</button>
+                  <button onClick={() => setLanguage('it')} className={`px-2.5 py-1 text-xs rounded-lg font-bold transition ${language === 'it' ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400'}`}>IT</button>
                 </div>
-                <button onClick={() => setTheme(isDarkMode ? 'light' : 'dark')} className="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-xs font-bold">
-                  {isDarkMode ? '☀️ وضع فاتح' : '🌙 وضع مظلم'}
+
+                <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold transition">
+                  {theme === 'dark' ? '☀️ فاتح' : '🌙 داكن'}
                 </button>
               </div>
 
               <div className="text-center mb-6">
-                <div className="bg-emerald-600 text-white p-3 rounded-full inline-flex mb-2 shadow-lg font-bold text-xl">HTU</div>
-                <h1 className="text-xl font-bold">{language === 'en' ? 'Helwan International Technological University' : 'جامعة حلوان الدولية التكنولوجية'}</h1>
-                <p className="text-xs text-slate-400 mt-1">{language === 'en' ? 'Official Schedules Platform' : 'منصة جداول الكلية الرسمية'}</p>
+                <div className="bg-emerald-600 text-white w-14 h-14 rounded-full inline-flex items-center justify-center mb-3 shadow-lg font-bold text-xl">HTU</div>
+                <h1 className="text-xl font-bold">{dict.title}</h1>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{dict.subTitle}</p>
               </div>
 
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold mb-1">{language === 'en' ? 'Full Name:' : 'الاسم الثلاثي:'}</label>
+                  <label className="block text-xs font-semibold mb-1">{dict.fullName}</label>
                   <input 
                     type="text" 
                     required
-                    placeholder={language === 'en' ? 'Enter full name...' : 'اكتب اسمك الثلاثي...'}
+                    placeholder={dict.fullName}
                     value={inputName}
                     onChange={(e) => setInputName(e.target.value)}
-                    className="w-full px-3 py-2.5 border dark:border-slate-700 rounded-xl bg-transparent text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-2.5 border rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1">{language === 'en' ? 'National ID (14 digits):' : 'الرقم القومي (14 رقماً):'}</label>
+                  <label className="block text-xs font-semibold mb-1">{dict.nid}</label>
                   <input 
                     type="text" 
                     required
                     maxLength="14"
-                    placeholder="أدخل الرقم القومي..."
+                    placeholder="14 digits..."
                     value={inputNid}
                     onChange={(e) => setInputNid(e.target.value)}
-                    className="w-full px-3 py-2.5 border dark:border-slate-700 rounded-xl bg-transparent text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-2.5 border rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1">{language === 'en' ? 'Department:' : 'القسم الدراسي:'}</label>
+                  <label className="block text-xs font-semibold mb-1">{dict.dept}</label>
                   <select 
                     value={inputDept}
                     onChange={(e) => {
                       setInputDept(e.target.value);
                       setInputSection('1');
                     }}
-                    className="w-full px-3 py-2.5 border dark:border-slate-700 rounded-xl bg-transparent text-sm"
+                    className="w-full px-4 py-2.5 border rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-sm focus:outline-none"
                   >
                     {Object.keys(departmentsData).map((dept) => (
-                      <option key={dept} value={dept} className="bg-slate-900 text-white">{dept}</option>
+                      <option key={dept} value={dept}>{dept}</option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1">{language === 'en' ? 'Section Number:' : 'رقم السكشن الخاص بك:'}</label>
+                  <label className="block text-xs font-semibold mb-1">{dict.sec}</label>
                   <select 
                     value={inputSection}
                     onChange={(e) => setInputSection(e.target.value)}
-                    className="w-full px-3 py-2.5 border dark:border-slate-700 rounded-xl bg-transparent text-sm"
+                    className="w-full px-4 py-2.5 border rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-sm focus:outline-none"
                   >
                     {[...Array(currentDeptData.sectionsCount)].map((_, i) => (
-                      <option key={i+1} value={i+1} className="bg-slate-900 text-white">
-                        {language === 'en' ? `Section ${i+1}` : `سكشن ${i+1}`}
+                      <option key={i+1} value={i+1}>
+                        {dict.section} {i+1}
                       </option>
                     ))}
                   </select>
@@ -340,9 +434,9 @@
 
                 <button 
                   type="submit"
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow text-sm"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow-lg text-sm mt-2"
                 >
-                  {language === 'en' ? 'Enter Platform 🚀' : 'دخول المنصة وعرض الجدول 🚀'}
+                  {dict.enterBtn}
                 </button>
               </form>
             </div>
@@ -351,74 +445,72 @@
       }
 
       return (
-        <div className={`min-h-screen font-sans transition-colors duration-300 ${isDarkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`} dir="rtl">
-          
-          {adminNotice && (
-            <div className="bg-emerald-600 text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow">
-              <span>📢 {adminNotice}</span>
-            </div>
-          )}
-
-          <header className={`border-b sticky top-0 z-50 backdrop-blur-md ${isDarkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white/90 border-slate-200'}`}>
+        <div className="min-h-screen font-sans transition-colors bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100" dir={language === 'en' ? 'ltr' : 'rtl'}>
+          <header className="border-b sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-slate-200 dark:border-slate-800">
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h1 className="font-bold text-sm md:text-base">{user.name}</h1>
-                <p className="text-xs text-emerald-500 font-semibold">{t(user.department, currentDeptData.nameEn, currentDeptData.nameIt)} — (سكشن {user.section}) {user.isAdmin && '✨ (الأدمن)'}</p>
+                <p className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                  {language === 'en' ? currentDeptData.nameEn : language === 'it' && user.department === 'تحكم صناعي' ? currentDeptData.nameIt : user.department} — ({dict.section} {user.section}) {user.isAdmin && '✨'}
+                </p>
               </div>
 
               <div className="flex items-center gap-2 flex-wrap">
-                <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg border dark:border-slate-700">
-                  <button onClick={() => setLanguage('ar')} className={`px-2 py-1 text-xs rounded font-bold ${language === 'ar' ? 'bg-emerald-600 text-white' : ''}`}>عربي</button>
-                  <button onClick={() => setLanguage('en')} className={`px-2 py-1 text-xs rounded font-bold ${language === 'en' ? 'bg-emerald-600 text-white' : ''}`}>EN</button>
+                <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
+                  <button onClick={() => setLanguage('ar')} className={`px-2.5 py-1 text-xs rounded-lg font-bold ${language === 'ar' ? 'bg-emerald-600 text-white' : 'text-slate-500'}`}>عربي</button>
+                  <button onClick={() => setLanguage('en')} className={`px-2.5 py-1 text-xs rounded-lg font-bold ${language === 'en' ? 'bg-emerald-600 text-white' : 'text-slate-500'}`}>EN</button>
                   {user.department === 'تحكم صناعي' && (
-                    <button onClick={() => setLanguage('it')} className={`px-2.5 py-1 text-xs rounded font-bold ${language === 'it' ? 'bg-emerald-600 text-white' : ''}`}>IT</button>
+                    <button onClick={() => setLanguage('it')} className={`px-2.5 py-1 text-xs rounded-lg font-bold ${language === 'it' ? 'bg-emerald-600 text-white' : 'text-slate-500'}`}>IT</button>
                   )}
                 </div>
 
-                <button onClick={() => setTheme(isDarkMode ? 'light' : 'dark')} className="p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-xs font-bold">
-                  {isDarkMode ? '☀️' : '🌙'}
+                <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold">
+                  {theme === 'dark' ? '☀️' : '🌙'}
                 </button>
 
-                <button onClick={() => setActiveTab('schedule')} className={`px-3 py-1.5 rounded-lg text-sm font-medium ${activeTab === 'schedule' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-200 dark:bg-slate-800'}`}>
-                  {t('📅 الجدول الدراسي', '📅 Schedule', '📅 Orario')}
+                <button onClick={() => setActiveTab('schedule')} className={`px-3 py-1.5 rounded-xl text-sm font-medium transition ${activeTab === 'schedule' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-200 dark:bg-slate-800'}`}>
+                  {dict.scheduleTab}
                 </button>
 
-                <button onClick={() => setActiveTab('chat')} className={`px-3 py-1.5 rounded-lg text-sm font-medium ${activeTab === 'chat' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-200 dark:bg-slate-800'}`}>
-                  {t('💬 شات القسم', '💬 Dept Chat', '💬 Chat')}
+                <button onClick={() => setActiveTab('chat')} className={`px-3 py-1.5 rounded-xl text-sm font-medium transition ${activeTab === 'chat' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-200 dark:bg-slate-800'}`}>
+                  {dict.chatTab}
                 </button>
 
                 {user.isAdmin && (
-                  <button onClick={() => setActiveTab('admin')} className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1 ${activeTab === 'admin' ? 'bg-amber-600 text-white shadow' : 'bg-amber-100 text-amber-800'}`}>
-                    ⚙️ لوحة الأدمن
+                  <button onClick={() => setActiveTab('admin')} className={`px-3 py-1.5 rounded-xl text-sm font-medium transition ${activeTab === 'admin' ? 'bg-amber-600 text-white shadow' : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200'}`}>
+                    {dict.adminTab}
                   </button>
                 )}
 
-                <button onClick={() => setUser(null)} className="text-xs px-3 py-1.5 rounded-lg bg-rose-100 text-rose-700 font-semibold">خروج</button>
+                <button onClick={() => setUser(null)} className="text-xs px-3 py-1.5 rounded-xl bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300 font-semibold">
+                  {dict.logout}
+                </button>
               </div>
             </div>
           </header>
 
           <main className="max-w-7xl mx-auto px-4 py-6">
-
             {activeTab === 'schedule' && (
               <div className="space-y-6">
-                <div className={`p-4 rounded-2xl shadow-sm border flex items-center gap-3 ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                <div className="p-4 rounded-2xl border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
                   <input 
                     type="text"
-                    placeholder={t('ابحث عن محاضرة، دكتور، مبنى، أو يوم...', 'Search lectures, doctor, place...', 'Cerca...')}
+                    placeholder={dict.searchPlaceholder}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full bg-transparent focus:outline-none text-sm"
                   />
                 </div>
 
-                <div className={`p-5 rounded-2xl border-2 ${currentDeptData.themeBg} flex justify-between items-center backdrop-blur-md`}>
+                <div className="p-5 rounded-2xl border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 flex justify-between items-center shadow-sm">
                   <div>
-                    <h2 className="font-bold text-lg">{t('جدول محاضرات:', 'Schedule for:', 'Orario:')} {t(user.department, currentDeptData.nameEn, currentDeptData.nameIt)}</h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{t('مخصص للسكشن رقم', 'Dedicated for Section', 'Sezione')} ({user.section})</p>
+                    <h2 className="font-bold text-lg">
+                      {dict.scheduleFor} {language === 'en' ? currentDeptData.nameEn : language === 'it' && user.department === 'تحكم صناعي' ? currentDeptData.nameIt : user.department}
+                    </h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{dict.sec}: ({user.section})</p>
                   </div>
-                  <span className={`text-xs px-3 py-1.5 rounded-full font-bold shadow ${currentDeptData.badge}`}>
-                    {t('معتمد رسمياً', 'Officially Approved', 'Approvato')}
+                  <span className="text-xs px-3 py-1.5 rounded-full font-bold bg-emerald-600 text-white shadow">
+                    {dict.officiallyApproved}
                   </span>
                 </div>
 
@@ -431,7 +523,6 @@
                       return item.subject.toLowerCase().includes(q) ||
                              item.doc.toLowerCase().includes(q) ||
                              item.place.toLowerCase().includes(q) ||
-                             item.type.toLowerCase().includes(q) ||
                              day.toLowerCase().includes(q);
                     }) : [];
 
@@ -439,20 +530,20 @@
                     const isOffDay = dayContent === '🌴 ارتاح يابطل';
 
                     return (
-                      <div key={day} className={`rounded-2xl border p-5 shadow-sm ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                        <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-200 dark:border-slate-800">
-                          <h3 className="font-bold text-lg text-emerald-600">{day}</h3>
-                          <span className="text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg font-bold">سكشن {user.section}</span>
+                      <div key={day} className="rounded-2xl border p-5 shadow-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+                        <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+                          <h3 className="font-bold text-lg text-emerald-600 dark:text-emerald-400">{day}</h3>
+                          <span className="text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg font-bold">{dict.sec} {user.section}</span>
                         </div>
 
                         {isOffDay ? (
-                          <div className="py-10 text-center bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border border-dashed border-emerald-200 dark:border-emerald-800">
-                            <span className="font-bold text-emerald-600 text-lg">🌴 ارتاح يابطل</span>
+                          <div className="py-10 text-center bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-dashed border-slate-200 dark:border-slate-700">
+                            <span className="font-bold text-emerald-600 dark:text-emerald-400 text-lg">{dict.dayOff}</span>
                           </div>
                         ) : (
                           <div className="space-y-3">
                             {filteredLectures.map((item, idx) => (
-                              <div key={idx} className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 shadow-sm">
+                              <div key={idx} className="p-3.5 rounded-xl border bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/60 shadow-sm">
                                 <div className="flex justify-between items-start mb-1.5">
                                   <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded font-bold">
                                     {item.type}
@@ -460,9 +551,9 @@
                                   <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">⏰ {item.time}</span>
                                 </div>
                                 <h4 className="font-bold text-sm mt-1">{item.subject}</h4>
-                                <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800">
-                                  <span>👨‍🏫 {item.doc}</span>
-                                  <span>📍 {item.place}</span>
+                                <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-700">
+                                  <span>👨‍🏫 {dict.doc} {item.doc}</span>
+                                  <span>📍 {dict.place} {item.place}</span>
                                 </div>
                               </div>
                             ))}
@@ -476,11 +567,10 @@
             )}
 
             {activeTab === 'chat' && (
-              <div className={`max-w-3xl mx-auto rounded-2xl border shadow-xl overflow-hidden flex flex-col h-[75vh] ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+              <div className="max-w-3xl mx-auto rounded-2xl border shadow-xl overflow-hidden flex flex-col h-[75vh] bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                 <div className="p-4 bg-emerald-600 text-white flex justify-between items-center shadow">
                   <div>
-                    <h3 className="font-bold">{t('شات قسم:', 'Department Chat:', 'Chat:')} {t(user.department, currentDeptData.nameEn, currentDeptData.nameIt)}</h3>
-                    <p className="text-xs text-emerald-200">{t('محادثة مغلقة ومخصصة لطلاب قسمك فقط', 'Private chat for department students only', 'Chat privata')}</p>
+                    <h3 className="font-bold">{dict.chatTab}: {user.department}</h3>
                   </div>
                 </div>
 
@@ -492,13 +582,13 @@
                         <span className="text-[10px] text-slate-400">{msg.time}</span>
                         {msg.isPinned && (
                           <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold border border-amber-300">
-                            📌 رسالة هامة للأدمن
+                            {dict.pinnedBadge}
                           </span>
                         )}
                       </div>
-                      <div className={`p-3 rounded-2xl max-w-md text-sm ${msg.user.includes(user.name) ? 'bg-emerald-600 text-white rounded-tl-none' : isDarkMode ? 'bg-slate-800 text-slate-100 rounded-tr-none border border-slate-700' : 'bg-slate-100 text-slate-900 rounded-tr-none border border-slate-200'}`}>
+                      <div className={`p-3 rounded-2xl max-w-md text-sm ${msg.user.includes(user.name) ? 'bg-emerald-600 text-white rounded-tl-none' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-tr-none border border-slate-200 dark:border-slate-700'}`}>
                         {msg.type === 'audio' ? (
-                          <audio controls src={msg.text} className="w-48 h-8"></audio>
+                          <audio controls src={msg.text} className="w-60 h-9"></audio>
                         ) : (
                           msg.text
                         )}
@@ -507,25 +597,28 @@
                   ))}
                 </div>
 
-                <form onSubmit={(e) => { e.preventDefault(); if(!newMessage.trim()) return; setMessages([...messages, { id: Date.now(), dept: user.department, user: user.name + ` (سكشن ${user.section})`, text: newMessage, isPinned: isReplyToAdmin, type: 'text', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]); setNewMessage(''); setIsReplyToAdmin(false); }} className={`p-3 border-t flex flex-col gap-2 ${isDarkMode ? 'border-slate-800 bg-slate-950' : 'border-slate-200 bg-slate-50'}`}>
+                <form onSubmit={handleSendText} className="p-3 border-t flex flex-col gap-2 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <input type="checkbox" id="replyAdmin" checked={isReplyToAdmin} onChange={(e) => setIsReplyToAdmin(e.target.checked)} className="rounded text-emerald-600" />
-                      <label htmlFor="replyAdmin" className="text-xs text-slate-500 dark:text-slate-400 cursor-pointer font-medium">
-                        تثبيت كرسالة هامة للأدمن
+                      <input type="checkbox" id="pinMsg" checked={isPinnedMsg} onChange={(e) => setIsPinnedMsg(e.target.checked)} className="rounded text-emerald-600" />
+                      <label htmlFor="pinMsg" className="text-xs text-slate-500 dark:text-slate-400 cursor-pointer font-medium">
+                        {dict.pinMessage}
                       </label>
                     </div>
-                    <button 
-                      type="button" 
-                      onClick={startAudioRecording} 
-                      className={`text-xs px-3 py-1 rounded-lg font-bold flex items-center gap-1 shadow ${isRecording ? 'bg-rose-600 text-white animate-pulse' : 'bg-indigo-600 text-white'}`}
-                    >
-                      🎤 {isRecording ? 'جاري التسجيل...' : 'تسجيل صوتي'}
-                    </button>
+
+                    {!isRecording ? (
+                      <button type="button" onClick={startRecording} className="text-xs px-3 py-1.5 rounded-xl font-bold bg-indigo-600 text-white shadow">
+                        {dict.recVoice}
+                      </button>
+                    ) : (
+                      <button type="button" onClick={stopRecording} className="text-xs px-3 py-1.5 rounded-xl font-bold bg-rose-600 text-white shadow animate-pulse">
+                        {dict.recStop}
+                      </button>
+                    )}
                   </div>
                   <div className="flex gap-2">
-                    <input type="text" placeholder={t('اكتب رسالتك...', 'Type your message...', 'Scrivi...')} value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className="flex-1 px-4 py-2 border dark:border-slate-700 rounded-xl bg-transparent text-sm focus:outline-none" />
-                    <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl shadow font-bold text-sm">إرسال</button>
+                    <input type="text" placeholder="..." value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className="flex-1 px-4 py-2 border rounded-xl bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-sm focus:outline-none" />
+                    <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl shadow font-bold text-sm">{dict.send}</button>
                   </div>
                 </form>
               </div>
@@ -533,43 +626,27 @@
 
             {activeTab === 'admin' && user.isAdmin && (
               <div className="space-y-6">
-                <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-500/40 p-5 rounded-2xl backdrop-blur-md">
-                  <h2 className="text-lg font-bold text-amber-900 dark:text-amber-200">
-                    ⚙️ لوحة تحكم الأدمن - شروق سمير السيد حميدو (٢٥٢)
-                  </h2>
-                  <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">إدارة الإعلانات ومتابعة الرسائل المثبتة.</p>
+                <div className="p-5 rounded-2xl border bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-500/40">
+                  <h2 className="text-lg font-bold text-amber-900 dark:text-amber-200">⚙️ لوحة تحكم الأدمن (شروق)</h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className={`border p-5 rounded-2xl shadow-sm ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                    <h3 className="font-bold text-base mb-4 text-emerald-600">📢 الإعلان العام للكلية</h3>
-                    <div className="space-y-3">
-                      <textarea rows="3" value={newNoticeInput} onChange={(e) => setNewNoticeInput(e.target.value)} placeholder="اكتب الإعلان العام..." className="w-full p-3 border dark:border-slate-700 rounded-xl bg-transparent text-sm focus:outline-none"></textarea>
-                      <button onClick={() => { setAdminNotice(newNoticeInput); alert('تم تحديث الإعلان بنجاح!'); }} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm shadow">
-                        تحديث الإعلان العام
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className={`border p-5 rounded-2xl shadow-sm ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                    <h3 className="font-bold text-base mb-4 text-amber-600">📥 الرسائل المثبتة</h3>
-                    <div className="space-y-3">
-                      {messages.filter(m => m.isPinned).length === 0 ? (
-                        <p className="text-sm text-slate-400">لا توجد رسائل مثبتة حالياً.</p>
-                      ) : (
-                        messages.filter(m => m.isPinned).map(m => (
-                          <div key={m.id} className="p-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-500/30 rounded-xl">
-                            <span className="text-xs font-bold text-amber-800 dark:text-amber-300 block mb-1">{m.user}</span>
-                            <p className="text-sm">{m.text}</p>
-                          </div>
-                        ))
-                      )}
-                    </div>
+                <div className="p-5 rounded-2xl border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm">
+                  <h3 className="font-bold text-base mb-4 text-amber-600">📥 الرسائل المثبتة</h3>
+                  <div className="space-y-3">
+                    {messages.filter(m => m.isPinned).length === 0 ? (
+                      <p className="text-sm text-slate-400">لا توجد رسائل مثبتة حالياً.</p>
+                    ) : (
+                      messages.filter(m => m.isPinned).map(m => (
+                        <div key={m.id} className="p-3 border rounded-xl bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-500/30">
+                          <span className="text-xs font-bold text-amber-800 dark:text-amber-300 block mb-1">{m.user}</span>
+                          <p className="text-sm">{m.text}</p>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
             )}
-
           </main>
         </div>
       );

@@ -33,27 +33,48 @@
           badge: 'bg-red-600 text-white font-bold'
         },
         schedule: {
-          'السبت': [
-            { id: 'ic_1', time: '09:00 - 10:00', type: 'Eng (سكشن)', subject: { ar: 'مقرر إيطالي / Solid / 3Phase', en: 'Italian / Solid / 3Phase', it: 'Corso di Italiano / Solid / 3Phase' }, place: 'G201 / D103-W.1 / C104', doc: 'م. آية / م. محمد جمال / م. باسمة' },
-            { id: 'ic_2', time: '10:00 - 11:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'مقرر إيطالي (Dr) / 3Phase (Eng) / إلكترونيات (Eng)', en: 'Italian (Dr) / 3Phase (Eng) / Electronics (Eng)', it: 'Italiano (Dr) / 3Phase (Eng) / Elettronica (Eng)' }, place: 'A303 / G206 / G104', doc: 'أ.د. وفاء عبد التواب / م. باسمة / م. سلمى جمال' },
-            { id: 'ic_3', time: '11:00 - 12:00', type: 'Eng (سكشن)', subject: { ar: 'إلكترونيات / رياضيات / رسم هندسي', en: 'Electronics / Math / Drawing', it: 'Electronics / Math / Drawing' }, place: 'C104 / G103 / A304', doc: 'م. ندى عبد الله / م. عريان / م. رفيدة' },
-            { id: 'ic_4', time: '12:00 - 01:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'إلكترونيات / رياضيات / مقرر إيطالي', en: 'Electronics / Math / Italian', it: 'Electronics / Math / Italiano' }, place: 'C104 / G201 / G103 / A303', doc: 'م. سلمى / م. ندى / م. آية / أ.د. وفاء عبد التواب' },
-            { id: 'ic_5', time: '01:00 - 02:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'إلكترونيات / رياضيات / 3Phase / مقرر إيطالي', en: 'Electronics / Math / 3Phase / Italian', it: 'Electronics / Math / 3Phase / Italiano' }, place: 'C108 / G103 / C104 / A303', doc: 'م. سلمى / م. فتيان / م. باسمة / أ.د. وفاء عبد التواب' },
-            { id: 'ic_6', time: '02:00 - 04:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رسم هندسي / 3Phase / إلكترونيات', en: 'Drawing / 3Phase / Electronics', it: 'Drawing / 3Phase / Electronics' }, place: 'A304 / G206 / A-New / D104', doc: 'د. حسام حجازي / د. جولينا سمير / م. رفيدة / م. إسراء' }
-          ],
-          'الأحد': [
-            { id: 'ic_7', time: '09:00 - 12:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رسم هندسي / 3Phase / فيزياء تطبيقية / إلكترونيات', en: 'Drawing / 3Phase / Physics / Electronics', it: 'Drawing / 3Phase / Physics / Electronics' }, place: 'G203 / G202 / D103 / G103 / F108', doc: 'د. محمد عثمان / د. حسام حجازي / م. رحمة / م. ندى' },
-            { id: 'ic_8', time: '12:00 - 03:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'إلكترونيات / رسم هندسي / 3Phase / فيزياء تطبيقية', en: 'Electronics / Drawing / 3Phase / Physics', it: 'Electronics / Drawing / 3Phase / Physics' }, place: 'A-New / G204 / F201 / F108 / D103', doc: 'د. جولينا سمير / د. طه فرغلي / م. عزة / م. أميرة' },
-            { id: 'ic_9', time: '03:00 - 05:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'Solid / فيزياء تطبيقية', en: 'Solid / Physics', it: 'Solid / Physics' }, place: 'D103-W.1 / A-New', doc: 'د. طه فرغلي / م. محمد / م. رفيدة' }
-          ],
+          'السبت': {
+            lectures: [
+              { id: 'ic_l1', time: '10:00 - 11:00', subject: 'مقرر إيطالي', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
+              { id: 'ic_l2', time: '12:00 - 01:00', subject: 'مقرر إيطالي', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
+              { id: 'ic_l3', time: '01:00 - 02:00', subject: 'مقرر إيطالي', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
+              { id: 'ic_l4', time: '02:00 - 04:00', subject: '3Phase / إلكترونيات', place: 'A-New', doc: 'د. حسام حجازي / د. جولينا سمير' }
+            ],
+            sections: [
+              { id: 'ic_s1', time: '09:00 - 10:00', subject: 'مقرر إيطالي / Solid / 3Phase', place: 'G201 / D103-W.1 / C104', doc: 'م. آية / م. محمد جمال / م. باسمة' },
+              { id: 'ic_s2', time: '10:00 - 11:00', subject: '3Phase / إلكترونيات / رياضيات', place: 'G206 / G104 / G103', doc: 'م. باسمة / م. سلمى / م. عريان' },
+              { id: 'ic_s3', time: '11:00 - 12:00', subject: 'إلكترونيات / رياضيات / رسم هندسي', place: 'C104 / G103 / A304', doc: 'م. ندى / م. عريان / م. رفيدة' },
+              { id: 'ic_s4', time: '12:00 - 01:00', subject: 'إلكترونيات / رياضيات / 3Phase', place: 'C104 / G201 / G103', doc: 'م. سلمى / م. ندى / م. آية' },
+              { id: 'ic_s5', time: '01:00 - 02:00', subject: 'إلكترونيات / رياضيات / 3Phase', place: 'C108 / G103 / C104', doc: 'م. سلمى / م. فتيان / م. باسمة' },
+              { id: 'ic_s6', time: '02:00 - 04:00', subject: 'رسم هندسي / 3Phase / إلكترونيات', place: 'A304 / G206 / D104', doc: 'م. رفيدة / م. إسراء / م. ندى' }
+            ]
+          },
+          'الأحد': {
+            lectures: [
+              { id: 'ic_l7', time: '09:00 - 12:00', subject: 'رسم هندسي / 3Phase', place: 'G203 / G202', doc: 'د. محمد عثمان / د. حسام حجازي' },
+              { id: 'ic_l8', time: '12:00 - 03:00', subject: 'إلكترونيات / فيزياء تطبيقية', place: 'A-New / D103', doc: 'د. جولينا سمير / د. طه فرغلي' }
+            ],
+            sections: [
+              { id: 'ic_s7', time: '09:00 - 12:00', subject: 'فيزياء تطبيقية / إلكترونيات / رسم', place: 'D103 / G103 / F108', doc: 'م. رحمة / م. ندى / م. سلمى' },
+              { id: 'ic_s8', time: '12:00 - 03:00', subject: 'رسم هندسي / 3Phase / فيزياء', place: 'G204 / F201 / F108', doc: 'م. عزة / م. أميرة' },
+              { id: 'ic_s9', time: '03:00 - 05:00', subject: 'Solid / فيزياء تطبيقية', place: 'D103-W.1 / A-New', doc: 'م. محمد / م. رفيدة' }
+            ]
+          },
           'الإثنين': '🌴 Day Off - يوم راحة رسمي',
-          'الثلاثاء': [
-            { id: 'ic_10', time: '08:00 - 10:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رياضيات / فيزياء تطبيقية / 3Phase', en: 'Math / Physics / 3Phase', it: 'Math / Physics / 3Phase' }, place: 'A303 / G103 / F201', doc: 'د. إبراهيم عيد / م. محمد جمال / م. أميرة' },
-            { id: 'ic_11', time: '10:00 - 01:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'إلكترونيات / رسم هندسي / رياضيات', en: 'Electronics / Drawing / Math', it: 'Electronics / Drawing / Math' }, place: 'F108 / G103 / F201 / G203 / A303', doc: 'د. إبراهيم عيد / م. سلمى / م. عزة' },
-            { id: 'ic_12', time: '01:00 - 05:00', type: 'Eng (سكشن)', subject: { ar: 'إلكترونيات / 3Phase / رسم / فيزياء / رياضيات', en: 'Electronics / 3Phase / Drawing / Physics / Math', it: 'Electronics / 3Phase / Drawing / Physics / Math' }, place: 'F108 / F201 / G203 / G206 / G104 / D103 / A303', doc: 'م. سلمى / م. هبة / م. عزة / م. فتيان' }
-          ],
-          'الأربعاء': '🌴 Day Off - يوم راحة رسمي',
-          'الخميس': '🌴 Day Off - يوم راحة رسمي'
+          'الثلاثاء': '🌴 Day Off - يوم راحة رسمي',
+          'الأربعاء': {
+            lectures: [
+              { id: 'ic_l10', time: '08:00 - 10:00', subject: 'رياضيات / فيزياء', place: 'A303 / G103', doc: 'د. إبراهيم عيد / م. م. جمال' },
+              { id: 'ic_l11', time: '10:00 - 01:00', subject: 'إلكترونيات / رياضيات', place: 'F108 / A303', doc: 'د. إبراهيم عيد / م. سلمى' }
+            ],
+            sections: [
+              { id: 'ic_s10', time: '08:00 - 10:00', subject: 'فيزياء / 3Phase', place: 'G103 / F201', doc: 'م. م. جمال / م. أميرة' },
+              { id: 'ic_s11', time: '10:00 - 01:00', subject: 'رسم هندسي / 3Phase', place: 'G203 / F201', doc: 'م. عزة / م. هبة' },
+              { id: 'ic_s12', time: '01:00 - 05:00', subject: 'إلكترونيات / 3Phase / رسم / فيزياء / رياضيات', place: 'F108 / F201 / G203 / G206', doc: 'م. سلمى / م. هبة / م. عزة' }
+            ]
+          },
+          'الخميس': '🌴 Day Off - يوم راحة رسمي',
+          'الجمعة': '🌴 Day Off - يوم راحة رسمي'
         }
       },
       'تكنولوجيا الملابس الجاهزة': {
@@ -70,21 +91,39 @@
           badge: 'bg-pink-600 text-white font-bold'
         },
         schedule: {
-          'الأحد': [
-            { id: 'rm_1', time: '09:00 - 01:00', type: 'Eng (سكشن)', subject: { ar: 'تشكيل على المانيكان 1 وتكنولوجيا الملابس الجاهزة (المجاميع 1، 2، 3)', en: 'Draping on Mannequin 1 & Garments Tech (Groups 1, 2, 3)', it: 'Draping on Mannequin 1 & Garments Tech (Groups 1, 2, 3)' }, place: 'C108 / G107 / C103', doc: 'م. مصطفى / م. يارا / م. بهنسي / م.د إيمان عبد المعطي' },
-            { id: 'rm_2', time: '01:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'أسس بناء الجسم والموضة والأزياء وتكنولوجيا الملابس (المجاميع 1، 2، 3)', en: 'Body Construction Foundations & Fashion', it: 'Body Construction Foundations & Fashion' }, place: 'G107 / G106 / C108 / C107', doc: 'م. يارا / م. بهنسي / م.د إيمان عبد المعطي / م. آلاء' }
-          ],
+          'الأحد': {
+            lectures: [
+              { id: 'rm_l1', time: '01:00 - 06:00', subject: 'تكنولوجيا صناعة الملابس الجاهزة', place: 'C108', doc: 'م.د إيمان عبد المعطي' }
+            ],
+            sections: [
+              { id: 'rm_s1', time: '09:00 - 01:00', subject: 'تشكيل على المانيكان 1 وتكنولوجيا الملابس', place: 'C108 / G107 / C103', doc: 'م. مصطفى / م. يارا / م. بهنسي' },
+              { id: 'rm_s2', time: '01:00 - 06:00', subject: 'أسس بناء الجسم والموضة والأزياء', place: 'G107 / G106 / C107', doc: 'م. يارا / م. بهنسي / م. آلاء' }
+            ]
+          },
           'الإثنين': '🌴 Day Off - يوم راحة رسمي',
-          'الثلاثاء': [
-            { id: 'rm_3', time: '09:00 - 03:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'الموضة والأزياء والثقافة والمجتمع وتكنولوجيا المعلومات (المجاميع 1، 2، 3)', en: 'Fashion Culture & Society / IT', it: 'Fashion Culture & Society / IT' }, place: 'C108 / G106 / G107 / C107', doc: 'م.د إيمان عبد المعطي / م. دينا / م. روضة' },
-            { id: 'rm_4', time: '03:00 - 06:00', type: 'Eng (سكشن)', subject: { ar: 'تشكيل على المانيكان 1 وأسس بناء الجسم (المجاميع 1، 2، 3)', en: 'Draping on Mannequin 1 & Body Construction', it: 'Draping on Mannequin 1 & Body Construction' }, place: 'C103 / C104 / C108 / G106 / G107', doc: 'م.م آية / م. مصطفى / م. بهنسي / م. روضة / م. يارا' }
-          ],
-          'الأربعاء': [
-            { id: 'rm_5', time: '09:00 - 06:00', type: 'Dr (محاضرة)', subject: { ar: 'تكنولوجيا المعلومات وأسس بناء الجسم ولغة إيطالية 1 (المجاميع 1، 2، 3)', en: 'IT, Body Construction & Italian Language 1', it: 'IT, Body Construction & Italian Language 1' }, place: 'C104 / C108 / G203 / G107 / G106', doc: 'م.د مها توفيق / م.د هبة رزق الله / أ.د وفاء عبد التواب' }
-          ],
-          'الخميس': [
-            { id: 'rm_6', time: '11:00 - 05:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'أسس بناء الجسم وتكنولوجيا المعلومات ولغة إيطالية 1 والموضة (المجاميع 1، 2، 3)', en: 'Body Construction, IT, Italian & Fashion', it: 'Body Construction, IT, Italian & Fashion' }, place: 'G107', doc: 'م. إسراء / أ.د وفاء عبد التواب / م. دينا / م. بهنسي' }
-          ]
+          'الثلاثاء': {
+            lectures: [
+              { id: 'rm_l3', time: '09:00 - 03:00', subject: 'الموضة والأزياء والثقافة والمجتمع', place: 'C108 / G106', doc: 'م.د إيمان عبد المعطي' }
+            ],
+            sections: [
+              { id: 'rm_s3', time: '09:00 - 03:00', subject: 'تكنولوجيا المعلومات وأسس بناء الجسم', place: 'G107 / C107', doc: 'م. دينا / م. روضة' },
+              { id: 'rm_s4', time: '03:00 - 06:00', subject: 'تشكيل على المانيكان 1 وأسس بناء الجسم', place: 'C103 / C104 / C108 / G106 / G107', doc: 'م.م آية / م. مصطفى / م. بهنسي / م. روضة / م. يارا' }
+            ]
+          },
+          'الأربعاء': {
+            lectures: [
+              { id: 'rm_l5', time: '09:00 - 06:00', subject: 'تكنولوجيا المعلومات / أسس بناء الجسم / لغة إيطالية 1', place: 'C104 / C108 / G203', doc: 'م.د مها توفيق / م.د هبة رزق الله / أ.د وفاء عبد التواب' }
+            ],
+            sections: []
+          },
+          'الخميس': {
+            lectures: [
+              { id: 'rm_l6', time: '11:00 - 05:00', subject: 'أسس بناء الجسم ولغة إيطالية 1 والموضة', place: 'G107', doc: 'أ.د وفاء عبد التواب' }
+            ],
+            sections: [
+              { id: 'rm_s6', time: '11:00 - 05:00', subject: 'تكنولوجيا المعلومات والموضة وبناء الجسم', place: 'G107', doc: 'م. إسراء / م. دينا / م. بهنسي' }
+            ]
+          }
         }
       },
       'تكنولوجيا الأمن السيبراني': {
@@ -101,18 +140,38 @@
           badge: 'bg-emerald-600 text-white font-bold'
         },
         schedule: {
-          'الجمعة': [
-            { id: 'cs_1', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'فيزياء تطبيقية / تكنولوجيا معلومات / نظم قواعد البيانات', en: 'Applied Physics / IT / Database Systems', it: 'Applied Physics / IT / Database Systems' }, place: 'G202 / G201 / A-New / F-Seminar', doc: 'Eng. Fares / Dr. Nelly Saeed / Dr. Abeer Hassan' }
-          ],
-          'السبت': [
-            { id: 'cs_2', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رياضيات / تكنولوجيا / نظم قواعد البيانات', en: 'Mathematics / Technology / Database Systems', it: 'Mathematics / Technology / Database Systems' }, place: 'A-NEW / D104 / D105 / D101 / A202', doc: 'Dr. Shaimaa Muhran / Eng. Maria / Eng. Karim Adel' }
-          ],
-          'الأربعاء': [
-            { id: 'cs_3', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'ريادة أعمال وتفكير إبداعي / رياضيات / فيزياء', en: 'Entrepreneurship & Creative Thinking / Math / Physics', it: 'Entrepreneurship & Creative Thinking / Math / Physics' }, place: 'O.L / G204 / G202 / A202 / G203', doc: 'Dr. Naglaa Abdulmohsen / Eng. Abdulaziz / Eng. Omnia' }
-          ],
-          'الخميس': [
-            { id: 'cs_4', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'فيزياء تطبيقية / نظم قواعد البيانات / مقدمة في نظم المعلومات', en: 'Applied Physics / Database Systems / Intro to IS', it: 'Applied Physics / Database Systems / Intro to IS' }, place: 'G204 / A303 / G104 / F-Seminar', doc: 'Dr. Ahmed Ibrahem / Eng. Nadia / Eng. Mohamed Hamdy' }
-          ]
+          'الجمعة': {
+            lectures: [
+              { id: 'cs_l1', time: '09:00 - 06:00', subject: 'Information Technology / Database Systems', place: 'G202 / A-New', doc: 'Dr. Nelly Saeed / Dr. Abeer Hassan' }
+            ],
+            sections: [
+              { id: 'cs_s1', time: '09:00 - 06:00', subject: 'Applied Physics / Intro to IS', place: 'G201 / F-Seminar', doc: 'Eng. Fares / Dr. Nelly Saeed' }
+            ]
+          },
+          'السبت': {
+            lectures: [
+              { id: 'cs_l2', time: '09:00 - 06:00', subject: 'Mathematics / Database Systems', place: 'A-NEW / D105', doc: 'Dr. Shaimaa Muhran / Eng. Karim Adel' }
+            ],
+            sections: [
+              { id: 'cs_s2', time: '09:00 - 06:00', subject: 'Technology / Information Technology', place: 'D104 / D101 / A202', doc: 'Eng. Maria' }
+            ]
+          },
+          'الأربعاء': {
+            lectures: [
+              { id: 'cs_l3', time: '09:00 - 06:00', subject: 'Entrepreneurship and Creative Thinking', place: 'O.L', doc: 'Dr. Naglaa Abdulmohsen' }
+            ],
+            sections: [
+              { id: 'cs_s3', time: '09:00 - 06:00', subject: 'Mathematics / Applied Physics / English 1', place: 'G204 / G202 / A202 / G203', doc: 'Eng. Abdulaziz / Eng. Omnia' }
+            ]
+          },
+          'الخميس': {
+            lectures: [
+              { id: 'cs_l4', time: '09:00 - 06:00', subject: 'Database Systems / Intro to IS', place: 'A303 / F-Seminar', doc: 'Dr. Ahmed Ibrahem / Eng. Mohamed Hamdy' }
+            ],
+            sections: [
+              { id: 'cs_s4', time: '09:00 - 06:00', subject: 'Applied Physics / Database System', place: 'G204 / G104', doc: 'Eng. Nadia / Eng. Habiba' }
+            ]
+          }
         }
       },
       'تكنولوجيا الميكاترونكس': {
@@ -129,19 +188,35 @@
           badge: 'bg-blue-600 text-white font-bold'
         },
         schedule: {
-          'الأحد': [
-            { id: 'mc_1', time: '09:00 - 06:00', type: 'Eng (سكشن)', subject: { ar: 'فيزياء / إنجليزي / تطبيقات رياضيات / صحة وسلامة مهنية', en: 'Physics / English / Application of Math / Health & Safety', it: 'Physics / English / Application of Math / Health & Safety' }, place: 'G104 / A307 / Workshop', doc: 'Eng. Adham / Eng. Nehal / Eng. Riham / Eng. Ibrahem Grah' }
-          ],
+          'الأحد': {
+            lectures: [],
+            sections: [
+              { id: 'mc_s1', time: '09:00 - 06:00', subject: 'Physics / English / Application of Math / Health & Safety', place: 'G104 / A307 / Workshop', doc: 'Eng. Adham / Eng. Nehal / Eng. Riham / Eng. Ibrahem Grah' }
+            ]
+          },
           'الإثنين': '🌴 Day Off - يوم راحة رسمي',
-          'الثلاثاء': [
-            { id: 'mc_2', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'فيزياء / رياضيات / مهارات اتصال / صحة وسلامة مهنية', en: 'Physics / Mathematics / Communication Skills / Health & Safety', it: 'Physics / Mathematics / Communication Skills / Health & Safety' }, place: 'G201 / G104 / G205 / A307', doc: 'Dr. Ahmed Bakr / Eng. Ibrahem Hamdy / Dr. Ahmed Swidan' }
-          ],
-          'الأربعاء': [
-            { id: 'mc_3', time: '09:00 - 06:00', type: 'Dr (محاضرة)', subject: { ar: 'صحة وسلامة مهنية / تطبيقات رياضيات / إنجليزي فني', en: 'Health & Safety / Application of Math / Technical English', it: 'Health & Safety / Application of Math / Technical English' }, place: 'G104 / G201 / A307 / G205', doc: 'Dr. Duaa Roshdy / Dr. Sabreen Ahmed / Dr. Ahmed Swidan' }
-          ],
-          'الخميس': [
-            { id: 'mc_4', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رياضيات للفنيين / مهارات اتصال / إنجليزي', en: 'Mathematics for Technicians / Communication Skills / English', it: 'Mathematics for Technicians / Communication Skills / English' }, place: 'G282 / G205 / A307 / G104', doc: 'Dr. Muhammed Fawzy / Dr. Mahmoud Samy / Eng. Adham' }
-          ]
+          'الثلاثاء': {
+            lectures: [
+              { id: 'mc_l2', time: '09:00 - 06:00', subject: 'Physics / Mathematics / Health & Safety', place: 'G201 / G205 / A307', doc: 'Dr. Ahmed Bakr / Dr. Ahmed Swidan' }
+            ],
+            sections: [
+              { id: 'mc_s2', time: '09:00 - 06:00', subject: 'Physics / Mathematics / Communication Skills', place: 'G104', doc: 'Eng. Ibrahem Hamdy' }
+            ]
+          },
+          'الأربعاء': {
+            lectures: [
+              { id: 'mc_l3', time: '09:00 - 06:00', subject: 'Health & Safety / Application of Math / Technical English', place: 'G104 / G201 / A307 / G205', doc: 'Dr. Duaa Roshdy / Dr. Sabreen Ahmed / Dr. Ahmed Swidan' }
+            ],
+            sections: []
+          },
+          'الخميس': {
+            lectures: [
+              { id: 'mc_l4', time: '09:00 - 06:00', subject: 'Mathematics for Technicians / Communication Skills', place: 'G282 / G205', doc: 'Dr. Muhammed Fawzy / Dr. Mahmoud Samy' }
+            ],
+            sections: [
+              { id: 'mc_s4', time: '09:00 - 06:00', subject: 'English / Application of Math', place: 'A307 / G104', doc: 'Eng. Adham / Eng. Hager' }
+            ]
+          }
         }
       },
       'تكنولوجيا الذكاء الاصطناعي': {
@@ -158,15 +233,30 @@
           badge: 'bg-indigo-600 text-white font-bold'
         },
         schedule: {
-          'الجمعة': [
-            { id: 'ai_1', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'فيزياء تطبيقية / رياضيات / بايثون / مقدمة في نظم المعلومات', en: 'Applied Physics / Math / Python / Intro to IS', it: 'Applied Physics / Math / Python / Intro to IS' }, place: 'A305 / G203 / F-Seminar / G205', doc: 'Dr. Simon Ezzat / Eng. Shahd Bakry / Dr. Muhammed Salah' }
-          ],
-          'السبت': [
-            { id: 'ai_2', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'تكنولوجيا معلومات / بايثون / رياضيات / إحصاء', en: 'IT / Python / Mathematics / Statistics', it: 'IT / Python / Mathematics / Statistics' }, place: 'A304 / D102 / D101 / A305 / F-Seminar', doc: 'Dr. Sameh Mustafa / Eng. Marwa / Dr. Ahmed Bakr' }
-          ],
-          'الأحد': [
-            { id: 'ai_3', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'إحصاء / فيزياء تطبيقية / بايثون / فيزياء', en: 'Statistics / Applied Physics / Python / Physics', it: 'Statistics / Applied Physics / Python / Physics' }, place: 'G107 / D102 / F-Seminar / A303', doc: 'Dr. Ibrahem Eid / Eng. Hana Hany / Eng. Dina' }
-          ]
+          'الجمعة': {
+            lectures: [
+              { id: 'ai_l1', time: '09:00 - 06:00', subject: 'Applied Physics / Intro to IS', place: 'A305 / G205', doc: 'Dr. Simon Ezzat / Dr. Muhammed Salah' }
+            ],
+            sections: [
+              { id: 'ai_s1', time: '09:00 - 06:00', subject: 'Mathematics / Python', place: 'G203 / F-Seminar', doc: 'Eng. Shahd Bakry' }
+            ]
+          },
+          'السبت': {
+            lectures: [
+              { id: 'ai_l2', time: '09:00 - 06:00', subject: 'Information Technology / Applied Statistics', place: 'A304 / A305 / F-Seminar', doc: 'Dr. Sameh Mustafa / Dr. Ahmed Bakr' }
+            ],
+            sections: [
+              { id: 'ai_s2', time: '09:00 - 06:00', subject: 'Python / Mathematics', place: 'D102 / D101', doc: 'Eng. Marwa' }
+            ]
+          },
+          'الأحد': {
+            lectures: [
+              { id: 'ai_l3', time: '09:00 - 06:00', subject: 'Applied Statistics / Physics', place: 'G107 / A303', doc: 'Dr. Ibrahem Eid / Eng. Dina' }
+            ],
+            sections: [
+              { id: 'ai_s3', time: '09:00 - 06:00', subject: 'Applied Physics / Python', place: 'D102 / F-Seminar', doc: 'Eng. Hana Hany' }
+            ]
+          }
         }
       },
       'تكنولوجيا الأوتوترونكس': {
@@ -183,18 +273,38 @@
           badge: 'bg-cyan-600 text-white font-bold'
         },
         schedule: {
-          'الأحد': [
-            { id: 'au_1', time: '09:00 - 04:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رياضيات (1) / فيزياء / رسم هندسي / أساسيات ورش / تكنولوجيا معلومات', en: 'Mathematics (1) / Physics / Graphics / Workshops / IT', it: 'Mathematics (1) / Physics / Graphics / Workshops / IT' }, place: 'F-Seminar / AUT1A / AUTO 4B / AUTO 1A / D104', doc: 'Dr. Doaa Roshdy / Eng. Amany / Eng. Ahmed Ashraf' }
-          ],
-          'الإثنين': [
-            { id: 'au_2', time: '09:00 - 06:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رسم / أساسيات ورش / تكنولوجيا معلومات / فيزياء / رياضيات (1)', en: 'Drawing / Workshops / IT / Physics / Mathematics (1)', it: 'Drawing / Workshops / IT / Physics / Mathematics (1)' }, place: 'A-NEW / A304 / G204 / F-Seminar / AUTO 2A', doc: 'Dr. Khaled / Dr. Ayman / Dr. Taha Farghaly / Eng. Sayed Lamiey' }
-          ],
-          'الثلاثاء': [
-            { id: 'au_3', time: '09:00 - 04:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رياضيات (1) / فيزياء / تكنولوجيا معلومات / ورش / إنجليزي (1) / رسم', en: 'Mathematics (1) / Physics / IT / Workshops / English / Drawing', it: 'Mathematics (1) / Physics / IT / Workshops / English / Drawing' }, place: 'AUTO 2A / F-Seminar / D104 / AUTO 1A / A305', doc: 'Eng. Sayed Lamiey / Dr. Taha Farghaly / Dr. Amal Tayeh' }
-          ],
-          'الأربعاء': [
-            { id: 'au_4', time: '09:00 - 01:00', type: 'Dr/Eng (محاضرة وسكشن)', subject: { ar: 'رسم / إنجليزي (1) / فيزياء / رياضيات (1) / رسم هندسي', en: 'Drawing / English (1) / Physics / Math (1) / Graphics', it: 'Drawing / English (1) / Physics / Math (1) / Graphics' }, place: 'AUTO 4B / A305 / AUT1A / AUTO 2A', doc: 'Eng. Amany / Dr. Amal Tayeh / Eng. Sayed Lamiey' }
-          ]
+          'الأحد': {
+            lectures: [
+              { id: 'au_l1', time: '09:00 - 04:00', subject: 'Mathematics (1)', place: 'F-Seminar', doc: 'Dr. Doaa Roshdy' }
+            ],
+            sections: [
+              { id: 'au_s1', time: '09:00 - 04:00', subject: 'Physics / Graphics / Basics of Workshops / IT', place: 'AUT1A / AUTO 4B / AUTO 1A / D104', doc: 'Eng. Amany / Eng. Ahmed Ashraf' }
+            ]
+          },
+          'الإثنين': {
+            lectures: [
+              { id: 'au_l2', time: '09:00 - 06:00', subject: 'Drawing / Physics', place: 'A-NEW / F-Seminar', doc: 'Dr. Khaled / Dr. Taha Farghaly' }
+            ],
+            sections: [
+              { id: 'au_s2', time: '09:00 - 06:00', subject: 'Basics of Workshops / IT / Mathematics (1)', place: 'A304 / G204 / AUTO 2A', doc: 'Dr. Ayman / Eng. Sayed Lamiey' }
+            ]
+          },
+          'الثلاثاء': {
+            lectures: [
+              { id: 'au_l3', time: '09:00 - 04:00', subject: 'Physics / English (1)', place: 'F-Seminar / A305', doc: 'Dr. Taha Farghaly / Dr. Amal Tayeh' }
+            ],
+            sections: [
+              { id: 'au_s3', time: '09:00 - 04:00', subject: 'Mathematics (1) / IT / Workshops / Drawing', place: 'AUTO 2A / D104 / AUTO 1A', doc: 'Eng. Sayed Lamiey' }
+            ]
+          },
+          'الأربعاء': {
+            lectures: [
+              { id: 'au_l4', time: '09:00 - 01:00', subject: 'English (1)', place: 'A305', doc: 'Dr. Amal Tayeh' }
+            ],
+            sections: [
+              { id: 'au_s4', time: '09:00 - 01:00', subject: 'Drawing / Physics / Mathematics (1)', place: 'AUTO 4B / AUT1A / AUTO 2A', doc: 'Eng. Amany / Eng. Sayed Lamiey' }
+            ]
+          }
         }
       },
       'تكنولوجيا علوم البيانات': {
@@ -211,12 +321,18 @@
           badge: 'bg-teal-600 text-white font-bold'
         },
         schedule: {
-          'السبت': [
-            { id: 'ds_1', time: '09:00 - 04:00', type: 'Dr (محاضرة)', subject: { ar: 'مقدمة نظم معلومات / تحول رقمي / إحصاء / إنجليزي', en: 'Intro to IS / Digital Transformation / Statistics / English', it: 'Intro to IS / Digital Transformation / Statistics / English' }, place: 'G204 / G205 / A305', doc: 'Dr. Hend / Dr. Sharief / Dr. Muhammed / Dr. Ahmed Hassan' }
-          ],
-          'الأحد': [
-            { id: 'ds_2', time: '01:00 - 06:00', type: 'Dr (محاضرة)', subject: { ar: 'ثقافة التحول الرقمي / فيزياء تطبيقية', en: 'Digital Transformation Culture / Applied Physics', it: 'Digital Transformation Culture / Applied Physics' }, place: 'G205', doc: 'Dr. Sherief Al-Sharhagy / Dr. Bahaa Salah' }
-          ],
+          'السبت': {
+            lectures: [
+              { id: 'ds_l1', time: '09:00 - 04:00', subject: 'Introduction to Information System / Digital Transformation Culture / Statistics / English Language', place: 'G204 / G205 / A305', doc: 'Dr. Hend / Dr. Sharief Al-Shorbagy / Dr. Muhammed Abdulhakem / Dr. Ahmed Hassan' }
+            ],
+            sections: []
+          },
+          'الأحد': {
+            lectures: [
+              { id: 'ds_l2', time: '01:00 - 06:00', subject: 'Digital Transformation Culture / Applied Physics', place: 'G205', doc: 'Dr. Sherief Al-Sharhagy / Dr. Bahaa Salah' }
+            ],
+            sections: []
+          },
           'الإثنين': '🌴 Day Off - يوم راحة رسمي',
           'الثلاثاء': '🌴 Day Off - يوم راحة رسمي',
           'الأربعاء': '🌴 Day Off - يوم راحة رسمي',
@@ -241,13 +357,15 @@
         selectDay: 'اختر اليوم الدراسي:',
         allDays: 'عرض كل الأيام',
         searchPlaceholder: '🔍 ابحث باسم المادة، المحاضر، أو القاعة...',
-        attendanceTitle: '📊 شيت الحضور والغياب الأسبوعي (محاضرات Dr وسكاشن Eng):',
+        lecturesHeader: '📚 المحاضرات (Dr):',
+        sectionsHeader: '👥 السكاشن (Eng):',
+        attendanceTitle: '📊 شيت الحضور والغياب الأسبوعي:',
         attendance: 'حالة الحضور والغياب:',
-        attended: 'حضرت المحاضرة/السكشن ✓',
-        notAttended: 'لم أحضر بعد ❌',
-        dayOff: '🌴 Day Off - يوم راحة',
+        attended: 'حضر ✓',
+        notAttended: 'لم يحضر ❌',
+        dayOff: '🌴 Day Off - يوم راحة رسمي',
         place: 'المكان والقاعة بدقة:',
-        doc: 'المحاضر (Dr) / المعيد (Eng):',
+        doc: 'المحاضر / المعيد:',
         send: 'إرسال',
         recVoice: '🎤 تسجيل صوتي',
         recStop: '⏹️ إيقاف وإرسال',
@@ -281,13 +399,15 @@
         selectDay: 'Select Day:',
         allDays: 'Show All Days',
         searchPlaceholder: '🔍 Search by subject, instructor, or room...',
-        attendanceTitle: '📊 Student Weekly Attendance Sheet (Dr Lectures & Eng Sections):',
+        lecturesHeader: '📚 Lectures (Dr):',
+        sectionsHeader: '👥 Sections (Eng):',
+        attendanceTitle: '📊 Student Weekly Attendance Sheet:',
         attendance: 'Attendance Status:',
         attended: 'Attended ✓',
         notAttended: 'Not Attended ❌',
         dayOff: '🌴 Day Off',
         place: 'Exact Location & Room:',
-        doc: 'Instructor (Dr) / TA (Eng):',
+        doc: 'Instructor / TA:',
         send: 'Send',
         recVoice: '🎤 Voice Note',
         recStop: '⏹️ Stop & Send',
@@ -321,13 +441,15 @@
         selectDay: 'Seleziona Giorno:',
         allDays: 'Tutti i Giorni',
         searchPlaceholder: '🔍 Cerca per materia, docente o aula...',
-        attendanceTitle: '📊 Foglio Presenze Settimanali (Lezioni Dr e Sezioni Eng):',
+        lecturesHeader: '📚 Lezioni (Dr):',
+        sectionsHeader: '👥 Sezioni (Eng):',
+        attendanceTitle: '📊 Foglio Presenze Settimanali:',
         attendance: 'Stato Presenza:',
         attended: 'Presente ✓',
         notAttended: 'Assente ❌',
         dayOff: '🌴 Giorno di Riposo',
         place: 'Luogo e Aula Esatta:',
-        doc: 'Docente (Dr) / TA (Eng):',
+        doc: 'Docente / TA:',
         send: 'Invia',
         recVoice: '🎤 Nota Vocale',
         recStop: '⏹️ Ferma e Invia',
@@ -673,17 +795,6 @@
                     .map(([day, dayContent]) => {
                       const isOffDay = typeof dayContent === 'string';
 
-                      const filteredLectures = !isOffDay ? dayContent.filter(item => {
-                        const query = searchQuery.toLowerCase().trim();
-                        if (!query) return true;
-                        const subjText = typeof item.subject === 'object' ? (item.subject[language] || item.subject.ar) : item.subject;
-                        return subjText.toLowerCase().includes(query) ||
-                               item.doc.toLowerCase().includes(query) ||
-                               item.place.toLowerCase().includes(query);
-                      }) : [];
-
-                      if (searchQuery && !isOffDay && filteredLectures.length === 0) return null;
-
                       return (
                         <div key={day} className={`rounded-2xl border p-5 shadow-2xl backdrop-blur-md transition-all ${theme === 'dark' ? deptTheme.cardDark : deptTheme.cardLight}`}>
                           <div className={`flex justify-between items-center mb-4 pb-3 border-b ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
@@ -696,39 +807,72 @@
                               <span className={`font-extrabold text-lg ${deptTheme.accent}`}>{dict.dayOff}</span>
                             </div>
                           ) : (
-                            <div className="space-y-4">
-                              {filteredLectures.map((item) => {
-                                const isChecked = attendanceMap[item.id] || false;
-                                const subjectText = typeof item.subject === 'object' ? (item.subject[language] || item.subject.ar) : item.subject;
-                                
-                                return (
-                                  <div key={item.id} className={`p-4 rounded-xl border transition shadow-md ${isChecked ? (theme === 'dark' ? 'bg-emerald-950/40 border-emerald-500/60' : 'bg-emerald-50 border-emerald-300') : (theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-300')}`}>
-                                    <div className="flex justify-between items-start mb-2">
-                                      <span className={`text-[10px] px-2.5 py-0.5 rounded font-black tracking-wider uppercase ${deptTheme.badge}`}>
-                                        {item.type}
-                                      </span>
-                                      <span className="text-xs font-bold opacity-80">⏰ {item.time}</span>
-                                    </div>
-
-                                    <h4 className="font-extrabold text-sm mt-1 leading-relaxed">{subjectText}</h4>
-                                    
-                                    <div className={`flex flex-col gap-1 text-xs font-semibold opacity-90 mt-3 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
-                                      <span>👨‍🏫 {dict.doc} {item.doc}</span>
-                                      <span>📍 {dict.place} {item.place}</span>
-                                    </div>
-
-                                    <div className={`mt-3 pt-2 border-t flex justify-between items-center ${theme === 'dark' ? 'border-slate-800/80' : 'border-slate-200'}`}>
-                                      <span className="text-[11px] font-bold opacity-80">{dict.attendance}</span>
-                                      <button 
-                                        onClick={() => toggleAttendance(item.id)}
-                                        className={`text-xs px-3 py-1 rounded-lg font-bold transition shadow ${isChecked ? 'bg-emerald-600 text-white' : (theme === 'dark' ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-200 text-slate-800 hover:bg-slate-300')}`}
-                                      >
-                                        {isChecked ? dict.attended : dict.notAttended}
-                                      </button>
-                                    </div>
+                            <div className="space-y-6">
+                              {/* المحاضرات Dr */}
+                              <div>
+                                <h4 className="text-xs font-black uppercase text-amber-500 mb-3 tracking-wider">{dict.lecturesHeader}</h4>
+                                {dayContent.lectures && dayContent.lectures.length > 0 ? (
+                                  <div className="space-y-3">
+                                    {dayContent.lectures.map((item) => {
+                                      const isChecked = attendanceMap[item.id] || false;
+                                      return (
+                                        <div key={item.id} className={`p-3.5 rounded-xl border transition shadow-sm ${isChecked ? (theme === 'dark' ? 'bg-emerald-950/40 border-emerald-500/60' : 'bg-emerald-50 border-emerald-300') : (theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-300')}`}>
+                                          <div className="flex justify-between items-start mb-1.5">
+                                            <span className="text-[10px] px-2 py-0.5 rounded font-black bg-amber-500 text-slate-950">محاضرة Dr</span>
+                                            <span className="text-xs font-bold opacity-80">⏰ {item.time}</span>
+                                          </div>
+                                          <h5 className="font-extrabold text-xs leading-relaxed">{item.subject}</h5>
+                                          <div className={`flex flex-col gap-0.5 text-[11px] font-semibold opacity-90 mt-2 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
+                                            <span>👨‍🏫 {item.doc}</span>
+                                            <span>📍 {item.place}</span>
+                                          </div>
+                                          <div className={`mt-2 pt-2 border-t flex justify-between items-center ${theme === 'dark' ? 'border-slate-800/80' : 'border-slate-200'}`}>
+                                            <span className="text-[10px] font-bold opacity-80">{dict.attendance}</span>
+                                            <button onClick={() => toggleAttendance(item.id)} className={`text-[11px] px-2.5 py-1 rounded-lg font-bold transition shadow ${isChecked ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-300'}`}>
+                                              {isChecked ? dict.attended : dict.notAttended}
+                                            </button>
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
                                   </div>
-                                );
-                              })}
+                                ) : (
+                                  <p className="text-xs opacity-50 italic">لا توجد محاضرات في هذا اليوم.</p>
+                                )}
+                              </div>
+
+                              {/* السكاشن Eng */}
+                              <div>
+                                <h4 className="text-xs font-black uppercase text-indigo-500 mb-3 tracking-wider">{dict.sectionsHeader}</h4>
+                                {dayContent.sections && dayContent.sections.length > 0 ? (
+                                  <div className="space-y-3">
+                                    {dayContent.sections.map((item) => {
+                                      const isChecked = attendanceMap[item.id] || false;
+                                      return (
+                                        <div key={item.id} className={`p-3.5 rounded-xl border transition shadow-sm ${isChecked ? (theme === 'dark' ? 'bg-emerald-950/40 border-emerald-500/60' : 'bg-emerald-50 border-emerald-300') : (theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-300')}`}>
+                                          <div className="flex justify-between items-start mb-1.5">
+                                            <span className="text-[10px] px-2 py-0.5 rounded font-black bg-indigo-600 text-white">سكشن Eng</span>
+                                            <span className="text-xs font-bold opacity-80">⏰ {item.time}</span>
+                                          </div>
+                                          <h5 className="font-extrabold text-xs leading-relaxed">{item.subject}</h5>
+                                          <div className={`flex flex-col gap-0.5 text-[11px] font-semibold opacity-90 mt-2 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
+                                            <span>👨‍🏫 {item.doc}</span>
+                                            <span>📍 {item.place}</span>
+                                          </div>
+                                          <div className={`mt-2 pt-2 border-t flex justify-between items-center ${theme === 'dark' ? 'border-slate-800/80' : 'border-slate-200'}`}>
+                                            <span className="text-[10px] font-bold opacity-80">{dict.attendance}</span>
+                                            <button onClick={() => toggleAttendance(item.id)} className={`text-[11px] px-2.5 py-1 rounded-lg font-bold transition shadow ${isChecked ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-300'}`}>
+                                              {isChecked ? dict.attended : dict.notAttended}
+                                            </button>
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                ) : (
+                                  <p className="text-xs opacity-50 italic">لا توجد سكاشن في هذا اليوم.</p>
+                                )}
+                              </div>
                             </div>
                           )}
                         </div>
@@ -763,8 +907,7 @@
                 <div className="space-y-3 pt-4 border-t border-slate-300 dark:border-slate-700">
                   <h3 className="text-sm font-extrabold">{dict.attendanceTitle}</h3>
                   <div className={`p-4 rounded-xl border text-xs font-semibold space-y-2 ${theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-300'}`}>
-                    <p>• تفصيل المحاضرات (Dr) والسكاشن (Eng): تم توضيحها بدقة في الجداول.</p>
-                    <p>• عدد المحاضرات والسكاشن التي تم حضورها: {Object.values(attendanceMap).filter(Boolean).length}</p>
+                    <p>• إجمالي العناصر التي تم تحديدها كـ "حضر ✓": {Object.values(attendanceMap).filter(Boolean).length}</p>
                     <p className="text-emerald-500 font-bold">✓ يتم تحديث شيت الحضور والغياب فوراً وبشكل تلقائي عند تفاعلك مع الجداول.</p>
                   </div>
                 </div>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>جامعة حلوان الدولية التكنولوجية</title>
+  <title>جامعة حلوان الدولية التكنولوجية - HITU</title>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
@@ -11,14 +11,19 @@
   <script>
     tailwind.config = { darkMode: 'class' }
   </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+    body { font-family: 'Cairo', sans-serif; }
+  </style>
 </head>
-<body class="font-sans transition-colors duration-500" dir="rtl">
+<body class="font-sans transition-colors duration-500 bg-slate-950 text-slate-100" dir="rtl">
   <div id="root"></div>
 
   <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
-    const departmentsData = {
+    // البيانات الأولية للأقسام والجدول
+    const initialDepartmentsData = {
       'تحكم صناعي': {
         nameEn: 'Industrial Control Technology',
         nameIt: 'Tecnologia di Controllo Industriale',
@@ -27,50 +32,58 @@
         theme: {
           darkBg: 'bg-slate-950 text-red-50',
           lightBg: 'bg-gradient-to-br from-red-50 via-slate-50 to-orange-50 text-slate-900',
-          cardDark: 'bg-slate-900/95 border-red-500/50 shadow-red-900/30',
-          cardLight: 'bg-white/95 border-red-300 shadow-2xl',
-          accent: 'text-red-600 dark:text-red-400 font-extrabold text-lg',
+          cardDark: 'bg-slate-900/95 border-red-500/40 shadow-red-950/40',
+          cardLight: 'bg-white/95 border-red-200 shadow-xl',
+          accent: 'text-red-500 dark:text-red-400 font-extrabold',
           badge: 'bg-red-600 text-white font-bold'
         },
         schedule: {
           'السبت': {
             lectures: [
-              { id: 'ic_l1', time: '10:00 - 11:00', subject: 'مقرر إيطالي', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
-              { id: 'ic_l2', time: '12:00 - 01:00', subject: 'مقرر إيطالي', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
-              { id: 'ic_l3', time: '01:00 - 02:00', subject: 'مقرر إيطالي', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
-              { id: 'ic_l4', time: '02:00 - 04:00', subject: '3Phase / إلكترونيات', place: 'A-New', doc: 'د. حسام حجازي / د. جولينا سمير' }
+              { id: 'ic_l1', time: '10:00 - 11:00', subject: 'مقرر لغة إيطالية 1', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
+              { id: 'ic_l2', time: '12:00 - 01:00', subject: 'مقرر لغة إيطالية 1', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
+              { id: 'ic_l3', time: '01:00 - 02:00', subject: 'مقرر لغة إيطالية 1', place: 'A303', doc: 'أ.د. وفاء عبد التواب' },
+              { id: 'ic_l4', time: '02:00 - 03:00', subject: '3Phase Systems', place: 'A-New', doc: 'د. حسام حجازي' },
+              { id: 'ic_l5', time: '03:00 - 04:00', subject: 'Electronics', place: 'A-New', doc: 'د. جولينا سمير' }
             ],
             sections: [
-              { id: 'ic_s1', time: '09:00 - 10:00', subject: 'مقرر إيطالي / Solid / 3Phase', place: 'G201 / D103-W.1 / C104', doc: 'م. آية / م. محمد جمال / م. باسمة' },
-              { id: 'ic_s2', time: '10:00 - 11:00', subject: '3Phase / إلكترونيات / رياضيات', place: 'G206 / G104 / G103', doc: 'م. باسمة / م. سلمى / م. عريان' },
-              { id: 'ic_s3', time: '11:00 - 12:00', subject: 'إلكترونيات / رياضيات / رسم هندسي', place: 'C104 / G103 / A304', doc: 'م. ندى / م. عريان / م. رفيدة' },
-              { id: 'ic_s4', time: '12:00 - 01:00', subject: 'إلكترونيات / رياضيات / 3Phase', place: 'C104 / G201 / G103', doc: 'م. سلمى / م. ندى / م. آية' },
-              { id: 'ic_s5', time: '01:00 - 02:00', subject: 'إلكترونيات / رياضيات / 3Phase', place: 'C108 / G103 / C104', doc: 'م. سلمى / م. فتيان / م. باسمة' },
-              { id: 'ic_s6', time: '02:00 - 04:00', subject: 'رسم هندسي / 3Phase / إلكترونيات', place: 'A304 / G206 / D104', doc: 'م. رفيدة / م. إسراء / م. ندى' }
+              { id: 'ic_s1', time: '09:00 - 10:00', subject: 'مقرر لغة إيطالية 1 (تمارين)', place: 'G201', doc: 'م. آية' },
+              { id: 'ic_s2', time: '09:00 - 10:00', subject: 'Solid Mechanics', place: 'D103-W.1', doc: 'م. محمد جمال' },
+              { id: 'ic_s3', time: '09:00 - 10:00', subject: '3Phase Systems Lab', place: 'C104', doc: 'م. باسمة' },
+              { id: 'ic_s4', time: '10:00 - 11:00', subject: '3Phase Systems Lab', place: 'G206', doc: 'م. باسمة' },
+              { id: 'ic_s5', time: '10:00 - 11:00', subject: 'Electronics Lab', place: 'G104', doc: 'م. سلمى' },
+              { id: 'ic_s6', time: '10:00 - 11:00', subject: 'Mathematics (1)', place: 'G103', doc: 'م. عريان' },
+              { id: 'ic_s7', time: '11:00 - 12:00', subject: 'Electronics Lab', place: 'C104', doc: 'م. ندى' },
+              { id: 'ic_s8', time: '11:00 - 12:00', subject: 'Mathematics (1)', place: 'G103', doc: 'م. عريان' },
+              { id: 'ic_s9', time: '11:00 - 12:00', subject: 'رسم هندسي (Drawing)', place: 'A304', doc: 'م. رفيدة' }
             ]
           },
           'الأحد': {
             lectures: [
-              { id: 'ic_l7', time: '09:00 - 12:00', subject: 'رسم هندسي / 3Phase', place: 'G203 / G202', doc: 'د. محمد عثمان / د. حسام حجازي' },
-              { id: 'ic_l8', time: '12:00 - 03:00', subject: 'إلكترونيات / فيزياء تطبيقية', place: 'A-New / D103', doc: 'د. جولينا سمير / د. طه فرغلي' }
+              { id: 'ic_l6', time: '09:00 - 11:00', subject: 'رسم هندسي (Engineering Drawing)', place: 'G203', doc: 'د. محمد عثمان' },
+              { id: 'ic_l7', time: '11:00 - 12:00', subject: '3Phase Systems', place: 'G202', doc: 'د. حسام حجازي' },
+              { id: 'ic_l8', time: '12:00 - 02:00', subject: 'Electronics', place: 'A-New', doc: 'د. جولينا سمير' },
+              { id: 'ic_l9', time: '02:00 - 04:00', subject: 'فيزياء تطبيقية (Physics)', place: 'A-New', doc: 'د. طه فرغلي' }
             ],
             sections: [
-              { id: 'ic_s7', time: '09:00 - 12:00', subject: 'فيزياء تطبيقية / إلكترونيات / رسم', place: 'D103 / G103 / F108', doc: 'م. رحمة / م. ندى / م. سلمى' },
-              { id: 'ic_s8', time: '12:00 - 03:00', subject: 'رسم هندسي / 3Phase / فيزياء', place: 'G204 / F201 / F108', doc: 'م. عزة / م. أميرة' },
-              { id: 'ic_s9', time: '03:00 - 05:00', subject: 'Solid / فيزياء تطبيقية', place: 'D103-W.1 / A-New', doc: 'م. محمد / م. رفيدة' }
+              { id: 'ic_s10', time: '09:00 - 11:00', subject: 'Solid Mechanics Lab', place: 'D103-W.1', doc: 'م. محمد' },
+              { id: 'ic_s11', time: '11:00 - 01:00', subject: 'فيزياء تطبيقية Lab', place: 'G103', doc: 'م. رحمة' },
+              { id: 'ic_s12', time: '01:00 - 03:00', subject: 'Electronics Lab', place: 'F108', doc: 'م. ندى' },
+              { id: 'ic_s13', time: '03:00 - 05:00', subject: 'رسم هندسي التطبيقي', place: 'G204', doc: 'م. عزة' }
             ]
           },
           'الإثنين': '🌴 Day Off - يوم راحة رسمي',
           'الثلاثاء': '🌴 Day Off - يوم راحة رسمي',
           'الأربعاء': {
             lectures: [
-              { id: 'ic_l10', time: '08:00 - 10:00', subject: 'رياضيات / فيزياء', place: 'A303 / G103', doc: 'د. إبراهيم عيد / م. م. جمال' },
-              { id: 'ic_l11', time: '10:00 - 01:00', subject: 'إلكترونيات / رياضيات', place: 'F108 / A303', doc: 'د. إبراهيم عيد / م. سلمى' }
+              { id: 'ic_l10', time: '08:00 - 10:00', subject: 'Mathematics (1)', place: 'A303', doc: 'د. إبراهيم عيد' }
             ],
             sections: [
-              { id: 'ic_s10', time: '08:00 - 10:00', subject: 'فيزياء / 3Phase', place: 'G103 / F201', doc: 'م. م. جمال / م. أميرة' },
-              { id: 'ic_s11', time: '10:00 - 01:00', subject: 'رسم هندسي / 3Phase', place: 'G203 / F201', doc: 'م. عزة / م. هبة' },
-              { id: 'ic_s12', time: '01:00 - 05:00', subject: 'إلكترونيات / 3Phase / رسم / فيزياء / رياضيات', place: 'F108 / F201 / G203 / G206', doc: 'م. سلمى / م. هبة / م. عزة' }
+              { id: 'ic_s14', time: '08:00 - 10:00', subject: 'فيزياء تطبيقية Lab', place: 'G103', doc: 'م. محمد جمال' },
+              { id: 'ic_s15', time: '08:00 - 10:00', subject: '3Phase Systems Lab', place: 'F201', doc: 'م. أميرة' },
+              { id: 'ic_s16', time: '10:00 - 12:00', subject: 'Electronics Lab', place: 'F108', doc: 'م. سلمى' },
+              { id: 'ic_s17', time: '12:00 - 02:00', subject: '3Phase Systems Lab', place: 'F201', doc: 'م. هبة' },
+              { id: 'ic_s18', time: '02:00 - 04:00', subject: 'رسم هندسي التطبيقي', place: 'G203', doc: 'م. عزة' }
             ]
           },
           'الخميس': '🌴 Day Off - يوم راحة رسمي',
@@ -79,257 +92,307 @@
       },
       'تكنولوجيا الملابس الجاهزة': {
         nameEn: 'Ready-Made Garments Technology',
-        nameIt: 'Ready-Made Garments Technology',
+        nameIt: 'Tecnologia dell\'Abbigliamento',
         icon: '👗',
         sectionsCount: 3,
         theme: {
           darkBg: 'bg-slate-950 text-pink-50',
           lightBg: 'bg-gradient-to-br from-pink-50 via-slate-50 to-purple-50 text-slate-900',
-          cardDark: 'bg-slate-900/95 border-pink-500/50 shadow-pink-900/30',
-          cardLight: 'bg-white/95 border-pink-300 shadow-2xl',
-          accent: 'text-pink-600 dark:text-pink-400 font-extrabold text-lg',
+          cardDark: 'bg-slate-900/95 border-pink-500/40 shadow-pink-950/40',
+          cardLight: 'bg-white/95 border-pink-200 shadow-xl',
+          accent: 'text-pink-500 dark:text-pink-400 font-extrabold',
           badge: 'bg-pink-600 text-white font-bold'
         },
         schedule: {
           'الأحد': {
             lectures: [
-              { id: 'rm_l1', time: '01:00 - 06:00', subject: 'تكنولوجيا صناعة الملابس الجاهزة', place: 'C108', doc: 'م.د إيمان عبد المعطي' }
+              { id: 'rm_l1', time: '01:00 - 05:00', subject: 'تكنولوجيا صناعة الملابس الجاهزة', place: 'C108', doc: 'م.د إيمان عبد المعطي' }
             ],
             sections: [
-              { id: 'rm_s1', time: '09:00 - 01:00', subject: 'تشكيل على المانيكان 1 وتكنولوجيا الملابس', place: 'C108 / G107 / C103', doc: 'م. مصطفى / م. يارا / م. بهنسي' },
-              { id: 'rm_s2', time: '01:00 - 06:00', subject: 'أسس بناء الجسم والموضة والأزياء', place: 'G107 / G106 / C107', doc: 'م. يارا / م. بهنسي / م. آلاء' }
+              { id: 'rm_s1', time: '09:00 - 12:00', subject: 'تشكيل على المانيكان 1', place: 'G107', doc: 'م. مصطفى' },
+              { id: 'rm_s2', time: '09:00 - 12:00', subject: 'تشكيل علي المانيكان 1', place: 'C108', doc: 'م. يارا / م. بهنسي' },
+              { id: 'rm_s3', time: '12:00 - 02:00', subject: 'أسس بناء الجسم', place: 'G107', doc: 'م. يارا' },
+              { id: 'rm_s4', time: '12:00 - 02:00', subject: 'الموضة والأزياء', place: 'G106', doc: 'م. بهنسي' }
             ]
           },
           'الإثنين': '🌴 Day Off - يوم راحة رسمي',
           'الثلاثاء': {
             lectures: [
-              { id: 'rm_l3', time: '09:00 - 03:00', subject: 'الموضة والأزياء والثقافة والمجتمع', place: 'C108 / G106', doc: 'م.د إيمان عبد المعطي' }
+              { id: 'rm_l2', time: '09:00 - 01:00', subject: 'الموضة والأزياء والثقافة والمجتمع', place: 'C108', doc: 'م.د إيمان عبد المعطي' }
             ],
             sections: [
-              { id: 'rm_s3', time: '09:00 - 03:00', subject: 'تكنولوجيا المعلومات وأسس بناء الجسم', place: 'G107 / C107', doc: 'م. دينا / م. روضة' },
-              { id: 'rm_s4', time: '03:00 - 06:00', subject: 'تشكيل على المانيكان 1 وأسس بناء الجسم', place: 'C103 / C104 / C108 / G106 / G107', doc: 'م.م آية / م. مصطفى / م. بهنسي / م. روضة / م. يارا' }
+              { id: 'rm_s5', time: '09:00 - 11:00', subject: 'موضة وازياء', place: 'G106', doc: 'م. دينا / م. مصطفى' },
+              { id: 'rm_s6', time: '11:00 - 01:00', subject: 'تكنولوجيا المعلومات', place: 'C107', doc: 'م. دينا' },
+              { id: 'rm_s7', time: '01:00 - 03:00', subject: 'تكنولوجيا المعلومات', place: 'C107', doc: 'م. دينا / م. فرج' }
             ]
           },
           'الأربعاء': {
             lectures: [
-              { id: 'rm_l5', time: '09:00 - 06:00', subject: 'تكنولوجيا المعلومات / أسس بناء الجسم / لغة إيطالية 1', place: 'C104 / C108 / G203', doc: 'م.د مها توفيق / م.د هبة رزق الله / أ.د وفاء عبد التواب' }
+              { id: 'rm_l3', time: '10:00 - 01:00', subject: 'تكنولوجيا المعلومات', place: 'C104', doc: 'م.د مها توفيق' },
+              { id: 'rm_l4', time: '01:00 - 03:00', subject: 'تشكيل على المانيكان 1', place: 'C104', doc: 'م.د هبة رزق الله' },
+              { id: 'rm_l5', time: '03:00 - 06:00', subject: 'لغة إيطالية 1', place: 'G203', doc: 'أ.د وفاء عبد التواب' }
             ],
-            sections: []
+            sections: [
+              { id: 'rm_s8', time: '03:00 - 05:00', subject: 'أسس بناء الجسم', place: 'C104', doc: 'م.د جيهان يوسف' }
+            ]
           },
           'الخميس': {
             lectures: [
-              { id: 'rm_l6', time: '11:00 - 05:00', subject: 'أسس بناء الجسم ولغة إيطالية 1 والموضة', place: 'G107', doc: 'أ.د وفاء عبد التواب' }
+              { id: 'rm_l6', time: '09:00 - 12:00', subject: 'أسس بناء الجسم', place: 'C104', doc: 'م.د جيهان يوسف' },
+              { id: 'rm_l7', time: '12:00 - 03:00', subject: 'لغة إيطالية 1', place: 'G203', doc: 'أ.د وفاء عبد التواب' }
             ],
             sections: [
-              { id: 'rm_s6', time: '11:00 - 05:00', subject: 'تكنولوجيا المعلومات والموضة وبناء الجسم', place: 'G107', doc: 'م. إسراء / م. دينا / م. بهنسي' }
+              { id: 'rm_s9', time: '12:00 - 02:00', subject: 'أسس بناء الجسم', place: 'G107', doc: 'م. إسراء' },
+              { id: 'rm_s10', time: '02:00 - 04:00', subject: 'تكنولوجيا المعلومات', place: 'G107', doc: 'م. دينا' }
             ]
           }
         }
       },
       'تكنولوجيا الأمن السيبراني': {
         nameEn: 'Cyber-Security Technology',
-        nameIt: 'Cyber-Security Technology',
+        nameIt: 'Tecnologia di Sicurezza Informatica',
         icon: '🔒',
         sectionsCount: 15,
         theme: {
           darkBg: 'bg-slate-950 text-emerald-50',
           lightBg: 'bg-gradient-to-br from-emerald-50 via-slate-50 to-teal-50 text-slate-900',
-          cardDark: 'bg-slate-900/95 border-emerald-500/50 shadow-emerald-900/30',
-          cardLight: 'bg-white/95 border-emerald-300 shadow-2xl',
-          accent: 'text-emerald-600 dark:text-emerald-400 font-extrabold text-lg',
+          cardDark: 'bg-slate-900/95 border-emerald-500/40 shadow-emerald-950/40',
+          cardLight: 'bg-white/95 border-emerald-200 shadow-xl',
+          accent: 'text-emerald-500 dark:text-emerald-400 font-extrabold',
           badge: 'bg-emerald-600 text-white font-bold'
         },
         schedule: {
           'الجمعة': {
             lectures: [
-              { id: 'cs_l1', time: '09:00 - 06:00', subject: 'Information Technology / Database Systems', place: 'G202 / A-New', doc: 'Dr. Nelly Saeed / Dr. Abeer Hassan' }
+              { id: 'cs_l1', time: '10:00 - 12:00', subject: 'Information Technology', place: 'G202', doc: 'Dr. Nelly Saeed' },
+              { id: 'cs_l2', time: '12:00 - 02:00', subject: 'Database Systems', place: 'A-New', doc: 'Dr. Abeer Hassan' },
+              { id: 'cs_l3', time: '02:00 - 04:00', subject: 'Introduction To Information System', place: 'A-New', doc: 'Dr. Nelly Saeed' }
             ],
             sections: [
-              { id: 'cs_s1', time: '09:00 - 06:00', subject: 'Applied Physics / Intro to IS', place: 'G201 / F-Seminar', doc: 'Eng. Fares / Dr. Nelly Saeed' }
+              { id: 'cs_s1', time: '09:00 - 10:00', subject: 'Applied Physics Lab', place: 'G202', doc: 'Eng. Fares' },
+              { id: 'cs_s2', time: '02:00 - 04:00', subject: 'Introduction To Information System', place: 'F-Seminar', doc: 'Dr. Nelly Saeed' }
             ]
           },
           'السبت': {
             lectures: [
-              { id: 'cs_l2', time: '09:00 - 06:00', subject: 'Mathematics / Database Systems', place: 'A-NEW / D105', doc: 'Dr. Shaimaa Muhran / Eng. Karim Adel' }
+              { id: 'cs_l4', time: '09:00 - 11:00', subject: 'Mathematics (1)', place: 'A-NEW', doc: 'Dr. Shaimaa Muhran' },
+              { id: 'cs_l5', time: '11:00 - 01:00', subject: 'Mathematics (1)', place: 'F-Seminar', doc: 'Dr. Shaimaa Muhran' }
             ],
             sections: [
-              { id: 'cs_s2', time: '09:00 - 06:00', subject: 'Technology / Information Technology', place: 'D104 / D101 / A202', doc: 'Eng. Maria' }
+              { id: 'cs_s3', time: '10:00 - 12:00', subject: 'Information Technology Lab', place: 'D104', doc: 'Eng. Maria' },
+              { id: 'cs_s4', time: '01:00 - 03:00', subject: 'Database Systems Lab', place: 'D105', doc: 'Eng. Karim Adel' },
+              { id: 'cs_s5', time: '04:00 - 06:00', subject: 'Applied Physics Lab', place: 'G204', doc: 'Eng. Faris' }
             ]
           },
           'الأربعاء': {
             lectures: [
-              { id: 'cs_l3', time: '09:00 - 06:00', subject: 'Entrepreneurship and Creative Thinking', place: 'O.L', doc: 'Dr. Naglaa Abdulmohsen' }
+              { id: 'cs_l6', time: '09:00 - 11:00', subject: 'Entrepreneurship and Creative Thinking', place: 'O.L (Online)', doc: 'Dr. Naglaa Abdulmohsen' },
+              { id: 'cs_l7', time: '04:00 - 06:00', subject: 'English 1', place: 'F-Seminar', doc: 'Dr. Ahmed Hassan' }
             ],
             sections: [
-              { id: 'cs_s3', time: '09:00 - 06:00', subject: 'Mathematics / Applied Physics / English 1', place: 'G204 / G202 / A202 / G203', doc: 'Eng. Abdulaziz / Eng. Omnia' }
+              { id: 'cs_s6', time: '09:00 - 11:00', subject: 'Mathematics Lab', place: 'G204', doc: 'Eng. Abdulaziz' },
+              { id: 'cs_s7', time: '01:00 - 03:00', subject: 'Mathematics Lab', place: 'A202', doc: 'Eng. Omnia' },
+              { id: 'cs_s8', time: '03:00 - 05:00', subject: 'Applied Physics Lab', place: 'G202', doc: 'Eng. Omnia' }
             ]
           },
           'الخميس': {
             lectures: [
-              { id: 'cs_l4', time: '09:00 - 06:00', subject: 'Database Systems / Intro to IS', place: 'A303 / F-Seminar', doc: 'Dr. Ahmed Ibrahem / Eng. Mohamed Hamdy' }
+              { id: 'cs_l8', time: '09:00 - 11:00', subject: 'Applied Physics', place: 'G204', doc: 'Dr. Ahmed Ibrahem' },
+              { id: 'cs_l9', time: '11:00 - 01:00', subject: 'English 1', place: 'A202', doc: 'Dr. Ahmed Hassan' }
             ],
             sections: [
-              { id: 'cs_s4', time: '09:00 - 06:00', subject: 'Applied Physics / Database System', place: 'G204 / G104', doc: 'Eng. Nadia / Eng. Habiba' }
+              { id: 'cs_s9', time: '01:00 - 03:00', subject: 'Database Systems Lab', place: 'G204', doc: 'Eng. Mohamed Hamdy' },
+              { id: 'cs_s10', time: '03:00 - 05:00', subject: 'Database Systems Lab', place: 'A303', doc: 'Eng. Nadia' },
+              { id: 'cs_s11', time: '04:00 - 06:00', subject: 'Introduction to Information Systems', place: 'G204', doc: 'Eng. Mahmoud' }
             ]
           }
         }
       },
       'تكنولوجيا الميكاترونكس': {
         nameEn: 'Mechatronics Technology',
-        nameIt: 'Mechatronics Technology',
+        nameIt: 'Tecnologia Meccatronica',
         icon: '🤖',
         sectionsCount: 10,
         theme: {
           darkBg: 'bg-slate-950 text-blue-50',
           lightBg: 'bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-50 text-slate-900',
-          cardDark: 'bg-slate-900/95 border-blue-500/50 shadow-blue-900/30',
-          cardLight: 'bg-white/95 border-blue-300 shadow-2xl',
-          accent: 'text-blue-600 dark:text-blue-400 font-extrabold text-lg',
+          cardDark: 'bg-slate-900/95 border-blue-500/40 shadow-blue-950/40',
+          cardLight: 'bg-white/95 border-blue-200 shadow-xl',
+          accent: 'text-blue-500 dark:text-blue-400 font-extrabold',
           badge: 'bg-blue-600 text-white font-bold'
         },
         schedule: {
           'الأحد': {
             lectures: [],
             sections: [
-              { id: 'mc_s1', time: '09:00 - 06:00', subject: 'Physics / English / Application of Math / Health & Safety', place: 'G104 / A307 / Workshop', doc: 'Eng. Adham / Eng. Nehal / Eng. Riham / Eng. Ibrahem Grah' }
+              { id: 'mc_s1', time: '09:00 - 11:00', subject: 'English 1', place: 'G104', doc: 'Eng. Adham' },
+              { id: 'mc_s2', time: '11:00 - 01:00', subject: 'Physics Lab', place: 'A307', doc: 'Eng. Riham / Eng. Yasmine' },
+              { id: 'mc_s3', time: '01:00 - 03:00', subject: 'Health & Safety Lab', place: 'Workshop', doc: 'Eng. Ibrahem Grah' },
+              { id: 'mc_s4', time: '03:00 - 05:00', subject: 'Application of Math Lab', place: 'A307', doc: 'Eng. Hager Yousry' }
             ]
           },
           'الإثنين': '🌴 Day Off - يوم راحة رسمي',
           'الثلاثاء': {
             lectures: [
-              { id: 'mc_l2', time: '09:00 - 06:00', subject: 'Physics / Mathematics / Health & Safety', place: 'G201 / G205 / A307', doc: 'Dr. Ahmed Bakr / Dr. Ahmed Swidan' }
+              { id: 'mc_l1', time: '09:00 - 11:00', subject: 'Physics', place: 'G201', doc: 'Dr. Ahmed Bakr' },
+              { id: 'mc_l2', time: '01:00 - 03:00', subject: 'Health & Safety', place: 'G205', doc: 'Dr. Ahmed Swidan' }
             ],
             sections: [
-              { id: 'mc_s2', time: '09:00 - 06:00', subject: 'Physics / Mathematics / Communication Skills', place: 'G104', doc: 'Eng. Ibrahem Hamdy' }
+              { id: 'mc_s5', time: '10:00 - 12:00', subject: 'Mathematics Lab', place: 'G104', doc: 'Eng. Ibrahem Hamdy' },
+              { id: 'mc_s6', time: '12:00 - 02:00', subject: 'Communication Skills Lab', place: 'A307', doc: 'Eng. Eslam Ahmed' }
             ]
           },
           'الأربعاء': {
             lectures: [
-              { id: 'mc_l3', time: '09:00 - 06:00', subject: 'Health & Safety / Application of Math / Technical English', place: 'G104 / G201 / A307 / G205', doc: 'Dr. Duaa Roshdy / Dr. Sabreen Ahmed / Dr. Ahmed Swidan' }
+              { id: 'mc_l3', time: '09:00 - 11:00', subject: 'Health & Safety', place: 'G205', doc: 'Dr. Ahmed Swidan' },
+              { id: 'mc_l4', time: '11:00 - 01:00', subject: 'Technical English', place: 'G201', doc: 'Dr. Sabreen Ahmed' },
+              { id: 'mc_l5', time: '01:00 - 03:00', subject: 'Application of Math', place: 'G201', doc: 'Dr. Duaa Roshdy' }
             ],
-            sections: []
+            sections: [
+              { id: 'mc_s7', time: '01:00 - 03:00', subject: 'Physics Lab', place: 'A307', doc: 'Eng. Riham' }
+            ]
           },
           'الخميس': {
             lectures: [
-              { id: 'mc_l4', time: '09:00 - 06:00', subject: 'Mathematics for Technicians / Communication Skills', place: 'G282 / G205', doc: 'Dr. Muhammed Fawzy / Dr. Mahmoud Samy' }
+              { id: 'mc_l6', time: '09:00 - 11:00', subject: 'Mathematics for Technicians', place: 'G282', doc: 'Dr. Muhammed Fawzy' },
+              { id: 'mc_l7', time: '01:00 - 03:00', subject: 'Communication Skills', place: 'G205', doc: 'Dr. Mahmoud Samy' }
             ],
             sections: [
-              { id: 'mc_s4', time: '09:00 - 06:00', subject: 'English / Application of Math', place: 'A307 / G104', doc: 'Eng. Adham / Eng. Hager' }
+              { id: 'mc_s8', time: '11:00 - 01:00', subject: 'Mathematics Lab', place: 'A307', doc: 'Eng. Eslam Ahmed' },
+              { id: 'mc_s9', time: '03:00 - 05:00', subject: 'Application of Math Lab', place: 'G104', doc: 'Eng. Hager Yousry' }
             ]
           }
         }
       },
       'تكنولوجيا الذكاء الاصطناعي': {
         nameEn: 'Artificial Intelligence Technology',
-        nameIt: 'Artificial Intelligence Technology',
+        nameIt: 'Tecnologia di Intelligenza Artificiale',
         icon: '🧠',
         sectionsCount: 8,
         theme: {
           darkBg: 'bg-slate-950 text-indigo-50',
           lightBg: 'bg-gradient-to-br from-indigo-50 via-slate-50 to-purple-50 text-slate-900',
-          cardDark: 'bg-slate-900/95 border-indigo-500/50 shadow-indigo-900/30',
-          cardLight: 'bg-white/95 border-indigo-300 shadow-2xl',
-          accent: 'text-indigo-600 dark:text-indigo-400 font-extrabold text-lg',
+          cardDark: 'bg-slate-900/95 border-indigo-500/40 shadow-indigo-950/40',
+          cardLight: 'bg-white/95 border-indigo-200 shadow-xl',
+          accent: 'text-indigo-500 dark:text-indigo-400 font-extrabold',
           badge: 'bg-indigo-600 text-white font-bold'
         },
         schedule: {
           'الجمعة': {
             lectures: [
-              { id: 'ai_l1', time: '09:00 - 06:00', subject: 'Applied Physics / Intro to IS', place: 'A305 / G205', doc: 'Dr. Simon Ezzat / Dr. Muhammed Salah' }
+              { id: 'ai_l1', time: '09:00 - 11:00', subject: 'Applied Physics', place: 'F-SEMINAR', doc: 'Dr. Simon Ezzat' },
+              { id: 'ai_l2', time: '11:00 - 01:00', subject: 'Introduction to Information Systems', place: 'G205', doc: 'Dr. Muhammed Salah' }
             ],
             sections: [
-              { id: 'ai_s1', time: '09:00 - 06:00', subject: 'Mathematics / Python', place: 'G203 / F-Seminar', doc: 'Eng. Shahd Bakry' }
+              { id: 'ai_s1', time: '09:00 - 10:00', subject: 'Mathematics Lab', place: 'G203', doc: 'Eng. Hana Hany' },
+              { id: 'ai_s2', time: '10:00 - 11:00', subject: 'Python Lab', place: 'A305', doc: 'Eng. Shahd Bakry' }
             ]
           },
           'السبت': {
             lectures: [
-              { id: 'ai_l2', time: '09:00 - 06:00', subject: 'Information Technology / Applied Statistics', place: 'A304 / A305 / F-Seminar', doc: 'Dr. Sameh Mustafa / Dr. Ahmed Bakr' }
+              { id: 'ai_l3', time: '11:00 - 01:00', subject: 'Information Technology', place: 'A304', doc: 'Dr. Sameh Mustafa' },
+              { id: 'ai_l4', time: '01:00 - 03:00', subject: 'Mathematics', place: 'A305', doc: 'Dr. Ahmed Bakr' },
+              { id: 'ai_l5', time: '03:00 - 05:00', subject: 'Applied Statistics', place: 'F-Seminar', doc: 'Dr. Muhammed Abdulhakem' }
             ],
             sections: [
-              { id: 'ai_s2', time: '09:00 - 06:00', subject: 'Python / Mathematics', place: 'D102 / D101', doc: 'Eng. Marwa' }
+              { id: 'ai_s3', time: '09:00 - 11:00', subject: 'Python Lab', place: 'D102', doc: 'Eng. Marwa' },
+              { id: 'ai_s4', time: '11:00 - 01:00', subject: 'Information Systems Lab', place: 'D101', doc: 'Eng. Dina' }
             ]
           },
           'الأحد': {
             lectures: [
-              { id: 'ai_l3', time: '09:00 - 06:00', subject: 'Applied Statistics / Physics', place: 'G107 / A303', doc: 'Dr. Ibrahem Eid / Eng. Dina' }
+              { id: 'ai_l6', time: '12:00 - 03:00', subject: 'Physics', place: 'F-Seminar', doc: 'Dr. Ibrahem Eid' }
             ],
             sections: [
-              { id: 'ai_s3', time: '09:00 - 06:00', subject: 'Applied Physics / Python', place: 'D102 / F-Seminar', doc: 'Eng. Hana Hany' }
+              { id: 'ai_s5', time: '09:00 - 11:00', subject: 'Applied Physics Lab', place: 'G107', doc: 'Eng. Shahd Bakry' },
+              { id: 'ai_s6', time: '01:00 - 03:00', subject: 'Applied Statistics Lab', place: 'Hydraulic Lab', doc: 'Eng. Ahmed Amin' }
             ]
           }
         }
       },
       'تكنولوجيا الأوتوترونكس': {
         nameEn: 'Autotronics Technology',
-        nameIt: 'Autotronics Technology',
+        nameIt: 'Tecnologia Autotronica',
         icon: '🚗',
         sectionsCount: 8,
         theme: {
           darkBg: 'bg-slate-950 text-cyan-50',
           lightBg: 'bg-gradient-to-br from-cyan-50 via-slate-50 to-blue-50 text-slate-900',
-          cardDark: 'bg-slate-900/95 border-cyan-500/50 shadow-cyan-900/30',
-          cardLight: 'bg-white/95 border-cyan-300 shadow-2xl',
-          accent: 'text-cyan-600 dark:text-cyan-400 font-extrabold text-lg',
+          cardDark: 'bg-slate-900/95 border-cyan-500/40 shadow-cyan-950/40',
+          cardLight: 'bg-white/95 border-cyan-200 shadow-xl',
+          accent: 'text-cyan-500 dark:text-cyan-400 font-extrabold',
           badge: 'bg-cyan-600 text-white font-bold'
         },
         schedule: {
           'الأحد': {
             lectures: [
-              { id: 'au_l1', time: '09:00 - 04:00', subject: 'Mathematics (1)', place: 'F-Seminar', doc: 'Dr. Doaa Roshdy' }
+              { id: 'au_l1', time: '09:00 - 11:00', subject: 'Mathematics (1)', place: 'F-Seminar', doc: 'Dr. Doaa Roshdy' }
             ],
             sections: [
-              { id: 'au_s1', time: '09:00 - 04:00', subject: 'Physics / Graphics / Basics of Workshops / IT', place: 'AUT1A / AUTO 4B / AUTO 1A / D104', doc: 'Eng. Amany / Eng. Ahmed Ashraf' }
+              { id: 'au_s1', time: '09:00 - 11:00', subject: 'Physics Lab', place: 'AUT 1A', doc: 'Eng. Amany' },
+              { id: 'au_s2', time: '11:00 - 01:00', subject: 'Graphics Lab', place: 'AUTO 4B', doc: 'Eng. Christena / Eng. Youssef Hussain' },
+              { id: 'au_s3', time: '01:00 - 03:00', subject: 'Basics of Workshops', place: 'AUTO 1A', doc: 'Eng. Ahmed Ashraf / Eng. Salma' }
             ]
           },
           'الإثنين': {
             lectures: [
-              { id: 'au_l2', time: '09:00 - 06:00', subject: 'Drawing / Physics', place: 'A-NEW / F-Seminar', doc: 'Dr. Khaled / Dr. Taha Farghaly' }
+              { id: 'au_l2', time: '09:00 - 11:00', subject: 'Drawing', place: 'A-NEW', doc: 'Dr. Khaled / Dr. Ayman' },
+              { id: 'au_l3', time: '11:00 - 01:00', subject: 'Information Technology', place: 'OL (Online)', doc: 'Dr. Rawda Hamza' },
+              { id: 'au_l4', time: '01:00 - 03:00', subject: 'Physics', place: 'F-Seminar', doc: 'Dr. Taha Farghaly' }
             ],
             sections: [
-              { id: 'au_s2', time: '09:00 - 06:00', subject: 'Basics of Workshops / IT / Mathematics (1)', place: 'A304 / G204 / AUTO 2A', doc: 'Dr. Ayman / Eng. Sayed Lamiey' }
+              { id: 'au_s4', time: '09:00 - 11:00', subject: 'Basics of Workshops', place: 'G204', doc: 'Dr. Ayman' },
+              { id: 'au_s5', time: '01:00 - 03:00', subject: 'Mathematics (1) Lab', place: 'AUTO 2A', doc: 'Eng. Sayed Lamiey' }
             ]
           },
           'الثلاثاء': {
             lectures: [
-              { id: 'au_l3', time: '09:00 - 04:00', subject: 'Physics / English (1)', place: 'F-Seminar / A305', doc: 'Dr. Taha Farghaly / Dr. Amal Tayeh' }
+              { id: 'au_l5', time: '10:00 - 12:00', subject: 'Physics', place: 'F-Seminar', doc: 'Dr. Taha Farghaly' },
+              { id: 'au_l6', time: '01:00 - 03:00', subject: 'English (1)', place: 'A305', doc: 'Dr. Amal Tayeh' }
             ],
             sections: [
-              { id: 'au_s3', time: '09:00 - 04:00', subject: 'Mathematics (1) / IT / Workshops / Drawing', place: 'AUTO 2A / D104 / AUTO 1A', doc: 'Eng. Sayed Lamiey' }
+              { id: 'au_s6', time: '09:00 - 11:00', subject: 'Mathematics (1) Lab', place: 'AUTO 2A', doc: 'Eng. Sayed Lamiey' },
+              { id: 'au_s7', time: '11:00 - 01:00', subject: 'Basics of Workshops', place: 'AUTO 1A', doc: 'Eng. Ahmed Ashraf' }
             ]
           },
           'الأربعاء': {
             lectures: [
-              { id: 'au_l4', time: '09:00 - 01:00', subject: 'English (1)', place: 'A305', doc: 'Dr. Amal Tayeh' }
+              { id: 'au_l7', time: '10:00 - 12:00', subject: 'English (1)', place: 'A305', doc: 'Dr. Amal Tayeh' }
             ],
             sections: [
-              { id: 'au_s4', time: '09:00 - 01:00', subject: 'Drawing / Physics / Mathematics (1)', place: 'AUTO 4B / AUT1A / AUTO 2A', doc: 'Eng. Amany / Eng. Sayed Lamiey' }
+              { id: 'au_s8', time: '09:00 - 11:00', subject: 'Mathematics (1) Lab', place: 'AUTO 2A', doc: 'Eng. Sayed Lamiey' },
+              { id: 'au_s9', time: '11:00 - 01:00', subject: 'Graphics Lab', place: 'AUTO 4B', doc: 'Eng. Youssef Hussain' }
             ]
           }
         }
       },
       'تكنولوجيا علوم البيانات': {
         nameEn: 'Data Science Technology',
-        nameIt: 'Data Science Technology',
+        nameIt: 'Tecnologia della Scienza dei Dati',
         icon: '📊',
         sectionsCount: 12,
         theme: {
           darkBg: 'bg-slate-950 text-teal-50',
           lightBg: 'bg-gradient-to-br from-teal-50 via-slate-50 to-emerald-50 text-slate-900',
-          cardDark: 'bg-slate-900/95 border-teal-500/50 shadow-teal-900/30',
-          cardLight: 'bg-white/95 border-teal-300 shadow-2xl',
-          accent: 'text-teal-600 dark:text-teal-400 font-extrabold text-lg',
+          cardDark: 'bg-slate-900/95 border-teal-500/40 shadow-teal-950/40',
+          cardLight: 'bg-white/95 border-teal-200 shadow-xl',
+          accent: 'text-teal-500 dark:text-teal-400 font-extrabold',
           badge: 'bg-teal-600 text-white font-bold'
         },
         schedule: {
           'السبت': {
             lectures: [
-              { id: 'ds_l1', time: '09:00 - 04:00', subject: 'Introduction to Information System / Digital Transformation Culture / Statistics / English Language', place: 'G204 / G205 / A305', doc: 'Dr. Hend / Dr. Sharief Al-Shorbagy / Dr. Muhammed Abdulhakem / Dr. Ahmed Hassan' }
+              { id: 'ds_l1', time: '09:00 - 11:00', subject: 'Introduction To Information System', place: 'G204', doc: 'Dr. Hend' },
+              { id: 'ds_l2', time: '10:00 - 12:00', subject: 'Statistics', place: 'A305', doc: 'Dr. Muhammed Abdulhakem' },
+              { id: 'ds_l3', time: '01:00 - 03:00', subject: 'English Language', place: 'G204', doc: 'Dr. Ahmed Hassan' },
+              { id: 'ds_l4', time: '03:00 - 05:00', subject: 'Digital Transformation Culture', place: 'G205', doc: 'Dr. Sharief Al-Shorbagy' }
             ],
             sections: []
           },
           'الأحد': {
             lectures: [
-              { id: 'ds_l2', time: '01:00 - 06:00', subject: 'Digital Transformation Culture / Applied Physics', place: 'G205', doc: 'Dr. Sherief Al-Sharhagy / Dr. Bahaa Salah' }
+              { id: 'ds_l5', time: '01:00 - 03:00', subject: 'Digital Transformation Culture', place: 'G205', doc: 'Dr. Sherief Al-Sharhagy' },
+              { id: 'ds_l6', time: '05:00 - 06:00', subject: 'Applied Physics', place: 'G204', doc: 'Dr. Bahaa Salah' }
             ],
             sections: []
           },
@@ -341,133 +404,165 @@
       }
     };
 
+    // القاموس اللغوي المحسن
     const dictionary = {
       ar: {
         title: 'جامعة حلوان الدولية التكنولوجية',
-        fullName: 'الاسم الثلاثي:',
+        subTitle: 'Faculty of Technology in Cairo - HITU',
+        fullName: 'الاسم الثلاثي للطالب:',
         nid: 'الرقم القومي (14 رقماً):',
-        dept: 'القسم الدراسي:',
+        dept: 'القسم الأكاديمي:',
         sec: 'رقم السكشن / المجموعة:',
-        enterBtn: 'دخول المنصة وعرض الجدول 🚀',
-        scheduleTab: '📅 الجدول الدراسي',
-        chatTab: '💬 شات القسم',
-        settingsTab: '⚙️ الإعدادات وشيت الحضور',
-        adminTab: '🔑 لوحة الأدمن',
-        logout: 'خروج',
+        enterBtn: 'الدخول للمنصة التفاعلية 🚀',
+        scheduleTab: '📅 الجدول الأكاديمي',
+        studentSheetTab: '📝 شيت الحضور والتسليمات',
+        chatTab: '💬 شات الدفعة',
+        settingsTab: '⚙️ الإعدادات والسمات',
+        adminTab: '🔑 لوحة الأدمن (تعديل الجدول)',
+        logout: 'تسجيل خروج',
         selectDay: 'اختر اليوم الدراسي:',
-        allDays: 'عرض كل الأيام',
-        searchPlaceholder: '🔍 ابحث باسم المادة، المحاضر، أو القاعة...',
-        lecturesHeader: '📚 المحاضرات (Dr):',
-        sectionsHeader: '👥 السكاشن (Eng):',
-        attendanceTitle: '📊 شيت الحضور والغياب الأسبوعي:',
-        attendance: 'حالة الحضور والغياب:',
-        attended: 'حضر ✓',
-        notAttended: 'لم يحضر ❌',
+        allDays: 'جميع أيام الأسبوع',
+        searchPlaceholder: '🔍 ابحث باسم المادة، المحاضر/المعيد، أو القاعة...',
+        lecturesHeader: '📚 المحاضرات النظرية (Dr):',
+        sectionsHeader: '👥 السكاشن والمعامل (Eng):',
         dayOff: '🌴 Day Off - يوم راحة رسمي',
-        place: 'المكان والقاعة بدقة:',
+        place: 'القاعة / المعمل:',
         doc: 'المحاضر / المعيد:',
-        send: 'إرسال',
-        recVoice: '🎤 تسجيل صوتي',
+        send: 'إرسال الرسالة',
+        recVoice: '🎤 تسجيل بصمة صوتية',
         recStop: '⏹️ إيقاف وإرسال',
-        pinMessage: 'تثبيت كرسالة هامة',
-        pinnedBadge: '📌 رسالة مثبتة',
-        settingsHeader: '⚙️ إعدادات الطالب، اللغة، السمات، وشيت الحضور والغياب:',
-        langLabel: 'اختر لغة المنصة:',
-        themeLabel: 'اختر السمة (الوضع الفاتح / الداكن):',
-        adminTitle: '⚙️ لوحة تحكم الأدمن - شروق سمير (٢٥٢)',
-        banSection: '🚫 حظر وإدارة المستخدمين',
-        banPlaceholder: 'اكتب اسم الطالب المراد حظره...',
-        banBtn: 'حظر الطالب',
-        broadcastSection: '📢 لوحة بلاغات وتنبيهات الدكاترة للطلاب',
-        broadcastPlaceholder: 'اكتب التنبيه أو البلاغ الهام من الدكاترة...',
-        broadcastBtn: 'نشر البلاغ',
-        bannedList: 'قائمة الطلاب المحظورين:',
-        broadcastList: 'التنبيهات النشطة:'
+        pinMessage: 'تثبيت الإعلان',
+        pinnedBadge: '📌 إعلان مثبت',
+        sheetLecturesHeader: '📚 شيت حضور المحاضرات (Dr)',
+        sheetSectionsHeader: '👥 شيت حضور السكاشن والمعامل (Eng)',
+        sheetTasksHeader: '📋 شيت تسليم الأنشطة والكويزات (Tasks & Quizzes)',
+        attended: 'حضر ✓',
+        absent: 'غائب ❌',
+        submitted: 'تم التسليم ✓',
+        notSubmitted: 'لم يسلم ❌',
+        taskLabel: 'نوع التسليم:',
+        editModalTitle: '✏️ تعديل حصة/جلسة في الجدول',
+        addModalTitle: '➕ إضافة حصة/جلسة جديدة للجدول',
+        subjectName: 'اسم المادة:',
+        instructorName: 'اسم المحاضر/المعيد:',
+        locationName: 'القاعة/المعمل:',
+        timeSlot: 'التوقيت:',
+        sessionType: 'نوع الجلسة:',
+        lectureType: 'محاضرة (Dr)',
+        sectionType: 'سكشن/معمل (Eng)',
+        dayLabel: 'اليوم الدراسي:',
+        saveBtn: 'حفظ التغييرات 💾',
+        deleteBtn: 'حذف من الجدول 🗑️',
+        addNewSlotBtn: '➕ إضافة حصة جديدة في هذا اليوم',
+        adminNotice: '⚙️ لوحة الأدمن - التحكم التام في الجداول والتنبيهات',
+        bannedNotice: 'عذراً، هذا الحساب محظور من الدخول للمنصة.'
       },
       en: {
         title: 'Helwan International Technological University',
-        fullName: 'Full Name:',
-        nid: 'National ID (14 digits):',
-        dept: 'Department:',
-        sec: 'Section / Group:',
-        enterBtn: 'Enter Platform & View Schedule 🚀',
-        scheduleTab: '📅 Schedule',
-        chatTab: '💬 Department Chat',
-        settingsTab: '⚙️ Settings & Attendance',
-        adminTab: '🔑 Admin Dashboard',
+        subTitle: 'Faculty of Technology in Cairo - HITU',
+        fullName: 'Full Student Name:',
+        nid: 'National ID (14 Digits):',
+        dept: 'Academic Department:',
+        sec: 'Section / Group No:',
+        enterBtn: 'Enter Interactive Platform 🚀',
+        scheduleTab: '📅 Academic Schedule',
+        studentSheetTab: '📝 Attendance & Submissions Sheet',
+        chatTab: '💬 Batch Chat',
+        settingsTab: '⚙️ Settings & Themes',
+        adminTab: '🔑 Admin Panel (Edit Timetable)',
         logout: 'Logout',
         selectDay: 'Select Day:',
-        allDays: 'Show All Days',
-        searchPlaceholder: '🔍 Search by subject, instructor, or room...',
-        lecturesHeader: '📚 Lectures (Dr):',
-        sectionsHeader: '👥 Sections (Eng):',
-        attendanceTitle: '📊 Student Weekly Attendance Sheet:',
-        attendance: 'Attendance Status:',
-        attended: 'Attended ✓',
-        notAttended: 'Not Attended ❌',
-        dayOff: '🌴 Day Off',
-        place: 'Exact Location & Room:',
-        doc: 'Instructor / TA:',
-        send: 'Send',
-        recVoice: '🎤 Voice Note',
+        allDays: 'All Week Days',
+        searchPlaceholder: '🔍 Search course, instructor, or room...',
+        lecturesHeader: '📚 Theoretical Lectures (Dr):',
+        sectionsHeader: '👥 Practical Sections & Labs (Eng):',
+        dayOff: '🌴 Official Day Off',
+        place: 'Room / Lab:',
+        doc: 'Doctor / TA:',
+        send: 'Send Message',
+        recVoice: '🎤 Record Voice Note',
         recStop: '⏹️ Stop & Send',
-        pinMessage: 'Pin Message',
-        pinnedBadge: '📌 Pinned',
-        settingsHeader: '⚙️ Student Settings, Language, Themes & Attendance:',
-        langLabel: 'Choose Platform Language:',
-        themeLabel: 'Choose Theme (Light / Dark):',
-        adminTitle: '⚙️ Admin Dashboard - Shrouk Samir (252)',
-        banSection: '🚫 Ban & User Management',
-        banPlaceholder: 'Enter student name to ban...',
-        banBtn: 'Ban Student',
-        broadcastSection: '📢 Doctor Notices & Announcements',
-        broadcastPlaceholder: 'Write an important notice...',
-        broadcastBtn: 'Publish Notice',
-        bannedList: 'Banned Students:',
-        broadcastList: 'Active Notices:'
+        pinMessage: 'Pin Announcement',
+        pinnedBadge: '📌 Pinned Notice',
+        sheetLecturesHeader: '📚 Lectures Attendance Sheet (Dr)',
+        sheetSectionsHeader: '👥 Practical Sections Attendance Sheet (Eng)',
+        sheetTasksHeader: '📋 Tasks & Quizzes Submission Sheet',
+        attended: 'Attended ✓',
+        absent: 'Absent ❌',
+        submitted: 'Submitted ✓',
+        notSubmitted: 'Not Submitted ❌',
+        taskLabel: 'Submission Type:',
+        editModalTitle: '✏️ Edit Schedule Slot',
+        addModalTitle: '➕ Add New Schedule Slot',
+        subjectName: 'Course Title:',
+        instructorName: 'Instructor / TA Name:',
+        locationName: 'Room / Lab Location:',
+        timeSlot: 'Time Interval:',
+        sessionType: 'Session Type:',
+        lectureType: 'Lecture (Dr)',
+        sectionType: 'Section / Lab (Eng)',
+        dayLabel: 'Day of Week:',
+        saveBtn: 'Save Changes 💾',
+        deleteBtn: 'Delete Slot 🗑️',
+        addNewSlotBtn: '➕ Add New Slot on This Day',
+        adminNotice: '⚙️ Admin Panel - Complete Timetable & User Control',
+        bannedNotice: 'Sorry, your account has been suspended.'
       },
       it: {
         title: 'Università Tecnologica Internazionale di Helwan',
-        fullName: 'Nome Completo:',
-        nid: 'Carta d\'Identità (14 cifre):',
-        dept: 'Dipartimento:',
-        sec: 'Sezione / Gruppo:',
-        enterBtn: 'Entra e Visualizza Orario 🚀',
-        scheduleTab: '📅 Orario',
-        chatTab: '💬 Chat',
-        settingsTab: '⚙️ Impostazioni e Presenze',
-        adminTab: '🔑 Admin Dashboard',
-        logout: 'Esci',
+        subTitle: 'Facoltà di Tecnologia a Il Cairo - HITU',
+        fullName: 'Nome Completo dello Studente:',
+        nid: 'Codice Fiscale (14 Cifre):',
+        dept: 'Dipartimento Accademico:',
+        sec: 'Numero Sezione / Gruppo:',
+        enterBtn: 'Accedi alla Piattaforma 🚀',
+        scheduleTab: '📅 Orario Accademico',
+        studentSheetTab: '📝 Registro Presenze e Consegne',
+        chatTab: '💬 Chat del Corso',
+        settingsTab: '⚙️ Impostazioni e Temi',
+        adminTab: '🔑 Pannello Admin (Modifica Orario)',
+        logout: 'Disconnettiti',
         selectDay: 'Seleziona Giorno:',
-        allDays: 'Tutti i Giorni',
-        searchPlaceholder: '🔍 Cerca per materia, docente o aula...',
-        lecturesHeader: '📚 Lezioni (Dr):',
-        sectionsHeader: '👥 Sezioni (Eng):',
-        attendanceTitle: '📊 Foglio Presenze Settimanali:',
-        attendance: 'Stato Presenza:',
-        attended: 'Presente ✓',
-        notAttended: 'Assente ❌',
-        dayOff: '🌴 Giorno di Riposo',
-        place: 'Luogo e Aula Esatta:',
-        doc: 'Docente / TA:',
-        send: 'Invia',
-        recVoice: '🎤 Nota Vocale',
+        allDays: 'Tutti i Giorni della Settimana',
+        searchPlaceholder: '🔍 Cerca corso, docente o aula...',
+        lecturesHeader: '📚 Lezioni Teoriche (Dr):',
+        sectionsHeader: '👥 Laboratori e Esercitazioni (Eng):',
+        dayOff: '🌴 Giorno di Riposo Ufficiale',
+        place: 'Aula / Laboratorio:',
+        doc: 'Docente / Tutor:',
+        send: 'Invia Messaggio',
+        recVoice: '🎤 Registra Nota Vocale',
         recStop: '⏹️ Ferma e Invia',
-        pinMessage: 'Fissa per Admin',
-        pinnedBadge: '📌 Fissato',
-        adminTitle: '⚙️ Dashboard Admin - Shrouk Samir (252)',
-        banSection: '🚫 Gestione Blocchi Utenti',
-        banPlaceholder: 'Nome studente da bloccare...',
-        banBtn: 'Blocca Studente',
-        broadcastSection: '📢 Avvisi Docenti',
-        broadcastPlaceholder: 'Scrivi un avviso...',
-        broadcastBtn: 'Pubblica Avviso',
-        bannedList: 'Studenti Bloccati:',
-        broadcastList: 'Avvisi Attivi:'
+        pinMessage: 'Fissa Avviso',
+        pinnedBadge: '📌 Avviso Fissato',
+        sheetLecturesHeader: '📚 Registro Presenze Lezioni (Dr)',
+        sheetSectionsHeader: '👥 Registro Presenze Laboratori (Eng)',
+        sheetTasksHeader: '📋 Registro Consegna Compiti e Quiz',
+        attended: 'Presente ✓',
+        absent: 'Assente ❌',
+        submitted: 'Consegnato ✓',
+        notSubmitted: 'Non Consegnato ❌',
+        taskLabel: 'Tipo di Consegna:',
+        editModalTitle: '✏️ Modifica Sessione Orario',
+        addModalTitle: '➕ Aggiungi Nuova Sessione',
+        subjectName: 'Titolo del Corso:',
+        instructorName: 'Nome Docente / Tutor:',
+        locationName: 'Aula / Laboratorio:',
+        timeSlot: 'Orario:',
+        sessionType: 'Tipo Sessione:',
+        lectureType: 'Lezione (Dr)',
+        sectionType: 'Laboratorio (Eng)',
+        dayLabel: 'Giorno della Settimana:',
+        saveBtn: 'Salva Modifiche 💾',
+        deleteBtn: 'Elimina Sessione 🗑️',
+        addNewSlotBtn: '➕ Aggiungi Nuova Sessione Oggi',
+        adminNotice: '⚙️ Pannello Admin - Controllo Completo Orari e Avvisi',
+        bannedNotice: 'Spiacenti, il tuo account è stato sospeso.'
       }
     };
 
     function App() {
+      const [departments, setDepartments] = useState(initialDepartmentsData);
       const [user, setUser] = useState(null);
       const [theme, setTheme] = useState('dark');
       const [language, setLanguage] = useState('ar');
@@ -480,10 +575,19 @@
 
       const [selectedDayFilter, setSelectedDayFilter] = useState('all');
       const [searchQuery, setSearchQuery] = useState('');
-      const [attendanceMap, setAttendanceMap] = useState({});
 
+      // حالة شيت الحضور والأنشطة
+      const [lectureAttendance, setLectureAttendance] = useState({});
+      const [sectionAttendance, setSectionAttendance] = useState({});
+      const [taskSubmissions, setTaskSubmissions] = useState({
+        'sheet_1': { title: 'Sheet 1 - Fundamentals', status: true, type: 'Sheet' },
+        'task_1': { title: 'Task 1 - Practical Lab Report', status: false, type: 'Task' },
+        'quiz_1': { title: 'Mid-Term Quiz 1', status: true, type: 'Quiz' }
+      });
+
+      // المحادثات والتنبيهات
       const [messages, setMessages] = useState([
-        { id: 1, dept: 'تحكم صناعي', user: 'شروق سمير (الأدمن)', text: 'أهلاً بكم في المنصة الرسمية لجدول الكلية.', isPinned: true, type: 'text', time: '10:00 AM' }
+        { id: 1, dept: 'تحكم صناعي', user: 'شروق سمير (الأدمن)', text: 'أهلاً بكم في المنصة المحدثة 2026/2027.', isPinned: true, type: 'text', time: '10:00 AM' }
       ]);
       const [newMessage, setNewMessage] = useState('');
       const [isPinnedMsg, setIsPinnedMsg] = useState(false);
@@ -491,9 +595,22 @@
       const [bannedUsers, setBannedUsers] = useState([]);
       const [banInput, setBanInput] = useState('');
       const [broadcasts, setBroadcasts] = useState([
-        { id: 1, text: 'تنبيه هام من إدارة الكلية والدكاترة: يرجى الالتزام التام بالمواعيد وقاعات المحاضرات والسكاشن.' }
+        { id: 1, text: 'تنبيه هام من الكلية: الالتزام التام بالتسجيل في السكاشن والمناوبات المقررة.' }
       ]);
       const [broadcastInput, setBroadcastInput] = useState('');
+
+      // التعديل والإضافة من قبل الأدمن
+      const [editingItem, setEditingItem] = useState(null);
+      const [addingDay, setAddingDay] = useState(null);
+
+      const [editFormData, setEditFormData] = useState({
+        subject: '',
+        doc: '',
+        place: '',
+        time: '',
+        type: 'lecture', // lecture OR section
+        day: 'السبت'
+      });
 
       const [isRecording, setIsRecording] = useState(false);
       const mediaRecorderRef = useRef(null);
@@ -508,7 +625,7 @@
       }, [theme]);
 
       const dict = dictionary[language] || dictionary.ar;
-      const currentDeptData = departmentsData[user ? user.department : inputDept];
+      const currentDeptData = departments[user ? user.department : inputDept];
       const deptTheme = currentDeptData.theme;
 
       const handleLogin = (e) => {
@@ -519,7 +636,7 @@
         }
 
         if (bannedUsers.includes(inputName.trim())) {
-          alert('عذراً، هذا الحساب محظور من دخول المنصة.');
+          alert(dict.bannedNotice);
           return;
         }
 
@@ -533,18 +650,101 @@
         });
       };
 
-      const handleBanUser = (e) => {
-        e.preventDefault();
-        if (!banInput.trim()) return;
-        setBannedUsers([...bannedUsers, banInput.trim()]);
-        setBanInput('');
+      // عمليات الأدمن: إضافة وتعديل وحذف
+      const openEditModal = (day, item, type) => {
+        setEditingItem({ day, id: item.id, type });
+        setEditFormData({
+          subject: item.subject,
+          doc: item.doc,
+          place: item.place,
+          time: item.time,
+          type: type,
+          day: day
+        });
       };
 
-      const handleAddBroadcast = (e) => {
+      const openAddModal = (day) => {
+        setAddingDay(day);
+        setEditFormData({
+          subject: '',
+          doc: '',
+          place: '',
+          time: '09:00 - 10:00',
+          type: 'lecture',
+          day: day
+        });
+      };
+
+      const handleSaveSlot = (e) => {
         e.preventDefault();
-        if (!broadcastInput.trim()) return;
-        setBroadcasts([...broadcasts, { id: Date.now(), text: broadcastInput.trim() }]);
-        setBroadcastInput('');
+        const deptKey = user.department;
+        const targetDay = editFormData.day;
+
+        setDepartments(prev => {
+          const updated = JSON.parse(JSON.stringify(prev));
+          let dayObj = updated[deptKey].schedule[targetDay];
+          if (typeof dayObj === 'string') {
+            dayObj = { lectures: [], sections: [] };
+            updated[deptKey].schedule[targetDay] = dayObj;
+          }
+
+          if (editingItem) {
+            // حذف النسخة القديمة
+            dayObj.lectures = dayObj.lectures.filter(l => l.id !== editingItem.id);
+            dayObj.sections = dayObj.sections.filter(s => s.id !== editingItem.id);
+
+            const newItem = {
+              id: editingItem.id,
+              subject: editFormData.subject,
+              doc: editFormData.doc,
+              place: editFormData.place,
+              time: editFormData.time
+            };
+
+            if (editFormData.type === 'lecture') {
+              dayObj.lectures.push(newItem);
+            } else {
+              dayObj.sections.push(newItem);
+            }
+          } else if (addingDay) {
+            const newItem = {
+              id: 'custom_' + Date.now(),
+              subject: editFormData.subject,
+              doc: editFormData.doc,
+              place: editFormData.place,
+              time: editFormData.time
+            };
+
+            if (editFormData.type === 'lecture') {
+              dayObj.lectures.push(newItem);
+            } else {
+              dayObj.sections.push(newItem);
+            }
+          }
+
+          return updated;
+        });
+
+        setEditingItem(null);
+        setAddingDay(null);
+      };
+
+      const handleDeleteSlot = () => {
+        if (!editingItem) return;
+        const deptKey = user.department;
+        const targetDay = editingItem.day;
+
+        setDepartments(prev => {
+          const updated = JSON.parse(JSON.stringify(prev));
+          const dayObj = updated[deptKey].schedule[targetDay];
+          if (dayObj && typeof dayObj !== 'string') {
+            dayObj.lectures = dayObj.lectures.filter(l => l.id !== editingItem.id);
+            dayObj.sections = dayObj.sections.filter(s => s.id !== editingItem.id);
+          }
+          return updated;
+        });
+
+        setEditingItem(null);
       };
 
       const startRecording = async () => {
@@ -604,81 +804,81 @@
         setIsPinnedMsg(false);
       };
 
-      const toggleAttendance = (lectureId) => {
-        setAttendanceMap(prev => ({ ...prev, [lectureId]: !prev[lectureId] }));
-      };
-
       if (!user) {
         return (
           <div className="min-h-screen flex items-center justify-center p-4 font-sans text-right transition-colors bg-slate-950 text-slate-100" dir={language === 'en' ? 'ltr' : 'rtl'}>
-            <div className="w-full max-w-md p-8 border rounded-3xl shadow-2xl bg-white text-slate-900 border-slate-200 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-800">
+            <div className="w-full max-w-lg p-8 border rounded-3xl shadow-2xl bg-slate-900 border-slate-800 text-slate-100">
               
-              <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
-                  <button onClick={() => setLanguage('ar')} className={`px-2.5 py-1 text-xs rounded-lg font-bold transition ${language === 'ar' ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400'}`}>عربي</button>
-                  <button onClick={() => setLanguage('en')} className={`px-2.5 py-1 text-xs rounded-lg font-bold transition ${language === 'en' ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400'}`}>EN</button>
-                  <button onClick={() => setLanguage('it')} className={`px-2.5 py-1 text-xs rounded-lg font-bold transition ${language === 'it' ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400'}`}>IT</button>
+              <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-800">
+                <div className="flex items-center gap-1.5 bg-slate-800 p-1 rounded-xl border border-slate-700">
+                  <button onClick={() => setLanguage('ar')} className={`px-3 py-1 text-xs rounded-lg font-bold transition ${language === 'ar' ? 'bg-emerald-600 text-white shadow' : 'text-slate-400'}`}>عربي</button>
+                  <button onClick={() => setLanguage('en')} className={`px-3 py-1 text-xs rounded-lg font-bold transition ${language === 'en' ? 'bg-emerald-600 text-white shadow' : 'text-slate-400'}`}>EN</button>
+                  <button onClick={() => setLanguage('it')} className={`px-3 py-1 text-xs rounded-lg font-bold transition ${language === 'it' ? 'bg-emerald-600 text-white shadow' : 'text-slate-400'}`}>IT</button>
                 </div>
 
-                <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold transition">
+                <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="px-3.5 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold transition">
                   {theme === 'dark' ? '☀️ فاتح' : '🌙 داكن'}
                 </button>
               </div>
 
-              <div className="text-center mb-6">
-                <div className="bg-emerald-600 text-white w-14 h-14 rounded-full inline-flex items-center justify-center mb-3 shadow-lg font-bold text-xl">HTU</div>
-                <h1 className="text-xl font-bold">{dict.title}</h1>
-                <p className="text-xs text-slate-500 mt-1">منصة الجداول الأكاديمية الذكية 2026/2027</p>
+              {/* شعار الكلية والجامعة بشكل أضخم وأجمل */}
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-indigo-600 text-white shadow-2xl mb-4 border-4 border-slate-800 transform hover:scale-105 transition-transform">
+                  <span className="font-black text-3xl tracking-tighter">HITU</span>
+                </div>
+                <h1 className="text-2xl font-black text-white">{dict.title}</h1>
+                <p className="text-xs font-extrabold text-emerald-400 mt-1">{dict.subTitle}</p>
+                <p className="text-[11px] text-slate-400 mt-1">العام الدراسي الرسمي 2026/2027 - الفصل الدراسي الأول</p>
               </div>
 
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold mb-1">{dict.fullName}</label>
+                  <label className="block text-xs font-bold mb-1.5">{dict.fullName}</label>
                   <input 
                     type="text" 
                     required
                     placeholder="الاسم الثلاثي..."
                     value={inputName}
                     onChange={(e) => setInputName(e.target.value)}
-                    className="w-full px-4 py-2.5 border rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border rounded-xl bg-slate-800 border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1">{dict.nid}</label>
+                  <label className="block text-xs font-bold mb-1.5">{dict.nid}</label>
                   <input 
                     type="text" 
                     required
                     maxLength="14"
-                    placeholder="14 digits..."
+                    placeholder="14 رقماً..."
                     value={inputNid}
                     onChange={(e) => setInputNid(e.target.value)}
-                    className="w-full px-4 py-2.5 border rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border rounded-xl bg-slate-800 border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1">{dict.dept}</label>
+                  <label className="block text-xs font-bold mb-1.5">{dict.dept}</label>
                   <select 
                     value={inputDept}
                     onChange={(e) => {
                       setInputDept(e.target.value);
                       setInputSection('1');
                     }}
-                    className="w-full px-4 py-2.5 border rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-sm focus:outline-none"
+                    className="w-full px-4 py-3 border rounded-xl bg-slate-800 border-slate-700 text-white text-sm focus:outline-none"
                   >
-                    {Object.keys(departmentsData).map((dept) => (
-                      <option key={dept} value={dept}>{dept} {departmentsData[dept].icon}</option>
+                    {Object.keys(departments).map((dept) => (
+                      <option key={dept} value={dept}>{dept} {departments[dept].icon}</option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold mb-1">{dict.sec}</label>
+                  <label className="block text-xs font-bold mb-1.5">{dict.sec}</label>
                   <select 
                     value={inputSection}
                     onChange={(e) => setInputSection(e.target.value)}
-                    className="w-full px-4 py-2.5 border rounded-xl bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-sm focus:outline-none"
+                    className="w-full px-4 py-3 border rounded-xl bg-slate-800 border-slate-700 text-white text-sm focus:outline-none"
                   >
                     {[...Array(currentDeptData.sectionsCount)].map((_, i) => (
                       <option key={i+1} value={i+1}>
@@ -690,7 +890,7 @@
 
                 <button 
                   type="submit"
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow-lg text-sm mt-2"
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold py-3.5 rounded-xl transition shadow-xl text-sm mt-4"
                 >
                   {dict.enterBtn}
                 </button>
@@ -702,37 +902,49 @@
 
       return (
         <div className={`min-h-screen font-sans transition-colors duration-500 ${theme === 'dark' ? deptTheme.darkBg : deptTheme.lightBg}`} dir={language === 'en' ? 'ltr' : 'rtl'}>
-          <header className={`border-b sticky top-0 z-50 backdrop-blur-md ${theme === 'dark' ? 'bg-slate-900/90 border-slate-800' : 'bg-white/90 border-slate-200'}`}>
+          {/* Header العلوي الفخم */}
+          <header className={`border-b sticky top-0 z-50 backdrop-blur-md ${theme === 'dark' ? 'bg-slate-900/95 border-slate-800' : 'bg-white/95 border-slate-200 shadow-md'}`}>
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <h1 className={`font-extrabold text-base md:text-lg flex items-center gap-2 ${deptTheme.accent}`}>
-                  <span>{currentDeptData.icon}</span> {user.name}
-                </h1>
-                <p className="text-xs font-bold opacity-90">
-                  {language === 'en' ? currentDeptData.nameEn : language === 'it' && user.department === 'تحكم صناعي' ? currentDeptData.nameIt : user.department} — ({dict.sec} {user.section}) {user.isAdmin && '✨ (أدمن)'}
-                </p>
+              
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-indigo-600 text-white flex items-center justify-center font-black text-lg shadow-lg border-2 border-slate-700">
+                  HITU
+                </div>
+                <div>
+                  <h1 className={`font-black text-base md:text-lg flex items-center gap-2 ${deptTheme.accent}`}>
+                    <span>{currentDeptData.icon}</span> {user.name}
+                  </h1>
+                  <p className="text-xs font-extrabold opacity-80">
+                    {language === 'en' ? currentDeptData.nameEn : language === 'it' ? currentDeptData.nameIt : user.department} — ({dict.sec} {user.section}) {user.isAdmin && '👑 (الأدمن)'}
+                  </p>
+                </div>
               </div>
 
+              {/* الأزرار والتبويبات */}
               <div className="flex items-center gap-2 flex-wrap">
-                <button onClick={() => setActiveTab('schedule')} className={`px-3 py-1.5 rounded-xl text-sm font-bold transition ${activeTab === 'schedule' ? 'bg-emerald-600 text-white shadow-lg' : theme === 'dark' ? 'bg-slate-800' : 'bg-slate-200'}`}>
+                <button onClick={() => setActiveTab('schedule')} className={`px-3.5 py-2 rounded-xl text-xs md:text-sm font-extrabold transition ${activeTab === 'schedule' ? 'bg-emerald-600 text-white shadow-lg' : theme === 'dark' ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-800'}`}>
                   {dict.scheduleTab}
                 </button>
 
-                <button onClick={() => setActiveTab('chat')} className={`px-3 py-1.5 rounded-xl text-sm font-bold transition ${activeTab === 'chat' ? 'bg-emerald-600 text-white shadow-lg' : theme === 'dark' ? 'bg-slate-800' : 'bg-slate-200'}`}>
+                <button onClick={() => setActiveTab('studentSheet')} className={`px-3.5 py-2 rounded-xl text-xs md:text-sm font-extrabold transition ${activeTab === 'studentSheet' ? 'bg-teal-600 text-white shadow-lg' : theme === 'dark' ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-800'}`}>
+                  {dict.studentSheetTab}
+                </button>
+
+                <button onClick={() => setActiveTab('chat')} className={`px-3.5 py-2 rounded-xl text-xs md:text-sm font-extrabold transition ${activeTab === 'chat' ? 'bg-indigo-600 text-white shadow-lg' : theme === 'dark' ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-800'}`}>
                   {dict.chatTab}
                 </button>
 
-                <button onClick={() => setActiveTab('settings')} className={`px-3 py-1.5 rounded-xl text-sm font-bold transition ${activeTab === 'settings' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-200'}`}>
+                <button onClick={() => setActiveTab('settings')} className={`px-3.5 py-2 rounded-xl text-xs md:text-sm font-extrabold transition ${activeTab === 'settings' ? 'bg-purple-600 text-white shadow-lg' : theme === 'dark' ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-800'}`}>
                   {dict.settingsTab}
                 </button>
 
                 {user.isAdmin && (
-                  <button onClick={() => setActiveTab('admin')} className={`px-3 py-1.5 rounded-xl text-sm font-bold transition ${activeTab === 'admin' ? 'bg-amber-600 text-white shadow-lg' : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200'}`}>
+                  <button onClick={() => setActiveTab('admin')} className={`px-3.5 py-2 rounded-xl text-xs md:text-sm font-extrabold transition ${activeTab === 'admin' ? 'bg-amber-600 text-white shadow-lg animate-pulse' : 'bg-amber-500/20 text-amber-500 border border-amber-500/40'}`}>
                     {dict.adminTab}
                   </button>
                 )}
 
-                <button onClick={() => setUser(null)} className="text-xs px-3 py-1.5 rounded-xl bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300 font-bold">
+                <button onClick={() => setUser(null)} className="text-xs px-3 py-2 rounded-xl bg-rose-600/20 text-rose-500 border border-rose-500/30 font-bold">
                   {dict.logout}
                 </button>
               </div>
@@ -740,20 +952,25 @@
           </header>
 
           <main className="max-w-7xl mx-auto px-4 py-6">
+            
+            {/* التنبيهات المباشرة */}
             {broadcasts.length > 0 && (
-              <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-300 text-xs md:text-sm font-bold flex flex-col gap-1 shadow-lg">
-                <span>📢 تنبيهات الدكاترة والأقسام الرسمية:</span>
+              <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-500 text-xs md:text-sm font-bold flex flex-col gap-1.5 shadow-lg backdrop-blur-md">
+                <span className="flex items-center gap-2 font-black">📢 تنبيهات وإعلانات القسم الرسمية:</span>
                 {broadcasts.map(b => (
-                  <p key={b.id} className="font-normal">• {b.text}</p>
+                  <p key={b.id} className="font-semibold text-slate-200 dark:text-slate-300 opacity-90">• {b.text}</p>
                 ))}
               </div>
             )}
 
+            {/* TAB 1: الجدول الأكاديمي */}
             {activeTab === 'schedule' && (
               <div className="space-y-6">
+                
+                {/* شريط البحث وتصفية الأيام */}
                 <div className={`p-5 rounded-2xl border shadow-xl backdrop-blur-md flex flex-wrap items-center justify-between gap-4 ${theme === 'dark' ? 'bg-slate-900/90 border-slate-800' : 'bg-white/90 border-slate-200'}`}>
                   <div>
-                    <h2 className={`font-extrabold text-xl flex items-center gap-2 ${deptTheme.accent}`}>
+                    <h2 className={`font-black text-xl flex items-center gap-2 ${deptTheme.accent}`}>
                       <span>{currentDeptData.icon}</span> {language === 'en' ? currentDeptData.nameEn : user.department}
                     </h2>
                     <p className="text-xs font-bold opacity-80 mt-1">{dict.sec}: ({user.section})</p>
@@ -766,11 +983,8 @@
                         placeholder={dict.searchPlaceholder}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className={`w-full px-4 py-2 border rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 ${theme === 'dark' ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-500'}`}
+                        className={`w-full px-4 py-2.5 border rounded-xl text-xs md:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 ${theme === 'dark' ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-500'}`}
                       />
-                      {searchQuery && (
-                        <button onClick={() => setSearchQuery('')} className="absolute left-3 top-2.5 text-xs text-slate-400 font-bold">✕</button>
-                      )}
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -778,7 +992,7 @@
                       <select 
                         value={selectedDayFilter} 
                         onChange={(e) => setSelectedDayFilter(e.target.value)}
-                        className={`px-4 py-2 border rounded-xl text-sm font-extrabold ${deptTheme.accent} focus:outline-none ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}
+                        className={`px-4 py-2.5 border rounded-xl text-xs md:text-sm font-black ${deptTheme.accent} focus:outline-none ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}
                       >
                         <option value="all">{dict.allDays}</option>
                         {Object.keys(currentDeptData.schedule).map(day => (
@@ -789,7 +1003,8 @@
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {/* عرض الأيام والجداول */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {Object.entries(currentDeptData.schedule)
                     .filter(([day]) => selectedDayFilter === 'all' || day === selectedDayFilter)
                     .map(([day, dayContent]) => {
@@ -797,82 +1012,88 @@
 
                       return (
                         <div key={day} className={`rounded-2xl border p-5 shadow-2xl backdrop-blur-md transition-all ${theme === 'dark' ? deptTheme.cardDark : deptTheme.cardLight}`}>
+                          
                           <div className={`flex justify-between items-center mb-4 pb-3 border-b ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
-                            <h3 className={`font-extrabold text-xl ${deptTheme.accent}`}>{day}</h3>
-                            <span className={`text-xs px-3 py-1 rounded-lg font-bold ${theme === 'dark' ? 'bg-slate-800 text-slate-200' : 'bg-slate-100 text-slate-800'}`}>{dict.sec} {user.section}</span>
+                            <h3 className={`font-black text-xl ${deptTheme.accent}`}>{day}</h3>
+                            <div className="flex items-center gap-2">
+                              {user.isAdmin && (
+                                <button onClick={() => openAddModal(day)} className="px-2.5 py-1 text-[11px] rounded-lg font-bold bg-amber-600 text-white shadow hover:bg-amber-500">
+                                  {dict.addNewSlotBtn}
+                                </button>
+                              )}
+                              <span className={`text-xs px-2.5 py-1 rounded-lg font-bold ${theme === 'dark' ? 'bg-slate-800 text-slate-200' : 'bg-slate-100 text-slate-800'}`}>{dict.sec} {user.section}</span>
+                            </div>
                           </div>
 
                           {isOffDay ? (
-                            <div className={`py-12 text-center rounded-xl border border-dashed ${theme === 'dark' ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-300'}`}>
-                              <span className={`font-extrabold text-lg ${deptTheme.accent}`}>{dict.dayOff}</span>
+                            <div className={`py-12 text-center rounded-2xl border border-dashed ${theme === 'dark' ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-300'}`}>
+                              <span className={`font-black text-base ${deptTheme.accent}`}>{dict.dayOff}</span>
                             </div>
                           ) : (
-                            <div className="space-y-6">
-                              {/* المحاضرات Dr */}
+                            <div className="space-y-5">
+                              
+                              {/* المحاضرات النظرية Dr */}
                               <div>
-                                <h4 className="text-xs font-black uppercase text-amber-500 mb-3 tracking-wider">{dict.lecturesHeader}</h4>
+                                <h4 className="text-xs font-black uppercase text-amber-500 mb-3 tracking-wider flex items-center justify-between">
+                                  <span>{dict.lecturesHeader}</span>
+                                </h4>
                                 {dayContent.lectures && dayContent.lectures.length > 0 ? (
                                   <div className="space-y-3">
-                                    {dayContent.lectures.map((item) => {
-                                      const isChecked = attendanceMap[item.id] || false;
-                                      return (
-                                        <div key={item.id} className={`p-3.5 rounded-xl border transition shadow-sm ${isChecked ? (theme === 'dark' ? 'bg-emerald-950/40 border-emerald-500/60' : 'bg-emerald-50 border-emerald-300') : (theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-300')}`}>
+                                    {dayContent.lectures
+                                      .filter(item => !searchQuery || item.subject.toLowerCase().includes(searchQuery.toLowerCase()) || item.doc.toLowerCase().includes(searchQuery.toLowerCase()))
+                                      .map((item) => (
+                                        <div key={item.id} className={`p-4 rounded-xl border transition shadow-md relative ${theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                                          {user.isAdmin && (
+                                            <button onClick={() => openEditModal(day, item, 'lecture')} className="absolute top-3 left-3 text-[11px] px-2 py-0.5 rounded bg-amber-600 text-white font-bold">✏️ تعديل</button>
+                                          )}
                                           <div className="flex justify-between items-start mb-1.5">
-                                            <span className="text-[10px] px-2 py-0.5 rounded font-black bg-amber-500 text-slate-950">محاضرة Dr</span>
-                                            <span className="text-xs font-bold opacity-80">⏰ {item.time}</span>
+                                            <span className="text-[10px] px-2.5 py-0.5 rounded-md font-black bg-amber-500 text-slate-950">محاضرة Dr</span>
+                                            <span className="text-xs font-extrabold opacity-80">⏰ {item.time}</span>
                                           </div>
-                                          <h5 className="font-extrabold text-xs leading-relaxed">{item.subject}</h5>
-                                          <div className={`flex flex-col gap-0.5 text-[11px] font-semibold opacity-90 mt-2 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
-                                            <span>👨‍🏫 {item.doc}</span>
-                                            <span>📍 {item.place}</span>
-                                          </div>
-                                          <div className={`mt-2 pt-2 border-t flex justify-between items-center ${theme === 'dark' ? 'border-slate-800/80' : 'border-slate-200'}`}>
-                                            <span className="text-[10px] font-bold opacity-80">{dict.attendance}</span>
-                                            <button onClick={() => toggleAttendance(item.id)} className={`text-[11px] px-2.5 py-1 rounded-lg font-bold transition shadow ${isChecked ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-300'}`}>
-                                              {isChecked ? dict.attended : dict.notAttended}
-                                            </button>
+                                          <h5 className="font-black text-xs md:text-sm leading-relaxed text-slate-100 dark:text-slate-100">{item.subject}</h5>
+                                          <div className={`flex flex-col gap-1 text-[11px] font-bold opacity-90 mt-2.5 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
+                                            <span>👨‍🏫 {dict.doc} {item.doc}</span>
+                                            <span>📍 {dict.place} {item.place}</span>
                                           </div>
                                         </div>
-                                      );
-                                    })}
+                                      ))}
                                   </div>
                                 ) : (
-                                  <p className="text-xs opacity-50 italic">لا توجد محاضرات في هذا اليوم.</p>
+                                  <p className="text-xs opacity-50 italic">لا توجد محاضرات نظري في هذا اليوم.</p>
                                 )}
                               </div>
 
-                              {/* السكاشن Eng */}
+                              {/* السكاشن والمعامل Eng */}
                               <div>
-                                <h4 className="text-xs font-black uppercase text-indigo-500 mb-3 tracking-wider">{dict.sectionsHeader}</h4>
+                                <h4 className="text-xs font-black uppercase text-indigo-400 mb-3 tracking-wider flex items-center justify-between">
+                                  <span>{dict.sectionsHeader}</span>
+                                </h4>
                                 {dayContent.sections && dayContent.sections.length > 0 ? (
                                   <div className="space-y-3">
-                                    {dayContent.sections.map((item) => {
-                                      const isChecked = attendanceMap[item.id] || false;
-                                      return (
-                                        <div key={item.id} className={`p-3.5 rounded-xl border transition shadow-sm ${isChecked ? (theme === 'dark' ? 'bg-emerald-950/40 border-emerald-500/60' : 'bg-emerald-50 border-emerald-300') : (theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-300')}`}>
+                                    {dayContent.sections
+                                      .filter(item => !searchQuery || item.subject.toLowerCase().includes(searchQuery.toLowerCase()) || item.doc.toLowerCase().includes(searchQuery.toLowerCase()))
+                                      .map((item) => (
+                                        <div key={item.id} className={`p-4 rounded-xl border transition shadow-md relative ${theme === 'dark' ? 'bg-slate-950/80 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                                          {user.isAdmin && (
+                                            <button onClick={() => openEditModal(day, item, 'section')} className="absolute top-3 left-3 text-[11px] px-2 py-0.5 rounded bg-amber-600 text-white font-bold">✏️ تعديل</button>
+                                          )}
                                           <div className="flex justify-between items-start mb-1.5">
-                                            <span className="text-[10px] px-2 py-0.5 rounded font-black bg-indigo-600 text-white">سكشن Eng</span>
-                                            <span className="text-xs font-bold opacity-80">⏰ {item.time}</span>
+                                            <span className="text-[10px] px-2.5 py-0.5 rounded-md font-black bg-indigo-600 text-white">سكشن Eng</span>
+                                            <span className="text-xs font-extrabold opacity-80">⏰ {item.time}</span>
                                           </div>
-                                          <h5 className="font-extrabold text-xs leading-relaxed">{item.subject}</h5>
-                                          <div className={`flex flex-col gap-0.5 text-[11px] font-semibold opacity-90 mt-2 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
-                                            <span>👨‍🏫 {item.doc}</span>
-                                            <span>📍 {item.place}</span>
-                                          </div>
-                                          <div className={`mt-2 pt-2 border-t flex justify-between items-center ${theme === 'dark' ? 'border-slate-800/80' : 'border-slate-200'}`}>
-                                            <span className="text-[10px] font-bold opacity-80">{dict.attendance}</span>
-                                            <button onClick={() => toggleAttendance(item.id)} className={`text-[11px] px-2.5 py-1 rounded-lg font-bold transition shadow ${isChecked ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-300'}`}>
-                                              {isChecked ? dict.attended : dict.notAttended}
-                                            </button>
+                                          <h5 className="font-black text-xs md:text-sm leading-relaxed text-slate-100 dark:text-slate-100">{item.subject}</h5>
+                                          <div className={`flex flex-col gap-1 text-[11px] font-bold opacity-90 mt-2.5 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
+                                            <span>👨‍🏫 {dict.doc} {item.doc}</span>
+                                            <span>📍 {dict.place} {item.place}</span>
                                           </div>
                                         </div>
-                                      );
-                                    })}
+                                      ))}
                                   </div>
                                 ) : (
-                                  <p className="text-xs opacity-50 italic">لا توجد سكاشن في هذا اليوم.</p>
+                                  <p className="text-xs opacity-50 italic">لا توجد سكاشن عملية في هذا اليوم.</p>
                                 )}
                               </div>
+
                             </div>
                           )}
                         </div>
@@ -882,42 +1103,105 @@
               </div>
             )}
 
-            {activeTab === 'settings' && (
-              <div className={`max-w-2xl mx-auto rounded-2xl border shadow-2xl p-6 space-y-6 ${theme === 'dark' ? 'bg-slate-900 border-slate-800 text-slate-100' : 'bg-white border-slate-200 text-slate-900'}`}>
-                <h2 className="text-xl font-extrabold pb-3 border-b border-slate-300 dark:border-slate-700">{dict.settingsHeader}</h2>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-bold">{dict.langLabel}</label>
-                  <div className="flex items-center gap-2">
-                    <button onClick={() => setLanguage('ar')} className={`px-4 py-2 text-xs rounded-xl font-extrabold transition ${language === 'ar' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-200 dark:bg-slate-800'}`}>العربية</button>
-                    <button onClick={() => setLanguage('en')} className={`px-4 py-2 text-xs rounded-xl font-extrabold transition ${language === 'en' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-200 dark:bg-slate-800'}`}>English</button>
-                    {user.department === 'تحكم صناعي' && (
-                      <button onClick={() => setLanguage('it')} className={`px-4 py-2 text-xs rounded-xl font-extrabold transition ${language === 'it' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-200 dark:bg-slate-800'}`}>Italiano</button>
-                    )}
+            {/* TAB 2: شيت الحضور والتسليمات المطور */}
+            {activeTab === 'studentSheet' && (
+              <div className="space-y-6 max-w-4xl mx-auto">
+                <div className={`p-6 rounded-2xl border shadow-2xl backdrop-blur-md ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  
+                  <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-800">
+                    <div>
+                      <h2 className={`font-black text-xl ${deptTheme.accent}`}>📝 شيت متابعة الطالب والتسليمات الأسبوعية</h2>
+                      <p className="text-xs font-bold text-slate-400 mt-1">الطالب: {user.name} | السكشن: ({user.section})</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="space-y-2 pt-4 border-t border-slate-300 dark:border-slate-700">
-                  <label className="block text-sm font-bold">{dict.themeLabel}</label>
-                  <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 border border-slate-400 dark:border-slate-600 text-sm font-extrabold transition shadow">
-                    {theme === 'dark' ? '☀️ التحويل إلى الوضع الفاتح' : '🌙 التحويل إلى الوضع الداكن'}
-                  </button>
-                </div>
-
-                <div className="space-y-3 pt-4 border-t border-slate-300 dark:border-slate-700">
-                  <h3 className="text-sm font-extrabold">{dict.attendanceTitle}</h3>
-                  <div className={`p-4 rounded-xl border text-xs font-semibold space-y-2 ${theme === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-300'}`}>
-                    <p>• إجمالي العناصر التي تم تحديدها كـ "حضر ✓": {Object.values(attendanceMap).filter(Boolean).length}</p>
-                    <p className="text-emerald-500 font-bold">✓ يتم تحديث شيت الحضور والغياب فوراً وبشكل تلقائي عند تفاعلك مع الجداول.</p>
+                  {/* 1. حضور المحاضرات */}
+                  <div className="space-y-4 mb-8">
+                    <h3 className="text-sm font-black text-amber-500 uppercase tracking-wider">{dict.sheetLecturesHeader}</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {Object.entries(currentDeptData.schedule).map(([day, content]) => {
+                        if (typeof content === 'string' || !content.lectures) return null;
+                        return content.lectures.map((lec) => {
+                          const status = lectureAttendance[lec.id] || false;
+                          return (
+                            <div key={lec.id} className={`p-3.5 rounded-xl border flex justify-between items-center transition ${status ? 'bg-emerald-950/30 border-emerald-500/50' : 'bg-slate-950/60 border-slate-800'}`}>
+                              <div>
+                                <span className="text-[10px] font-bold text-slate-400">{day} | {lec.time}</span>
+                                <h5 className="font-extrabold text-xs mt-0.5">{lec.subject}</h5>
+                              </div>
+                              <button 
+                                onClick={() => setLectureAttendance(prev => ({ ...prev, [lec.id]: !prev[lec.id] }))}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-black shadow transition ${status ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`}
+                              >
+                                {status ? dict.attended : dict.absent}
+                              </button>
+                            </div>
+                          );
+                        });
+                      })}
+                    </div>
                   </div>
+
+                  {/* 2. حضور السكاشن والمعامل */}
+                  <div className="space-y-4 mb-8">
+                    <h3 className="text-sm font-black text-indigo-400 uppercase tracking-wider">{dict.sheetSectionsHeader}</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {Object.entries(currentDeptData.schedule).map(([day, content]) => {
+                        if (typeof content === 'string' || !content.sections) return null;
+                        return content.sections.map((sec) => {
+                          const status = sectionAttendance[sec.id] || false;
+                          return (
+                            <div key={sec.id} className={`p-3.5 rounded-xl border flex justify-between items-center transition ${status ? 'bg-emerald-950/30 border-emerald-500/50' : 'bg-slate-950/60 border-slate-800'}`}>
+                              <div>
+                                <span className="text-[10px] font-bold text-slate-400">{day} | {sec.time}</span>
+                                <h5 className="font-extrabold text-xs mt-0.5">{sec.subject}</h5>
+                              </div>
+                              <button 
+                                onClick={() => setSectionAttendance(prev => ({ ...prev, [sec.id]: !prev[sec.id] }))}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-black shadow transition ${status ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`}
+                              >
+                                {status ? dict.attended : dict.absent}
+                              </button>
+                            </div>
+                          );
+                        });
+                      })}
+                    </div>
+                  </div>
+
+                  {/* 3. تسليم الشيتات والتاسكات والكويزات */}
+                  <div className="space-y-4">
+                    <h3 className="text-sm font-black text-teal-400 uppercase tracking-wider">{dict.sheetTasksHeader}</h3>
+                    <div className="space-y-3">
+                      {Object.entries(taskSubmissions).map(([key, task]) => (
+                        <div key={key} className={`p-4 rounded-xl border flex justify-between items-center transition ${task.status ? 'bg-teal-950/30 border-teal-500/50' : 'bg-slate-950/60 border-slate-800'}`}>
+                          <div>
+                            <span className="text-[10px] px-2 py-0.5 rounded font-black bg-teal-600 text-white">{task.type}</span>
+                            <h5 className="font-extrabold text-xs md:text-sm mt-1">{task.title}</h5>
+                          </div>
+                          <button 
+                            onClick={() => setTaskSubmissions(prev => ({
+                              ...prev,
+                              [key]: { ...prev[key], status: !prev[key].status }
+                            }))}
+                            className={`px-4 py-1.5 rounded-lg text-xs font-black shadow transition ${task.status ? 'bg-teal-600 text-white' : 'bg-slate-800 text-slate-300'}`}
+                          >
+                            {task.status ? dict.submitted : dict.notSubmitted}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               </div>
             )}
 
+            {/* TAB 3: شات الدفعة والملاحظات */}
             {activeTab === 'chat' && (
               <div className={`max-w-3xl mx-auto rounded-2xl border shadow-2xl overflow-hidden flex flex-col h-[75vh] ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
                 <div className={`p-4 text-white flex justify-between items-center shadow-lg ${deptTheme.badge}`}>
-                  <h3 className="font-extrabold">{dict.chatTab}: {user.department} {currentDeptData.icon}</h3>
+                  <h3 className="font-black text-sm md:text-base">{dict.chatTab}: {user.department} {currentDeptData.icon}</h3>
                 </div>
 
                 <div className="flex-1 p-4 overflow-y-auto space-y-3">
@@ -927,12 +1211,12 @@
                         <span className="text-xs font-bold opacity-80">{msg.user}</span>
                         <span className="text-[10px] opacity-60">{msg.time}</span>
                         {msg.isPinned && (
-                          <span className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 text-[10px] px-2 py-0.5 rounded font-extrabold border border-amber-500/40">
+                          <span className="bg-amber-500 text-slate-950 text-[10px] px-2 py-0.5 rounded font-black">
                             {dict.pinnedBadge}
                           </span>
                         )}
                       </div>
-                      <div className={`p-3 rounded-2xl max-w-md text-sm font-medium ${msg.user.includes(user.name) ? 'bg-emerald-600 text-white rounded-tl-none shadow-lg' : (theme === 'dark' ? 'bg-slate-800 text-slate-100 border border-slate-700' : 'bg-slate-100 text-slate-900 border border-slate-300')} rounded-tr-none`}>
+                      <div className={`p-3.5 rounded-2xl max-w-md text-sm font-medium ${msg.user.includes(user.name) ? 'bg-emerald-600 text-white rounded-tl-none `}>
                         {msg.type === 'audio' ? <audio controls src={msg.text} className="w-60 h-9"></audio> : msg.text}
                       </div>
                     </div>
@@ -953,67 +1237,125 @@
                     )}
                   </div>
                   <div className="flex gap-2">
-                    <input type="text" placeholder="..." value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className={`flex-1 px-4 py-2 border rounded-xl text-sm font-medium focus:outline-none ${theme === 'dark' ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`} />
-                    <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl shadow-lg font-bold text-sm">{dict.send}</button>
+                    <input type="text" placeholder="اكتب رسالتك..." value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className={`flex-1 px-4 py-2.5 border rounded-xl text-sm font-medium focus:outline-none ${theme === 'dark' ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`} />
+                    <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl shadow-lg font-bold text-sm">{dict.send}</button>
                   </div>
                 </form>
               </div>
             )}
 
-            {activeTab === 'admin' && user.isAdmin && (
-              <div className="space-y-6">
-                <div className="p-5 rounded-2xl border bg-amber-500/10 border-amber-500/30 shadow">
-                  <h2 className="text-lg font-extrabold text-amber-600 dark:text-amber-200">{dict.adminTitle}</h2>
-                </div>
-
-                <div className={`p-5 rounded-2xl border shadow-xl ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                  <h3 className="font-extrabold text-base mb-3 text-rose-500">{dict.banSection}</h3>
-                  <form onSubmit={handleBanUser} className="flex gap-2 mb-4">
-                    <input 
-                      type="text"
-                      placeholder={dict.banPlaceholder}
-                      value={banInput}
-                      onChange={(e) => setBanInput(e.target.value)}
-                      className={`flex-1 px-4 py-2 border rounded-xl text-sm font-medium focus:outline-none ${theme === 'dark' ? 'bg-slate-800 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'}`}
-                    />
-                    <button type="submit" className="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl text-sm font-extrabold shadow">{dict.banBtn}</button>
-                  </form>
-                  <div>
-                    <span className="text-xs font-bold opacity-80">{dict.bannedList}</span>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {bannedUsers.length === 0 ? <p className="text-xs opacity-60">لا توجد حالات حظر حالياً.</p> : bannedUsers.map((name, idx) => (
-                        <span key={idx} className="bg-rose-950 text-rose-300 px-3 py-1 rounded-lg text-xs font-extrabold border border-rose-800">{name}</span>
-                      ))}
-                    </div>
+            {/* TAB 4: الإعدادات والسمات */}
+            {activeTab === 'settings' && (
+              <div className={`max-w-2xl mx-auto rounded-2xl border shadow-2xl p-6 space-y-6 ${theme === 'dark' ? 'bg-slate-900 border-slate-800 text-slate-100' : 'bg-white border-slate-200 text-slate-900'}`}>
+                <h2 className="text-xl font-black pb-3 border-b border-slate-800">⚙️ الإعدادات العامة واللغة والسمات</h2>
+                
+                <div className="space-y-3">
+                  <label className="block text-sm font-bold">اللغات المتاحة للترجمة الفورية:</label>
+                  <div className="flex items-center gap-3">
+                    <button onClick={() => setLanguage('ar')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'ar' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800'}`}>العربية 🇪🇬</button>
+                    <button onClick={() => setLanguage('en')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'en' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800'}`}>English 🇬🇧</button>
+                    <button onClick={() => setLanguage('it')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'it' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800'}`}>Italiano 🇮🇹</button>
                   </div>
                 </div>
 
-                <div className={`p-5 rounded-2xl border shadow-xl ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                  <h3 className="font-extrabold text-base mb-3 text-amber-500">{dict.broadcastSection}</h3>
-                  <form onSubmit={handleAddBroadcast} className="flex gap-2 mb-4">
+                <div className="space-y-3 pt-4 border-t border-slate-800">
+                  <label className="block text-sm font-bold">نمط الواجهة (السمة):</label>
+                  <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="px-5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-black transition shadow">
+                    {theme === 'dark' ? '☀️ التحويل إلى الوضع الفاتح' : '🌙 التحويل إلى الوضع الداكن'}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* TAB 5: لوحة الأدمن المخصصة لشروق */}
+            {activeTab === 'admin' && user.isAdmin && (
+              <div className="space-y-6 max-w-4xl mx-auto">
+                <div className="p-5 rounded-2xl border bg-amber-500/10 border-amber-500/30 shadow-xl">
+                  <h2 className="text-lg font-black text-amber-500">{dict.adminNotice}</h2>
+                  <p className="text-xs font-bold text-slate-300 mt-1">مرحباً الأدمن شروق! يمكنك تعديل أو إضافة أي مادة وقاعة في أي وقت مباشرة في الجدول.</p>
+                </div>
+
+                <div className={`p-6 rounded-2xl border shadow-xl space-y-4 ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  <h3 className="font-black text-base text-rose-500">🚫 حظر وإدارة حسابات الطلاب</h3>
+                  <div className="flex gap-2">
                     <input 
                       type="text"
-                      placeholder={dict.broadcastPlaceholder}
+                      placeholder="اسم الطالب المراد حظره..."
+                      value={banInput}
+                      onChange={(e) => setBanInput(e.target.value)}
+                      className={`flex-1 px-4 py-2.5 border rounded-xl text-sm font-medium focus:outline-none ${theme === 'dark' ? 'bg-slate-800 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'}`}
+                    />
+                    <button onClick={() => { if(banInput) { setBannedUsers([...bannedUsers, banInput]); setBanInput(''); } }} className="bg-rose-600 hover:bg-rose-700 text-white px-5 py-2.5 rounded-xl text-xs font-black shadow">حظر الطالب</button>
+                  </div>
+                </div>
+
+                <div className={`p-6 rounded-2xl border shadow-xl space-y-4 ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  <h3 className="font-black text-base text-amber-500">📢 لوحة نشر تنبيهات وإعلانات الدكاترة</h3>
+                  <div className="flex gap-2">
+                    <input 
+                      type="text"
+                      placeholder="اكتب التنبيه أو الإعلان الجديد..."
                       value={broadcastInput}
                       onChange={(e) => setBroadcastInput(e.target.value)}
-                      className={`flex-1 px-4 py-2 border rounded-xl text-sm font-medium focus:outline-none ${theme === 'dark' ? 'bg-slate-800 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'}`}
+                      className={`flex-1 px-4 py-2.5 border rounded-xl text-sm font-medium focus:outline-none ${theme === 'dark' ? 'bg-slate-800 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'}`}
                     />
-                    <button type="submit" className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-sm font-extrabold shadow">{dict.broadcastBtn}</button>
-                  </form>
-                  <div>
-                    <span className="text-xs font-bold opacity-80">{dict.broadcastList}</span>
-                    <div className="space-y-2 mt-2">
-                      {broadcasts.map(b => (
-                        <div key={b.id} className="p-3 rounded-xl bg-amber-950/20 border border-amber-500/40 text-xs font-bold text-amber-200">
-                          {b.text}
-                        </div>
-                      ))}
-                    </div>
+                    <button onClick={() => { if(broadcastInput) { setBroadcasts([...broadcasts, { id: Date.now(), text: broadcastInput }]); setBroadcastInput(''); } }} className="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-xl text-xs font-black shadow">نشر التنبيه</button>
                   </div>
                 </div>
               </div>
             )}
+
           </main>
+
+          {/* نافذة التعديل والإضافة للجدول (Modal للأدمن) */}
+          {(editingItem || addingDay) && (
+            <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className={`w-full max-w-md p-6 rounded-3xl border shadow-2xl ${theme === 'dark' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
+                <h3 className="font-black text-lg mb-4 text-amber-500">
+                  {editingItem ? dict.editModalTitle : dict.addModalTitle}
+                </h3>
+                
+                <form onSubmit={handleSaveSlot} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold mb-1">{dict.subjectName}</label>
+                    <input type="text" required value={editFormData.subject} onChange={(e) => setEditFormData({ ...editFormData, subject: e.target.value })} className={`w-full px-3 py-2 border rounded-xl text-xs font-bold ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`} />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold mb-1">{dict.instructorName}</label>
+                    <input type="text" required value={editFormData.doc} onChange={(e) => setEditFormData({ ...editFormData, doc: e.target.value })} className={`w-full px-3 py-2 border rounded-xl text-xs font-bold ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`} />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold mb-1">{dict.locationName}</label>
+                    <input type="text" required value={editFormData.place} onChange={(e) => setEditFormData({ ...editFormData, place: e.target.value })} className={`w-full px-3 py-2 border rounded-xl text-xs font-bold ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`} />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold mb-1">{dict.timeSlot}</label>
+                    <input type="text" required value={editFormData.time} onChange={(e) => setEditFormData({ ...editFormData, time: e.target.value })} className={`w-full px-3 py-2 border rounded-xl text-xs font-bold ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`} />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold mb-1">{dict.sessionType}</label>
+                    <select value={editFormData.type} onChange={(e) => setEditFormData({ ...editFormData, type: e.target.value })} className={`w-full px-3 py-2 border rounded-xl text-xs font-bold ${theme === 'dark' ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-300'}`}>
+                      <option value="lecture">{dict.lectureType}</option>
+                      <option value="section">{dict.sectionType}</option>
+                    </select>
+                  </div>
+
+                  <div className="flex gap-2 pt-2">
+                    <button type="submit" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl font-black text-xs shadow">{dict.saveBtn}</button>
+                    {editingItem && (
+                      <button type="button" onClick={handleDeleteSlot} className="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2.5 rounded-xl font-black text-xs shadow">{dict.deleteBtn}</button>
+                    )}
+                    <button type="button" onClick={() => { setEditingItem(null); setAddingDay(null); }} className="bg-slate-700 text-slate-200 px-4 py-2.5 rounded-xl font-black text-xs">إلغاء</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
         </div>
       );
     }

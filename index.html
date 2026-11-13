@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -29,7 +22,7 @@
   <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
-    // البيانات الأولية للأقسام والجدول
+    // الجداول الرسمية الدقيقة 100% حسب ملفات الـ PDF
     const initialDepartmentsData = {
       'تحكم صناعي': {
         nameEn: 'Industrial Control Technology',
@@ -411,45 +404,47 @@
       }
     };
 
-    // القاموس اللغوي المحسن
+    // القاموس اللغوي الدقيق للترجمة الحرفية الشاملة
     const dictionary = {
       ar: {
         title: 'جامعة حلوان الدولية التكنولوجية',
         subTitle: 'Faculty of Technology in Cairo - HITU',
-        fullName: 'الاسم الثلاثي للطالب:',
+        welcome: 'أهلاً بكم',
+        fullName: 'الاسم الثلاثي:',
         nid: 'الرقم القومي (14 رقماً):',
-        dept: 'القسم الأكاديمي:',
+        dept: 'اختيار القسم:',
         sec: 'رقم السكشن / المجموعة:',
-        enterBtn: 'الدخول للمنصة التفاعلية 🚀',
+        enterBtn: 'تسجيل الدخول',
         scheduleTab: '📅 الجدول الأكاديمي',
-        studentSheetTab: '📝 شيت الحضور والتسليمات',
+        studentSheetTab: '📝 تابع أسبوعك',
         chatTab: '💬 شات الدفعة',
-        settingsTab: '⚙️ الإعدادات والسمات',
-        adminTab: '🔑 لوحة الأدمن (تعديل الجدول)',
+        settingsTab: '⚙️ الإعدادات',
+        adminTab: '🔑 لوحة الأدمن',
         logout: 'تسجيل خروج',
-        selectDay: 'اختر اليوم الدراسي:',
+        selectDay: 'اختر اليوم:',
         allDays: 'جميع أيام الأسبوع',
-        searchPlaceholder: '🔍 ابحث باسم المادة، المحاضر/المعيد، أو القاعة...',
+        searchPlaceholder: 'بحث...',
         lecturesHeader: '📚 المحاضرات النظرية (Dr):',
         sectionsHeader: '👥 السكاشن والمعامل (Eng):',
         dayOff: '🌴 Day Off - يوم راحة رسمي',
         place: 'القاعة / المعمل:',
         doc: 'المحاضر / المعيد:',
         send: 'إرسال الرسالة',
-        recVoice: '🎤 تسجيل بصمة صوتية',
-        recStop: '⏹️ إيقاف وإرسال',
+        recVoice: '🎤 تسجيل صوتي',
+        recStop: '⏹️ إيقاف',
         pinMessage: 'تثبيت الإعلان',
         pinnedBadge: '📌 إعلان مثبت',
-        sheetLecturesHeader: '📚 شيت حضور المحاضرات (Dr)',
-        sheetSectionsHeader: '👥 شيت حضور السكاشن والمعامل (Eng)',
-        sheetTasksHeader: '📋 شيت تسليم الأنشطة والكويزات (Tasks & Quizzes)',
+        sheetLecturesHeader: '📚 تابع حضور المحاضرات (Dr)',
+        sheetSectionsHeader: '👥 تابع حضور السكاشن والمعامل (Eng)',
+        sheetTasksHeader: '📋 تسليم الأنشطة والكويزات (اكتب ما لديك وتابع التسليم)',
+        addTaskPlaceholder: 'اكتب اسم الشيت أو التاسك أو الكويز الجديد...',
+        addTaskBtn: '➕ إضافة نشاط/شيت',
         attended: 'حضر ✓',
         absent: 'غائب ❌',
         submitted: 'تم التسليم ✓',
-        notSubmitted: 'لم يسلم ❌',
-        taskLabel: 'نوع التسليم:',
-        editModalTitle: '✏️ تعديل حصة/جلسة في الجدول',
-        addModalTitle: '➕ إضافة حصة/جلسة جديدة للجدول',
+        notSubmitted: 'لم يُسلم ❌',
+        editModalTitle: '✏️ تعديل حصة/جلسة',
+        addModalTitle: '➕ إضافة حصة جديدة',
         subjectName: 'اسم المادة:',
         instructorName: 'اسم المحاضر/المعيد:',
         locationName: 'القاعة/المعمل:',
@@ -459,48 +454,50 @@
         sectionType: 'سكشن/معمل (Eng)',
         dayLabel: 'اليوم الدراسي:',
         saveBtn: 'حفظ التغييرات 💾',
-        deleteBtn: 'حذف من الجدول 🗑️',
-        addNewSlotBtn: '➕ إضافة حصة جديدة في هذا اليوم',
-        adminNotice: '⚙️ لوحة الأدمن - التحكم التام في الجداول والتنبيهات',
+        deleteBtn: 'حذف 🗑️',
+        addNewSlotBtn: '➕ إضافة حصة',
+        adminNotice: '⚙️ لوحة الأدمن المركزية (التعديلات، فك الحظر، والتنبيهات)',
         bannedNotice: 'عذراً، هذا الحساب محظور من الدخول للمنصة.'
       },
       en: {
         title: 'Helwan International Technological University',
         subTitle: 'Faculty of Technology in Cairo - HITU',
-        fullName: 'Full Student Name:',
+        welcome: 'Welcome',
+        fullName: 'Full Name:',
         nid: 'National ID (14 Digits):',
-        dept: 'Academic Department:',
+        dept: 'Select Department:',
         sec: 'Section / Group No:',
-        enterBtn: 'Enter Interactive Platform 🚀',
+        enterBtn: 'Login',
         scheduleTab: '📅 Academic Schedule',
-        studentSheetTab: '📝 Attendance & Submissions Sheet',
+        studentSheetTab: '📝 Follow Your Week',
         chatTab: '💬 Batch Chat',
-        settingsTab: '⚙️ Settings & Themes',
-        adminTab: '🔑 Admin Panel (Edit Timetable)',
+        settingsTab: '⚙️ Settings',
+        adminTab: '🔑 Admin Panel',
         logout: 'Logout',
         selectDay: 'Select Day:',
         allDays: 'All Week Days',
-        searchPlaceholder: '🔍 Search course, instructor, or room...',
+        searchPlaceholder: 'Search...',
         lecturesHeader: '📚 Theoretical Lectures (Dr):',
         sectionsHeader: '👥 Practical Sections & Labs (Eng):',
         dayOff: '🌴 Official Day Off',
         place: 'Room / Lab:',
         doc: 'Doctor / TA:',
         send: 'Send Message',
-        recVoice: '🎤 Record Voice Note',
-        recStop: '⏹️ Stop & Send',
-        pinMessage: 'Pin Announcement',
+        recVoice: '🎤 Record Voice',
+        recStop: '⏹️ Stop',
+        pinMessage: 'Pin Notice',
         pinnedBadge: '📌 Pinned Notice',
-        sheetLecturesHeader: '📚 Lectures Attendance Sheet (Dr)',
-        sheetSectionsHeader: '👥 Practical Sections Attendance Sheet (Eng)',
-        sheetTasksHeader: '📋 Tasks & Quizzes Submission Sheet',
+        sheetLecturesHeader: '📚 Lectures Attendance Tracking (Dr)',
+        sheetSectionsHeader: '👥 Sections Attendance Tracking (Eng)',
+        sheetTasksHeader: '📋 Tasks & Quizzes Submissions',
+        addTaskPlaceholder: 'Enter new sheet, task or quiz name...',
+        addTaskBtn: '➕ Add Activity',
         attended: 'Attended ✓',
         absent: 'Absent ❌',
         submitted: 'Submitted ✓',
         notSubmitted: 'Not Submitted ❌',
-        taskLabel: 'Submission Type:',
-        editModalTitle: '✏️ Edit Schedule Slot',
-        addModalTitle: '➕ Add New Schedule Slot',
+        editModalTitle: '✏️ Edit Session',
+        addModalTitle: '➕ Add New Session',
         subjectName: 'Course Title:',
         instructorName: 'Instructor / TA Name:',
         locationName: 'Room / Lab Location:',
@@ -510,61 +507,63 @@
         sectionType: 'Section / Lab (Eng)',
         dayLabel: 'Day of Week:',
         saveBtn: 'Save Changes 💾',
-        deleteBtn: 'Delete Slot 🗑️',
-        addNewSlotBtn: '➕ Add New Slot on This Day',
-        adminNotice: '⚙️ Admin Panel - Complete Timetable & User Control',
+        deleteBtn: 'Delete 🗑️',
+        addNewSlotBtn: '➕ Add Slot',
+        adminNotice: '⚙️ Central Admin Panel (Timetable, Unban & Announcements)',
         bannedNotice: 'Sorry, your account has been suspended.'
       },
       it: {
         title: 'Università Tecnologica Internazionale di Helwan',
         subTitle: 'Facoltà di Tecnologia a Il Cairo - HITU',
-        fullName: 'Nome Completo dello Studente:',
+        welcome: 'Benvenuti',
+        fullName: 'Nome Completo:',
         nid: 'Codice Fiscale (14 Cifre):',
-        dept: 'Dipartimento Accademico:',
+        dept: 'Seleziona Dipartimento:',
         sec: 'Numero Sezione / Gruppo:',
-        enterBtn: 'Accedi alla Piattaforma 🚀',
+        enterBtn: 'Accesso',
         scheduleTab: '📅 Orario Accademico',
-        studentSheetTab: '📝 Registro Presenze e Consegne',
+        studentSheetTab: '📝 Segui la tua Settimana',
         chatTab: '💬 Chat del Corso',
-        settingsTab: '⚙️ Impostazioni e Temi',
-        adminTab: '🔑 Pannello Admin (Modifica Orario)',
+        settingsTab: '⚙️ Impostazioni',
+        adminTab: '🔑 Pannello Admin',
         logout: 'Disconnettiti',
         selectDay: 'Seleziona Giorno:',
-        allDays: 'Tutti i Giorni della Settimana',
-        searchPlaceholder: '🔍 Cerca corso, docente o aula...',
+        allDays: 'Tutti i Giorni',
+        searchPlaceholder: 'Cerca...',
         lecturesHeader: '📚 Lezioni Teoriche (Dr):',
-        sectionsHeader: '👥 Laboratori e Esercitazioni (Eng):',
-        dayOff: '🌴 Giorno di Riposo Ufficiale',
+        sectionsHeader: '👥 Laboratori (Eng):',
+        dayOff: '🌴 Giorno di Riposo',
         place: 'Aula / Laboratorio:',
         doc: 'Docente / Tutor:',
-        send: 'Invia Messaggio',
-        recVoice: '🎤 Registra Nota Vocale',
-        recStop: '⏹️ Ferma e Invia',
+        send: 'Invia',
+        recVoice: '🎤 Registra',
+        recStop: '⏹️ Ferma',
         pinMessage: 'Fissa Avviso',
         pinnedBadge: '📌 Avviso Fissato',
         sheetLecturesHeader: '📚 Registro Presenze Lezioni (Dr)',
         sheetSectionsHeader: '👥 Registro Presenze Laboratori (Eng)',
-        sheetTasksHeader: '📋 Registro Consegna Compiti e Quiz',
+        sheetTasksHeader: '📋 Consegna Compiti e Quiz',
+        addTaskPlaceholder: 'Inserisci nuovo compito o quiz...',
+        addTaskBtn: '➕ Aggiungi Attività',
         attended: 'Presente ✓',
         absent: 'Assente ❌',
         submitted: 'Consegnato ✓',
         notSubmitted: 'Non Consegnato ❌',
-        taskLabel: 'Tipo di Consegna:',
-        editModalTitle: '✏️ Modifica Sessione Orario',
-        addModalTitle: '➕ Aggiungi Nuova Sessione',
+        editModalTitle: '✏️ Modifica Sessione',
+        addModalTitle: '➕ Aggiungi Sessione',
         subjectName: 'Titolo del Corso:',
-        instructorName: 'Nome Docente / Tutor:',
+        instructorName: 'Nome Docente:',
         locationName: 'Aula / Laboratorio:',
         timeSlot: 'Orario:',
         sessionType: 'Tipo Sessione:',
         lectureType: 'Lezione (Dr)',
         sectionType: 'Laboratorio (Eng)',
-        dayLabel: 'Giorno della Settimana:',
-        saveBtn: 'Salva Modifiche 💾',
-        deleteBtn: 'Elimina Sessione 🗑️',
-        addNewSlotBtn: '➕ Aggiungi Nuova Sessione Oggi',
-        adminNotice: '⚙️ Pannello Admin - Controllo Completo Orari e Avvisi',
-        bannedNotice: 'Spiacenti, il tuo account è stato sospeso.'
+        dayLabel: 'Giorno:',
+        saveBtn: 'Salva 💾',
+        deleteBtn: 'Elimina 🗑️',
+        addNewSlotBtn: '➕ Aggiungi',
+        adminNotice: '⚙️ Pannello Admin Centrale',
+        bannedNotice: 'Spiacenti, account sospeso.'
       }
     };
 
@@ -575,6 +574,7 @@
       const [language, setLanguage] = useState('ar');
       const [activeTab, setActiveTab] = useState('schedule');
       
+      // حقول تسجيل الدخول حسب رسمة الصورة الأولى
       const [inputName, setInputName] = useState('');
       const [inputNid, setInputNid] = useState('');
       const [inputDept, setInputDept] = useState('تحكم صناعي');
@@ -583,18 +583,17 @@
       const [selectedDayFilter, setSelectedDayFilter] = useState('all');
       const [searchQuery, setSearchQuery] = useState('');
 
-      // حالة شيت الحضور والأنشطة
-      const [lectureAttendance, setLectureAttendance] = useState({});
-      const [sectionAttendance, setSectionAttendance] = useState({});
-      const [taskSubmissions, setTaskSubmissions] = useState({
-        'sheet_1': { title: 'Sheet 1 - Fundamentals', status: true, type: 'Sheet' },
-        'task_1': { title: 'Task 1 - Practical Lab Report', status: false, type: 'Task' },
-        'quiz_1': { title: 'Mid-Term Quiz 1', status: true, type: 'Quiz' }
-      });
+      // شيت "تابع أسبوعك"
+      const [attendanceData, setAttendanceData] = useState({});
+      const [studentTasks, setStudentTasks] = useState([
+        { id: 't1', title: 'Sheet 1 - Fundamentals', status: false, type: 'Sheet' },
+        { id: 't2', title: 'Lab Report Task', status: true, type: 'Task' }
+      ]);
+      const [newTaskInput, setNewTaskInput] = useState('');
 
-      // المحادثات والتنبيهات
+      // الشات والإعلانات
       const [messages, setMessages] = useState([
-        { id: 1, dept: 'تحكم صناعي', user: 'شروق سمير (الأدمن)', text: 'أهلاً بكم في المنصة المحدثة 2026/2027.', isPinned: true, type: 'text', time: '10:00 AM' }
+        { id: 1, dept: 'تحكم صناعي', user: 'شروق سمير (الأدمن)', text: 'أهلاً بكم في المنصة الأكاديمية الرسمية 2026/2027.', isPinned: true, type: 'text', time: '10:00 AM' }
       ]);
       const [newMessage, setNewMessage] = useState('');
       const [isPinnedMsg, setIsPinnedMsg] = useState(false);
@@ -602,21 +601,15 @@
       const [bannedUsers, setBannedUsers] = useState([]);
       const [banInput, setBanInput] = useState('');
       const [broadcasts, setBroadcasts] = useState([
-        { id: 1, text: 'تنبيه هام من الكلية: الالتزام التام بالتسجيل في السكاشن والمناوبات المقررة.' }
+        { id: 1, text: 'تنبيه هام من الكلية: الالتزام التام بالمواعيد والسكاشن المقررة.' }
       ]);
       const [broadcastInput, setBroadcastInput] = useState('');
 
-      // التعديل والإضافة من قبل الأدمن
+      // التعديل والإضافة للأدمن
       const [editingItem, setEditingItem] = useState(null);
       const [addingDay, setAddingDay] = useState(null);
-
       const [editFormData, setEditFormData] = useState({
-        subject: '',
-        doc: '',
-        place: '',
-        time: '',
-        type: 'lecture', // lecture OR section
-        day: 'السبت'
+        subject: '', doc: '', place: '', time: '09:00 - 10:00', type: 'lecture', day: 'السبت'
       });
 
       const [isRecording, setIsRecording] = useState(false);
@@ -657,28 +650,17 @@
         });
       };
 
-      // عمليات الأدمن: إضافة وتعديل وحذف
       const openEditModal = (day, item, type) => {
         setEditingItem({ day, id: item.id, type });
         setEditFormData({
-          subject: item.subject,
-          doc: item.doc,
-          place: item.place,
-          time: item.time,
-          type: type,
-          day: day
+          subject: item.subject, doc: item.doc, place: item.place, time: item.time, type: type, day: day
         });
       };
 
       const openAddModal = (day) => {
         setAddingDay(day);
         setEditFormData({
-          subject: '',
-          doc: '',
-          place: '',
-          time: '09:00 - 10:00',
-          type: 'lecture',
-          day: day
+          subject: '', doc: '', place: '', time: '09:00 - 10:00', type: 'lecture', day: day
         });
       };
 
@@ -696,39 +678,23 @@
           }
 
           if (editingItem) {
-            // حذف النسخة القديمة
             dayObj.lectures = dayObj.lectures.filter(l => l.id !== editingItem.id);
             dayObj.sections = dayObj.sections.filter(s => s.id !== editingItem.id);
 
             const newItem = {
-              id: editingItem.id,
-              subject: editFormData.subject,
-              doc: editFormData.doc,
-              place: editFormData.place,
-              time: editFormData.time
+              id: editingItem.id, subject: editFormData.subject, doc: editFormData.doc, place: editFormData.place, time: editFormData.time
             };
 
-            if (editFormData.type === 'lecture') {
-              dayObj.lectures.push(newItem);
-            } else {
-              dayObj.sections.push(newItem);
-            }
+            if (editFormData.type === 'lecture') dayObj.lectures.push(newItem);
+            else dayObj.sections.push(newItem);
           } else if (addingDay) {
             const newItem = {
-              id: 'custom_' + Date.now(),
-              subject: editFormData.subject,
-              doc: editFormData.doc,
-              place: editFormData.place,
-              time: editFormData.time
+              id: 'custom_' + Date.now(), subject: editFormData.subject, doc: editFormData.doc, place: editFormData.place, time: editFormData.time
             };
 
-            if (editFormData.type === 'lecture') {
-              dayObj.lectures.push(newItem);
-            } else {
-              dayObj.sections.push(newItem);
-            }
+            if (editFormData.type === 'lecture') dayObj.lectures.push(newItem);
+            else dayObj.sections.push(newItem);
           }
-
           return updated;
         });
 
@@ -750,7 +716,6 @@
           }
           return updated;
         });
-
         setEditingItem(null);
       };
 
@@ -768,13 +733,7 @@
             const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
             const audioUrl = URL.createObjectURL(audioBlob);
             setMessages(prev => [...prev, {
-              id: Date.now(),
-              dept: user.department,
-              user: user.name + ` (${dict.sec} ${user.section})`,
-              text: audioUrl,
-              isPinned: false,
-              type: 'audio',
-              time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+              id: Date.now(), dept: user.department, user: user.name, text: audioUrl, isPinned: false, type: 'audio', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             }]);
             stream.getTracks().forEach(track => track.stop());
           };
@@ -796,21 +755,14 @@
       const handleSendText = (e) => {
         e.preventDefault();
         if (!newMessage.trim()) return;
-
         setMessages(prev => [...prev, {
-          id: Date.now(),
-          dept: user.department,
-          user: user.name + ` (${dict.sec} ${user.section})`,
-          text: newMessage,
-          isPinned: isPinnedMsg,
-          type: 'text',
-          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          id: Date.now(), dept: user.department, user: user.name, text: newMessage, isPinned: isPinnedMsg, type: 'text', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }]);
-
         setNewMessage('');
         setIsPinnedMsg(false);
       };
 
+      // شاشة تسجيل الدخول مرتبة تماماً حسب رسمة الصورة الأولى
       if (!user) {
         return (
           <div className="min-h-screen flex items-center justify-center p-4 font-sans text-right transition-colors bg-slate-950 text-slate-100" dir={language === 'en' ? 'ltr' : 'rtl'}>
@@ -828,14 +780,14 @@
                 </button>
               </div>
 
-              {/* شعار الكلية والجامعة بشكل أضخم وأجمل */}
+              {/* 1. لوجو الجامعة بشكل أضخم وأجمل + 2. أهلاً بكم */}
               <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-indigo-600 text-white shadow-2xl mb-4 border-4 border-slate-800 transform hover:scale-105 transition-transform">
-                  <span className="font-black text-3xl tracking-tighter">HITU</span>
+                <div className="inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-indigo-600 text-white shadow-2xl mb-4 border-4 border-slate-800 transform hover:scale-105 transition-transform">
+                  <span className="font-black text-4xl tracking-tighter">HITU</span>
                 </div>
                 <h1 className="text-2xl font-black text-white">{dict.title}</h1>
-                <p className="text-xs font-extrabold text-emerald-400 mt-1">{dict.subTitle}</p>
-                <p className="text-[11px] text-slate-400 mt-1">العام الدراسي الرسمي 2026/2027 - الفصل الدراسي الأول</p>
+                <h2 className="text-xl font-black text-emerald-400 mt-2">{dict.welcome}</h2>
+                <p className="text-xs font-medium text-slate-400 mt-1">العام الدراسي الرسمي 2026/2027</p>
               </div>
 
               <form onSubmit={handleLogin} className="space-y-4">
@@ -864,6 +816,7 @@
                   />
                 </div>
 
+                {/* اختيار القسم ورقم السكشن/المجموعة (يظهر دائماً بوضوح) */}
                 <div>
                   <label className="block text-xs font-bold mb-1.5">{dict.dept}</label>
                   <select 
@@ -888,13 +841,12 @@
                     className="w-full px-4 py-3 border rounded-xl bg-slate-800 border-slate-700 text-white text-sm focus:outline-none"
                   >
                     {[...Array(currentDeptData.sectionsCount)].map((_, i) => (
-                      <option key={i+1} value={i+1}>
-                        {dict.sec} {i+1}
-                      </option>
+                      <option key={i+1} value={i+1}>{dict.sec} {i+1}</option>
                     ))}
                   </select>
                 </div>
 
+                {/* زر تسجيل الدخول في الآخر */}
                 <button 
                   type="submit"
                   className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold py-3.5 rounded-xl transition shadow-xl text-sm mt-4"
@@ -909,7 +861,7 @@
 
       return (
         <div className={`min-h-screen font-sans transition-colors duration-500 ${theme === 'dark' ? deptTheme.darkBg : deptTheme.lightBg}`} dir={language === 'en' ? 'ltr' : 'rtl'}>
-          {/* Header العلوي الفخم */}
+          {/* Header العلوي */}
           <header className={`border-b sticky top-0 z-50 backdrop-blur-md ${theme === 'dark' ? 'bg-slate-900/95 border-slate-800' : 'bg-white/95 border-slate-200 shadow-md'}`}>
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
               
@@ -927,7 +879,7 @@
                 </div>
               </div>
 
-              {/* الأزرار والتبويبات */}
+              {/* التبويبات بدون أي خلط */}
               <div className="flex items-center gap-2 flex-wrap">
                 <button onClick={() => setActiveTab('schedule')} className={`px-3.5 py-2 rounded-xl text-xs md:text-sm font-extrabold transition ${activeTab === 'schedule' ? 'bg-emerald-600 text-white shadow-lg' : theme === 'dark' ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-800'}`}>
                   {dict.scheduleTab}
@@ -960,21 +912,19 @@
 
           <main className="max-w-7xl mx-auto px-4 py-6">
             
-            {/* التنبيهات المباشرة */}
             {broadcasts.length > 0 && (
               <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-500 text-xs md:text-sm font-bold flex flex-col gap-1.5 shadow-lg backdrop-blur-md">
-                <span className="flex items-center gap-2 font-black">📢 تنبيهات وإعلانات القسم الرسمية:</span>
+                <span className="flex items-center gap-2 font-black">📢 تنبيهات وإعلانات القسم:</span>
                 {broadcasts.map(b => (
                   <p key={b.id} className="font-semibold text-slate-200 dark:text-slate-300 opacity-90">• {b.text}</p>
                 ))}
               </div>
             )}
 
-            {/* TAB 1: الجدول الأكاديمي */}
+            {/* TAB 1: الجدول الأكاديمي (بحث نظيف وخانات دقيقة بدون إضافات) */}
             {activeTab === 'schedule' && (
               <div className="space-y-6">
                 
-                {/* شريط البحث وتصفية الأيام */}
                 <div className={`p-5 rounded-2xl border shadow-xl backdrop-blur-md flex flex-wrap items-center justify-between gap-4 ${theme === 'dark' ? 'bg-slate-900/90 border-slate-800' : 'bg-white/90 border-slate-200'}`}>
                   <div>
                     <h2 className={`font-black text-xl flex items-center gap-2 ${deptTheme.accent}`}>
@@ -984,6 +934,7 @@
                   </div>
 
                   <div className="flex items-center gap-3 flex-wrap w-full md:w-auto">
+                    {/* خانة بحث عامة بدون نصوص زائدة */}
                     <div className="relative flex-1 md:w-72">
                       <input 
                         type="text"
@@ -992,9 +943,7 @@
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className={`w-full px-4 py-2.5 border rounded-xl text-xs md:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 ${theme === 'dark' ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400' : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-500'}`}
                       />
-                    </div>
-
-                    <div className="flex items-center gap-2">
+                    </div><div className="flex items-center gap-2">
                       <span className="text-xs font-bold">{dict.selectDay}</span>
                       <select 
                         value={selectedDayFilter} 
@@ -1010,7 +959,6 @@
                   </div>
                 </div>
 
-                {/* عرض الأيام والجداول */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {Object.entries(currentDeptData.schedule)
                     .filter(([day]) => selectedDayFilter === 'all' || day === selectedDayFilter)
@@ -1039,11 +987,8 @@
                           ) : (
                             <div className="space-y-5">
                               
-                              {/* المحاضرات النظرية Dr */}
                               <div>
-                                <h4 className="text-xs font-black uppercase text-amber-500 mb-3 tracking-wider flex items-center justify-between">
-                                  <span>{dict.lecturesHeader}</span>
-                                </h4>
+                                <h4 className="text-xs font-black uppercase text-amber-500 mb-3 tracking-wider">{dict.lecturesHeader}</h4>
                                 {dayContent.lectures && dayContent.lectures.length > 0 ? (
                                   <div className="space-y-3">
                                     {dayContent.lectures
@@ -1057,7 +1002,7 @@
                                             <span className="text-[10px] px-2.5 py-0.5 rounded-md font-black bg-amber-500 text-slate-950">محاضرة Dr</span>
                                             <span className="text-xs font-extrabold opacity-80">⏰ {item.time}</span>
                                           </div>
-                                          <h5 className="font-black text-xs md:text-sm leading-relaxed text-slate-100 dark:text-slate-100">{item.subject}</h5>
+                                          <h5 className="font-black text-xs md:text-sm leading-relaxed text-slate-100">{item.subject}</h5>
                                           <div className={`flex flex-col gap-1 text-[11px] font-bold opacity-90 mt-2.5 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
                                             <span>👨‍🏫 {dict.doc} {item.doc}</span>
                                             <span>📍 {dict.place} {item.place}</span>
@@ -1066,15 +1011,12 @@
                                       ))}
                                   </div>
                                 ) : (
-                                  <p className="text-xs opacity-50 italic">لا توجد محاضرات نظري في هذا اليوم.</p>
+                                  <p className="text-xs opacity-50 italic">لا توجد محاضرات نظرية في هذا اليوم.</p>
                                 )}
                               </div>
 
-                              {/* السكاشن والمعامل Eng */}
                               <div>
-                                <h4 className="text-xs font-black uppercase text-indigo-400 mb-3 tracking-wider flex items-center justify-between">
-                                  <span>{dict.sectionsHeader}</span>
-                                </h4>
+                                <h4 className="text-xs font-black uppercase text-indigo-400 mb-3 tracking-wider">{dict.sectionsHeader}</h4>
                                 {dayContent.sections && dayContent.sections.length > 0 ? (
                                   <div className="space-y-3">
                                     {dayContent.sections
@@ -1088,7 +1030,7 @@
                                             <span className="text-[10px] px-2.5 py-0.5 rounded-md font-black bg-indigo-600 text-white">سكشن Eng</span>
                                             <span className="text-xs font-extrabold opacity-80">⏰ {item.time}</span>
                                           </div>
-                                          <h5 className="font-black text-xs md:text-sm leading-relaxed text-slate-100 dark:text-slate-100">{item.subject}</h5>
+                                          <h5 className="font-black text-xs md:text-sm leading-relaxed text-slate-100">{item.subject}</h5>
                                           <div className={`flex flex-col gap-1 text-[11px] font-bold opacity-90 mt-2.5 pt-2 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'}`}>
                                             <span>👨‍🏫 {dict.doc} {item.doc}</span>
                                             <span>📍 {dict.place} {item.place}</span>
@@ -1110,87 +1052,112 @@
               </div>
             )}
 
-            {/* TAB 2: شيت الحضور والتسليمات المطور */}
+            {/* TAB 2: تابع أسبوعك (مقسم بالأيام وحسب جدول القسم، مع جزء تسليم الأنشطة الذي يكتبه الطالب) */}
             {activeTab === 'studentSheet' && (
               <div className="space-y-6 max-w-4xl mx-auto">
                 <div className={`p-6 rounded-2xl border shadow-2xl backdrop-blur-md ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
                   
                   <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-800">
                     <div>
-                      <h2 className={`font-black text-xl ${deptTheme.accent}`}>📝 شيت متابعة الطالب والتسليمات الأسبوعية</h2>
+                      <h2 className={`font-black text-xl ${deptTheme.accent}`}>📝 تابع أسبوعك</h2>
                       <p className="text-xs font-bold text-slate-400 mt-1">الطالب: {user.name} | السكشن: ({user.section})</p>
                     </div>
                   </div>
 
-                  {/* 1. حضور المحاضرات */}
-                  <div className="space-y-4 mb-8">
-                    <h3 className="text-sm font-black text-amber-500 uppercase tracking-wider">{dict.sheetLecturesHeader}</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {Object.entries(currentDeptData.schedule).map(([day, content]) => {
-                        if (typeof content === 'string' || !content.lectures) return null;
-                        return content.lectures.map((lec) => {
-                          const status = lectureAttendance[lec.id] || false;
-                          return (
-                            <div key={lec.id} className={`p-3.5 rounded-xl border flex justify-between items-center transition ${status ? 'bg-emerald-950/30 border-emerald-500/50' : 'bg-slate-950/60 border-slate-800'}`}>
-                              <div>
-                                <span className="text-[10px] font-bold text-slate-400">{day} | {lec.time}</span>
-                                <h5 className="font-extrabold text-xs mt-0.5">{lec.subject}</h5>
+                  {/* القسم الأول: الحضور مقسم بالأيام حسب جدول القسم */}
+                  <div className="space-y-6 mb-8">
+                    {Object.entries(currentDeptData.schedule).map(([day, content]) => {
+                      if (typeof content === 'string') return null;
+                      return (
+                        <div key={day} className={`p-4 rounded-2xl border ${theme === 'dark' ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                          <h3 className={`font-black text-base mb-3 ${deptTheme.accent}`}>📅 {day}</h3>
+                          
+                          {/* المحاضرات */}
+                          {content.lectures && content.lectures.length > 0 && (
+                            <div className="mb-4">
+                              <h4 className="text-xs font-bold text-amber-500 mb-2">{dict.sheetLecturesHeader}</h4>
+                              <div className="space-y-2">
+                                {content.lectures.map(lec => {
+                                  const key = `${day}_${lec.id}`;
+                                  const status = attendanceData[key] || false;
+                                  return (
+                                    <div key={lec.id} className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex justify-between items-center">
+                                      <span className="text-xs font-bold">{lec.subject} ({lec.time})</span>
+                                      <button 
+                                        onClick={() => setAttendanceData(prev => ({ ...prev, [key]: !prev[key] }))}
+                                        className={`px-3 py-1 rounded-lg text-xs font-black shadow transition ${status ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`}
+                                      >
+                                        {status ? dict.attended : dict.absent}
+                                      </button>
+                                    </div>
+                                  );
+                                })}
                               </div>
-                              <button 
-                                onClick={() => setLectureAttendance(prev => ({ ...prev, [lec.id]: !prev[lec.id] }))}
-                                className={`px-3 py-1.5 rounded-lg text-xs font-black shadow transition ${status ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`}
-                              >
-                                {status ? dict.attended : dict.absent}
-                              </button>
                             </div>
-                          );
-                        });
-                      })}
-                    </div>
+                          )}
+
+                          {/* السكاشن */}
+                          {content.sections && content.sections.length > 0 && (
+                            <div>
+                              <h4 className="text-xs font-bold text-indigo-400 mb-2">{dict.sheetSectionsHeader}</h4>
+                              <div className="space-y-2">
+                                {content.sections.map(sec => {
+                                  const key = `${day}_${sec.id}`;
+                                  const status = attendanceData[key] || false;
+                                  return (
+                                    <div key={sec.id} className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex justify-between items-center">
+                                      <span className="text-xs font-bold">{sec.subject} ({sec.time})</span>
+                                      <button 
+                                        onClick={() => setAttendanceData(prev => ({ ...prev, [key]: !prev[key] }))}
+                                        className={`px-3 py-1 rounded-lg text-xs font-black shadow transition ${status ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`}
+                                      >
+                                        {status ? dict.attended : dict.absent}
+                                      </button>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
 
-                  {/* 2. حضور السكاشن والمعامل */}
-                  <div className="space-y-4 mb-8">
-                    <h3 className="text-sm font-black text-indigo-400 uppercase tracking-wider">{dict.sheetSectionsHeader}</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {Object.entries(currentDeptData.schedule).map(([day, content]) => {
-                        if (typeof content === 'string' || !content.sections) return null;
-                        return content.sections.map((sec) => {
-                          const status = sectionAttendance[sec.id] || false;
-                          return (
-                            <div key={sec.id} className={`p-3.5 rounded-xl border flex justify-between items-center transition ${status ? 'bg-emerald-950/30 border-emerald-500/50' : 'bg-slate-950/60 border-slate-800'}`}>
-                              <div>
-                                <span className="text-[10px] font-bold text-slate-400">{day} | {sec.time}</span>
-                                <h5 className="font-extrabold text-xs mt-0.5">{sec.subject}</h5>
-                              </div>
-                              <button 
-                                onClick={() => setSectionAttendance(prev => ({ ...prev, [sec.id]: !prev[sec.id] }))}
-                                className={`px-3 py-1.5 rounded-lg text-xs font-black shadow transition ${status ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`}
-                              >
-                                {status ? dict.attended : dict.absent}
-                              </button>
-                            </div>
-                          );
-                        });
-                      })}
-                    </div>
-                  </div>
-
-                  {/* 3. تسليم الشيتات والتاسكات والكويزات */}
-                  <div className="space-y-4">
+                  {/* القسم الثاني: تسليم الأنشطة والكويزات (الطالب هو من يكتب ما لديه ويتابعه) */}
+                  <div className="space-y-4 pt-6 border-t border-slate-800">
                     <h3 className="text-sm font-black text-teal-400 uppercase tracking-wider">{dict.sheetTasksHeader}</h3>
-                    <div className="space-y-3">
-                      {Object.entries(taskSubmissions).map(([key, task]) => (
-                        <div key={key} className={`p-4 rounded-xl border flex justify-between items-center transition ${task.status ? 'bg-teal-950/30 border-teal-500/50' : 'bg-slate-950/60 border-slate-800'}`}>
+                    
+                    <div className="flex gap-2">
+                      <input 
+                        type="text"
+                        placeholder={dict.addTaskPlaceholder}
+                        value={newTaskInput}
+                        onChange={(e) => setNewTaskInput(e.target.value)}
+                        className={`flex-1 px-4 py-2.5 border rounded-xl text-xs font-medium focus:outline-none ${theme === 'dark' ? 'bg-slate-800 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'}`}
+                      />
+                      <button 
+                        onClick={() => {
+                          if (newTaskInput.trim()) {
+                            setStudentTasks([...studentTasks, { id: 't_' + Date.now(), title: newTaskInput, status: false, type: 'Task' }]);
+                            setNewTaskInput('');
+                          }
+                        }}
+                        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2.5 rounded-xl text-xs font-black shadow"
+                      >
+                        {dict.addTaskBtn}
+                      </button>
+                    </div>
+
+                    <div className="space-y-3 mt-4">
+                      {studentTasks.map((task) => (
+                        <div key={task.id} className={`p-4 rounded-xl border flex justify-between items-center transition ${task.status ? 'bg-teal-950/30 border-teal-500/50' : 'bg-slate-950/60 border-slate-800'}`}>
                           <div>
                             <span className="text-[10px] px-2 py-0.5 rounded font-black bg-teal-600 text-white">{task.type}</span>
                             <h5 className="font-extrabold text-xs md:text-sm mt-1">{task.title}</h5>
                           </div>
                           <button 
-                            onClick={() => setTaskSubmissions(prev => ({
-                              ...prev,
-                              [key]: { ...prev[key], status: !prev[key].status }
-                            }))}
+                            onClick={() => setStudentTasks(studentTasks.map(t => t.id === task.id ? { ...t, status: !t.status } : t))}
                             className={`px-4 py-1.5 rounded-lg text-xs font-black shadow transition ${task.status ? 'bg-teal-600 text-white' : 'bg-slate-800 text-slate-300'}`}
                           >
                             {task.status ? dict.submitted : dict.notSubmitted}
@@ -1204,7 +1171,7 @@
               </div>
             )}
 
-            {/* TAB 3: شات الدفعة والملاحظات */}
+            {/* TAB 3: شات الدفعة */}
             {activeTab === 'chat' && (
               <div className={`max-w-3xl mx-auto rounded-2xl border shadow-2xl overflow-hidden flex flex-col h-[75vh] ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
                 <div className={`p-4 text-white flex justify-between items-center shadow-lg ${deptTheme.badge}`}>
@@ -1218,9 +1185,7 @@
                         <span className="text-xs font-bold opacity-80">{msg.user}</span>
                         <span className="text-[10px] opacity-60">{msg.time}</span>
                         {msg.isPinned && (
-                          <span className="bg-amber-500 text-slate-950 text-[10px] px-2 py-0.5 rounded font-black">
-                            {dict.pinnedBadge}
-                          </span>
+                          <span className="bg-amber-500 text-slate-950 text-[10px] px-2 py-0.5 rounded font-black">{dict.pinnedBadge}</span>
                         )}
                       </div>
                       <div className={`p-3.5 rounded-2xl max-w-md text-sm font-medium ${msg.user.includes(user.name) ? 'bg-emerald-600 text-white rounded-tl-none shadow-lg' : (theme === 'dark' ? 'bg-slate-800 text-slate-100 border border-slate-700' : 'bg-slate-100 text-slate-900 border border-slate-300')} rounded-tr-none`}>
@@ -1251,17 +1216,17 @@
               </div>
             )}
 
-            {/* TAB 4: الإعدادات والسمات */}
+            {/* TAB 4: الإعدادات (اللغة والسمة فقط بدون أي خلط) */}
             {activeTab === 'settings' && (
               <div className={`max-w-2xl mx-auto rounded-2xl border shadow-2xl p-6 space-y-6 ${theme === 'dark' ? 'bg-slate-900 border-slate-800 text-slate-100' : 'bg-white border-slate-200 text-slate-900'}`}>
-                <h2 className="text-xl font-black pb-3 border-b border-slate-800">⚙️ الإعدادات العامة واللغة والسمات</h2>
+                <h2 className="text-xl font-black pb-3 border-b border-slate-800">⚙️ الإعدادات (اللغة والسمة)</h2>
                 
                 <div className="space-y-3">
-                  <label className="block text-sm font-bold">اللغات المتاحة للترجمة الفورية:</label>
+                  <label className="block text-sm font-bold">اللغة (Language):</label>
                   <div className="flex items-center gap-3">
-                    <button onClick={() => setLanguage('ar')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'ar' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800'}`}>العربية 🇪🇬</button>
-                    <button onClick={() => setLanguage('en')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'en' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800'}`}>English 🇬🇧</button>
-                    <button onClick={() => setLanguage('it')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'it' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800'}`}>Italiano 🇮🇹</button>
+                    <button onClick={() => setLanguage('ar')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'ar' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800 text-slate-300'}`}>العربية 🇪🇬</button>
+                    <button onClick={() => setLanguage('en')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'en' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800 text-slate-300'}`}>English 🇬🇧</button>
+                    <button onClick={() => setLanguage('it')} className={`px-4 py-2 text-xs rounded-xl font-black transition ${language === 'it' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800 text-slate-300'}`}>Italiano 🇮🇹</button>
                   </div>
                 </div>
 
@@ -1274,12 +1239,12 @@
               </div>
             )}
 
-            {/* TAB 5: لوحة الأدمن المخصصة لشروق */}
+            {/* TAB 5: لوحة الأدمن (مفصولة تماماً هنا: تعديلات الجدول، فك الحظر، والتنبيهات) */}
             {activeTab === 'admin' && user.isAdmin && (
               <div className="space-y-6 max-w-4xl mx-auto">
                 <div className="p-5 rounded-2xl border bg-amber-500/10 border-amber-500/30 shadow-xl">
                   <h2 className="text-lg font-black text-amber-500">{dict.adminNotice}</h2>
-                  <p className="text-xs font-bold text-slate-300 mt-1">مرحباً الأدمن شروق! يمكنك تعديل أو إضافة أي مادة وقاعة في أي وقت مباشرة في الجدول.</p>
+                  <p className="text-xs font-bold text-slate-300 mt-1">مرحباً الأدمن شروق! يمكنك التحكم بكل الإعدادات، فك الحظر، ونشر التنبيهات هنا بعيداً عن الجداول.</p>
                 </div>
 
                 <div className={`p-6 rounded-2xl border shadow-xl space-y-4 ${theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
@@ -1314,7 +1279,7 @@
 
           </main>
 
-          {/* نافذة التعديل والإضافة للجدول (Modal للأدمن) */}
+          {/* نافذة التعديل للأدمن */}
           {(editingItem || addingDay) && (
             <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <div className={`w-full max-w-md p-6 rounded-3xl border shadow-2xl ${theme === 'dark' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
@@ -1371,4 +1336,3 @@
   </script>
 </body>
 </html>
-

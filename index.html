@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -1216,7 +1223,7 @@
                           </span>
                         )}
                       </div>
-                      <div className={`p-3.5 rounded-2xl max-w-md text-sm font-medium ${msg.user.includes(user.name) ? 'bg-emerald-600 text-white rounded-tl-none `}>
+                      <div className={`p-3.5 rounded-2xl max-w-md text-sm font-medium ${msg.user.includes(user.name) ? 'bg-emerald-600 text-white rounded-tl-none shadow-lg' : (theme === 'dark' ? 'bg-slate-800 text-slate-100 border border-slate-700' : 'bg-slate-100 text-slate-900 border border-slate-300')} rounded-tr-none`}>
                         {msg.type === 'audio' ? <audio controls src={msg.text} className="w-60 h-9"></audio> : msg.text}
                       </div>
                     </div>
@@ -1364,3 +1371,4 @@
   </script>
 </body>
 </html>
+
